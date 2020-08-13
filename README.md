@@ -1,2 +1,1 @@
-@MyApp
-This is my app
+This Repository contains all the codes and PDFs for CS Honours.
