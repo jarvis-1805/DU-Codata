@@ -329,7 +329,7 @@ template <typename T>
 void singlyLinkedList<T>::search_in_list()
 {
 	bool flag=false;
-	int ele, count=0;
+	T ele, count=0;
 	cout << "\n------------ SEARCHING IN LIST ------------\n";
 	emptyListChecker();
 	cout << "Enter the element to be searched: ";
