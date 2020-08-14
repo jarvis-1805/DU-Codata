@@ -294,33 +294,32 @@ void singlyLinkedList<T>::delete_at_location()
 		{
 			cout << "Enter the to be deleted node's location: ";
 			cin >> loc;
-			if(loc == 1)
-			{
-				delete_at_beginning();
-				break;
-			}
 			if(loc > count || loc == 0)
 			{
 				cout << "\n########### WRONG LOCATION... ###########\n";
 				continue;
 			}
+			if(loc == 1)
+			{
+				delete_at_beginning();
+				break;
+			}
+			if(loc == count)
+			{
+				delete_at_end();
+				break;
+			}
 			else
 			{
-				temp = head;
-				temp1 = head;
+				temp = temp1 = head;
 				while(i < loc-1)
 				{
 					temp = temp -> next;
-					temp1 = temp1 -> next;
+					temp1 = temp -> next;
 					++i;
 				}
-				if(temp -> next -> next == NULL)
-				{
-					delete_at_end();
-					break;
-				}
-				temp -> next = temp -> next -> next;
-				delete(temp1 -> next);
+				temp -> next = temp1 -> next;
+				delete(temp1);
 				cout << "\nSuccessfully deleted node at " << loc << endl;
 				traverse();
 				break;
