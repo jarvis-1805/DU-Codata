@@ -12,7 +12,7 @@ class singlyLinkedList
 			struct node *next;
 		};
 		struct node *head=NULL, *newNode, *temp;
-		int ch;
+		int ch, x;
 		bool emp;
 		
 		~singlyLinkedList();
@@ -40,10 +40,10 @@ template <typename T>
 singlyLinkedList<T>::~singlyLinkedList()
 {
 	struct node *temp1;
-	temp = temp1 = head;
+	temp = head;
 	while(temp != NULL)
 	{
-		temp1 = temp1 -> next;
+		temp1 = temp -> next;
 		delete(temp);
 		temp = temp1;
 	}
@@ -122,6 +122,7 @@ template <typename T>
 void singlyLinkedList<T>::create()
 {
 	cout << "\n------------ CREATING NEW LIST ------------\n";
+	head = NULL;
 	char ch;
 	do
 	{
@@ -141,6 +142,7 @@ void singlyLinkedList<T>::create()
 		cout << "\nDo you want to enter more nodes? y/n: ";
 		cin >> ch;
 	}while(ch == 'y');
+	x=1;
 	traverse();
 }
 
@@ -449,6 +451,8 @@ int main()
 		choice = ob.choice();
 		if(choice == 0)
 			break;
+		if(ob.x == 1)
+			ob.~singlyLinkedList();
 		ob.choiceCalling(choice);
 	}while(1);
 	
