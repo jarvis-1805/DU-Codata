@@ -12,7 +12,7 @@ class singlyLinkedList
 			struct node *next;
 		};
 		struct node *head=NULL, *newNode, *temp;
-		int ch, x;
+		int ch;
 		bool emp;
 		
 		~singlyLinkedList();
@@ -142,7 +142,6 @@ void singlyLinkedList<T>::create()
 		cout << "\nDo you want to enter more nodes? y/n: ";
 		cin >> ch;
 	}while(ch == 'y');
-	x=1;
 	traverse();
 }
 
@@ -451,8 +450,6 @@ int main()
 		choice = ob.choice();
 		if(choice == 0)
 			break;
-		if(ob.x == 1)
-			ob.~singlyLinkedList();
 		ob.choiceCalling(choice);
 	}while(1);
 	
