@@ -13,11 +13,12 @@ class singlyLinkedList
 		};
 		struct node *head=NULL, *newNode, *temp;
 		int ch;
+		bool emp;
 		
 		~singlyLinkedList();
 		
 		void options();
-		void choice();
+		int choice();
 		void choiceCalling(int);
 		
 		void create();
@@ -32,7 +33,7 @@ class singlyLinkedList
 		void reverse_the_list();
 		
 		int countList();
-		void emptyListChecker();
+		bool emptyListChecker();
 };
 
 template <typename T>
@@ -63,16 +64,14 @@ void singlyLinkedList<T>::options()
 		<<	"\n9. SEARCH IN LIST"
 		<<	"\n10. REVERSE THE LIST"
 		<<	"\n0. EXIT";
-	
-	choice();
 }
 
 template <typename T>
-void singlyLinkedList<T>::choice()
+int singlyLinkedList<T>::choice()
 {
 	cout << "\n\nEnter the number of your choice: ";
 	cin >> ch;
-	choiceCalling(ch);
+	return ch;
 }
 
 template <typename T>
@@ -142,76 +141,91 @@ void singlyLinkedList<T>::create()
 		cout << "\nDo you want to enter more nodes? y/n: ";
 		cin >> ch;
 	}while(ch == 'y');
-	temp = head;
+	traverse();
 }
 
 template <typename T>
 void singlyLinkedList<T>::traverse()
 {
-	emptyListChecker();
-	temp = head;
-	cout << endl << "List: ";
-	while(temp != NULL)
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
 	{
-		cout << temp -> data;
-		temp = temp -> next;
-		if(temp != NULL)
-			cout << " -> ";
+		temp = head;
+		cout << endl << "List: ";
+		while(temp != NULL)
+		{
+			cout << temp -> data;
+			temp = temp -> next;
+			if(temp != NULL)
+				cout << " -> ";
+		}
+		cout << endl;
 	}
-	cout << endl;
 }
 
 template <typename T>
 void singlyLinkedList<T>::insert_at_beginning()
 {
 	cout << "\n------------ INSERTING AT BEGINNING ------------\n";
-	emptyListChecker();
-	newNode = (struct node *)new struct node;
-	cout << "Enter the new node's data : ";
-	cin >> newNode -> data;
-	newNode -> next = head;
-	head = newNode;
-	cout << "\nSuccessfully inserted the node at beginning\n";
-	traverse();
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
+	{
+		newNode = (struct node *)new struct node;
+		cout << "Enter the new node's data : ";
+		cin >> newNode -> data;
+		newNode -> next = head;
+		head = newNode;
+		cout << "\nSuccessfully inserted the node at beginning\n";
+		traverse();
+	}
 }
 
 template <typename T>
 void singlyLinkedList<T>::insert_at_location()
 {
 	cout << "\n------------ INSERTING AT LOCATION ------------\n";
-	emptyListChecker();
-	int loc, i=1, count;
-	count = countList();
-	while(1)
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
 	{
-		cout << "Enter the new node's location: ";
-		cin >> loc;
-		if(loc > count || loc == 0)
+		int loc, i=1, count;
+		count = countList();
+		while(1)
 		{
-			cout << "\n########### WRONG LOCATION... ###########\n";
-			continue;
-		}
-		if(loc == 1)
-		{
-			insert_at_beginning();
-			break;
-		}
-		else
-		{
-			newNode = (struct node *)new struct node;
-			cout << "Enter the new node's data : ";
-			cin >> newNode -> data;
-			temp = head;
-			while(i < loc-1)
+			cout << "Enter the new node's location: ";
+			cin >> loc;
+			if(loc > count || loc == 0)
 			{
-				temp = temp -> next;
-				++i;
+				cout << "\n########### WRONG LOCATION... ###########\n";
+				continue;
 			}
-			newNode -> next = temp -> next;
-			temp -> next = newNode;
-			cout << "\nSuccessfully inserted the node at " << loc << endl;
-			traverse();
-			break;
+			if(loc == 1)
+			{
+				insert_at_beginning();
+				break;
+			}
+			else
+			{
+				newNode = (struct node *)new struct node;
+				cout << "Enter the new node's data : ";
+				cin >> newNode -> data;
+				temp = head;
+				while(i < loc-1)
+				{
+					temp = temp -> next;
+					++i;
+				}
+				newNode -> next = temp -> next;
+				temp -> next = newNode;
+				cout << "\nSuccessfully inserted the node at " << loc << endl;
+				traverse();
+				break;
+			}
 		}
 	}
 }
@@ -220,36 +234,46 @@ template <typename T>
 void singlyLinkedList<T>::insert_at_end()
 {
 	cout << "\n------------ INSERTING AT END ------------\n";
-	emptyListChecker();
-	newNode = (struct node *)new struct node;
-	cout << "Enter the new node's data : ";
-	cin >> newNode -> data;
-	newNode -> next = NULL;
-	temp = head;
-	while(temp -> next != NULL)
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
 	{
-		temp = temp -> next;
+		newNode = (struct node *)new struct node;
+		cout << "Enter the new node's data : ";
+		cin >> newNode -> data;
+		newNode -> next = NULL;
+		temp = head;
+		while(temp -> next != NULL)
+		{
+			temp = temp -> next;
+		}
+		temp -> next = newNode;
+		cout << "\nSuccessfully inserted the node at end\n";
+		traverse();
 	}
-	temp -> next = newNode;
-	cout << "\nSuccessfully inserted the node at end\n";
-	traverse();
 }
 
 template <typename T>
 void singlyLinkedList<T>::delete_at_beginning()
 {
 	cout << "\n------------ DELETING AT BEGINNING ------------\n";
-	emptyListChecker();
-	int c = countList();
-	if(c == 0)
-		cout << "The list is empty";
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
 	else
 	{
-		temp = head;
-		head = head -> next;
-		delete(temp);
-		cout << "\nSuccessfully deleted the node at beginning\n";
-		traverse();
+		int c = countList();
+		if(c == 0)
+			cout << "The list is empty";
+		else
+		{
+			temp = head;
+			head = head -> next;
+			delete(temp);
+			cout << "\nSuccessfully deleted the node at beginning\n";
+			traverse();
+		}
 	}
 }
 
@@ -257,44 +281,49 @@ template <typename T>
 void singlyLinkedList<T>::delete_at_location()
 {
 	cout << "\n------------ DELETING AT LOACTION ------------\n";
-	emptyListChecker();
-	struct node *temp1;
-	int loc, i=1, count;
-	count = countList();
-	while(1)
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
 	{
-		cout << "Enter the to be deleted node's location: ";
-		cin >> loc;
-		if(loc == 1)
+		struct node *temp1;
+		int loc, i=1, count;
+		count = countList();
+		while(1)
 		{
-			delete_at_beginning();
-			break;
-		}
-		if(loc > count || loc == 0)
-		{
-			cout << "\n########### WRONG LOCATION... ###########\n";
-			continue;
-		}
-		else
-		{
-			temp = head;
-			temp1 = head;
-			while(i < loc-1)
+			cout << "Enter the to be deleted node's location: ";
+			cin >> loc;
+			if(loc == 1)
 			{
-				temp = temp -> next;
-				temp1 = temp1 -> next;
-				++i;
-			}
-			if(temp -> next -> next == NULL)
-			{
-				delete_at_end();
+				delete_at_beginning();
 				break;
 			}
-			temp -> next = temp -> next -> next;
-			delete(temp1 -> next);
-			cout << "\nSuccessfully deleted node at " << loc << endl;
-			traverse();
-			break;
+			if(loc > count || loc == 0)
+			{
+				cout << "\n########### WRONG LOCATION... ###########\n";
+				continue;
+			}
+			else
+			{
+				temp = head;
+				temp1 = head;
+				while(i < loc-1)
+				{
+					temp = temp -> next;
+					temp1 = temp1 -> next;
+					++i;
+				}
+				if(temp -> next -> next == NULL)
+				{
+					delete_at_end();
+					break;
+				}
+				temp -> next = temp -> next -> next;
+				delete(temp1 -> next);
+				cout << "\nSuccessfully deleted node at " << loc << endl;
+				traverse();
+				break;
+			}
 		}
 	}
 }
@@ -303,26 +332,31 @@ template <typename T>
 void singlyLinkedList<T>::delete_at_end()
 {
 	cout << "\n------------ DELETING AT END ------------\n";
-	emptyListChecker();
-	int c = countList();
-	temp = head;
-	if(c == 1)
-	{
-		delete(temp -> next);
-		head = NULL;
-		cout << "\nSuccessfully deleted the node at end\n";
-	}
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
 	else
 	{
-		while(temp -> next -> next != NULL)
+		int c = countList();
+		temp = head;
+		if(c == 1)
 		{
-			temp = temp -> next;
+			delete(temp -> next);
+			head = NULL;
+			cout << "\nSuccessfully deleted the node at end\n";
 		}
-		delete(temp -> next);
-		temp -> next = NULL;
-		cout << "\nSuccessfully deleted the node at end\n";
+		else
+		{
+			while(temp -> next -> next != NULL)
+			{
+				temp = temp -> next;
+			}
+			delete(temp -> next);
+			temp -> next = NULL;
+			cout << "\nSuccessfully deleted the node at end\n";
+		}
+		traverse();
 	}
-	traverse();
 }
 
 template <typename T>
@@ -331,43 +365,53 @@ void singlyLinkedList<T>::search_in_list()
 	bool flag=false;
 	T ele, count=0;
 	cout << "\n------------ SEARCHING IN LIST ------------\n";
-	emptyListChecker();
-	cout << "Enter the element to be searched: ";
-	cin >> ele;
-	temp = head;
-	do
-	{
-		if(temp -> data == ele)
-		{
-			flag = true;
-			break;
-		}
-		temp = temp -> next;
-		count++;
-	}while(temp != NULL);
-	if(flag == true)
-		cout << endl << ele << " found at position " << count+1 << " in the list\n";
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
 	else
-		cout << endl << ele << " not found in the list\n";
+	{
+		cout << "Enter the element to be searched: ";
+		cin >> ele;
+		temp = head;
+		do
+		{
+			if(temp -> data == ele)
+			{
+				flag = true;
+				break;
+			}
+			temp = temp -> next;
+			count++;
+		}while(temp != NULL);
+		if(flag == true)
+			cout << endl << ele << " found at position " << count+1 << " in the list\n";
+		else
+			cout << endl << ele << " not found in the list\n";
+	}
 }
 
 template <typename T>
 void singlyLinkedList<T>::reverse_the_list()
 {
 	cout << "\n------------ REVERSING THE LIST ------------\n";
-	emptyListChecker();
-	struct node *prevNode, *nextNode;
-	prevNode = NULL;
-	temp = nextNode = head;
-	while(nextNode != NULL)
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
 	{
-		nextNode = nextNode -> next;
-		temp -> next = prevNode;
-		prevNode = temp;
-		temp = nextNode;
+		struct node *prevNode, *nextNode;
+		prevNode = NULL;
+		temp = nextNode = head;
+		while(nextNode != NULL)
+		{
+			nextNode = nextNode -> next;
+			temp -> next = prevNode;
+			prevNode = temp;
+			temp = nextNode;
+		}
+		head = prevNode;
+		traverse();
 	}
-	head = prevNode;
-	traverse();
 }
 
 template <typename T>
@@ -384,24 +428,28 @@ int singlyLinkedList<T>::countList()
 }
 
 template <typename T>
-void singlyLinkedList<T>::emptyListChecker()
+bool singlyLinkedList<T>::emptyListChecker()
 {
 	if(head == NULL)
 	{
 		cout << "\n########### The list is empty ###########\n";
-		options();
+		return false;
 	}
+	return true;
 }
 
 int main()
 {
+	int choice;
 	singlyLinkedList<char> ob;
 	cout << "\n=========== SINGLY LINKED LIST ===========\n";
 	do
 	{
 		ob.options();
-		if(ob.ch == 0)
+		choice = ob.choice();
+		if(choice == 0)
 			break;
+		ob.choiceCalling(choice);
 	}while(1);
 	
 	cout << "\n########### EXITING... ###########\n";
