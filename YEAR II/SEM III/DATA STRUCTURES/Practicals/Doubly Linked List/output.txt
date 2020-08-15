@@ -1,3 +1,8 @@
+==13714== Memcheck, a memory error detector
+==13714== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==13714== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==13714== Command: ./doublyLinkedList
+==13714== 
 
 =========== DOUBLY LINKED LIST ===========
 
@@ -15,6 +20,8 @@
 
 Enter the number of your choice: 1
 
+########### MEMORY IS FREED ###########
+
 ------------ CREATING NEW LIST ------------
 Enter the new node's data : 1
 
@@ -27,9 +34,15 @@ Enter the new node's data : 3
 Do you want to enter more nodes? y/n: y
 Enter the new node's data : 4
 
+Do you want to enter more nodes? y/n: y
+Enter the new node's data : 5
+
+Do you want to enter more nodes? y/n: y
+Enter the new node's data : 6
+
 Do you want to enter more nodes? y/n: n
 
-List: 1 <-> 2 <-> 3 <-> 4
+List: 1 <-> 2 <-> 3 <-> 4 <-> 5 <-> 6
 
 1. CREATE
 2. TRAVERSE
@@ -47,7 +60,7 @@ Enter the number of your choice: 2
 
 ------------ TRAVERSING LIST ------------
 
-List: 1 <-> 2 <-> 3 <-> 4
+List: 1 <-> 2 <-> 3 <-> 4 <-> 5 <-> 6
 
 1. CREATE
 2. TRAVERSE
@@ -68,7 +81,7 @@ Enter the new node's data : 0
 
 Successfully inserted the node at beginning
 
-List: 0 <-> 1 <-> 2 <-> 3 <-> 4
+List: 0 <-> 1 <-> 2 <-> 3 <-> 4 <-> 5 <-> 6
 
 1. CREATE
 2. TRAVERSE
@@ -86,11 +99,11 @@ Enter the number of your choice: 4
 
 ------------ INSERTING AT LOCATION ------------
 Enter the new node's location: 5
-Enter the new node's data : 5
+Enter the new node's data : 7
 
 Successfully inserted the node at 5
 
-List: 0 <-> 1 <-> 2 <-> 3 <-> 5 <-> 4
+List: 0 <-> 1 <-> 2 <-> 3 <-> 7 <-> 4 <-> 5 <-> 6
 
 1. CREATE
 2. TRAVERSE
@@ -107,11 +120,11 @@ List: 0 <-> 1 <-> 2 <-> 3 <-> 5 <-> 4
 Enter the number of your choice: 5
 
 ------------ INSERTING AT END ------------
-Enter the new node's data : 6
+Enter the new node's data : 8
 
 Successfully inserted the node at end
 
-List: 0 <-> 1 <-> 2 <-> 3 <-> 5 <-> 4 <-> 6
+List: 0 <-> 1 <-> 2 <-> 3 <-> 7 <-> 4 <-> 5 <-> 6 <-> 8
 
 1. CREATE
 2. TRAVERSE
@@ -131,7 +144,7 @@ Enter the number of your choice: 6
 
 Successfully deleted the node at beginning
 
-List: 1 <-> 2 <-> 3 <-> 5 <-> 4 <-> 6
+List: 1 <-> 2 <-> 3 <-> 7 <-> 4 <-> 5 <-> 6 <-> 8
 
 1. CREATE
 2. TRAVERSE
@@ -152,7 +165,7 @@ Enter the to be deleted node's location: 4
 
 Successfully deleted node at 4
 
-List: 1 <-> 2 <-> 3 <-> 4 <-> 6
+List: 1 <-> 2 <-> 3 <-> 4 <-> 5 <-> 6 <-> 8
 
 1. CREATE
 2. TRAVERSE
@@ -172,7 +185,7 @@ Enter the number of your choice: 8
 
 Successfully deleted the node at end
 
-List: 1 <-> 2 <-> 3 <-> 4
+List: 1 <-> 2 <-> 3 <-> 4 <-> 5 <-> 6
 
 1. CREATE
 2. TRAVERSE
@@ -189,9 +202,9 @@ List: 1 <-> 2 <-> 3 <-> 4
 Enter the number of your choice: 9
 
 ------------ SEARCHING IN LIST ------------
-Enter the element to be searched: 3
+Enter the element to be searched: 5
 
-3 found at position 3 in the list
+5 found at position 5 in the list
 
 1. CREATE
 2. TRAVERSE
@@ -209,7 +222,7 @@ Enter the number of your choice: 10
 
 ------------ REVERSING THE LIST ------------
 
-List: 4 <-> 3 <-> 2 <-> 1
+List: 6 <-> 5 <-> 4 <-> 3 <-> 2 <-> 1
 
 1. CREATE
 2. TRAVERSE
@@ -228,3 +241,13 @@ Enter the number of your choice: 0
 ########### EXITING... ###########
 
 ########### MEMORY IS FREED ###########
+==13714== 
+==13714== HEAP SUMMARY:
+==13714==     in use at exit: 0 bytes in 0 blocks
+==13714==   total heap usage: 12 allocs, 12 frees, 74,968 bytes allocated
+==13714== 
+==13714== All heap blocks were freed -- no leaks are possible
+==13714== 
+==13714== For lists of detected and suppressed errors, rerun with: -s
+==13714== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
