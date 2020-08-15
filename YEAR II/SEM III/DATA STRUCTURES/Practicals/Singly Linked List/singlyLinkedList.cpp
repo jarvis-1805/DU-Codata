@@ -202,7 +202,7 @@ void singlyLinkedList<T>::insert_at_location()
 			if(loc > count || loc == 0)
 			{
 				cout << "\n########### WRONG LOCATION... ###########\n";
-				continue;
+				break;
 			}
 			if(loc == 1)
 			{
@@ -296,7 +296,7 @@ void singlyLinkedList<T>::delete_at_location()
 			if(loc > count || loc == 0)
 			{
 				cout << "\n########### WRONG LOCATION... ###########\n";
-				continue;
+				break;
 			}
 			if(loc == 1)
 			{

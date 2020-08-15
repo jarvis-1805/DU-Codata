@@ -1,0 +1,230 @@
+
+=========== DOUBLY LINKED LIST ===========
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ CREATING NEW LIST ------------
+Enter the new node's data : 1
+
+Do you want to enter more nodes? y/n: y
+Enter the new node's data : 2
+
+Do you want to enter more nodes? y/n: y
+Enter the new node's data : 3
+
+Do you want to enter more nodes? y/n: y
+Enter the new node's data : 4
+
+Do you want to enter more nodes? y/n: n
+
+List: 1 <-> 2 <-> 3 <-> 4
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 2
+
+------------ TRAVERSING LIST ------------
+
+List: 1 <-> 2 <-> 3 <-> 4
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 3
+
+------------ INSERTING AT BEGINNING ------------
+Enter the new node's data : 0
+
+Successfully inserted the node at beginning
+
+List: 0 <-> 1 <-> 2 <-> 3 <-> 4
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 4
+
+------------ INSERTING AT LOCATION ------------
+Enter the new node's location: 5
+Enter the new node's data : 5
+
+Successfully inserted the node at 5
+
+List: 0 <-> 1 <-> 2 <-> 3 <-> 5 <-> 4
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 5
+
+------------ INSERTING AT END ------------
+Enter the new node's data : 6
+
+Successfully inserted the node at end
+
+List: 0 <-> 1 <-> 2 <-> 3 <-> 5 <-> 4 <-> 6
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 6
+
+------------ DELETING AT BEGINNING ------------
+
+Successfully deleted the node at beginning
+
+List: 1 <-> 2 <-> 3 <-> 5 <-> 4 <-> 6
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 7
+
+------------ DELETING AT LOACTION ------------
+Enter the to be deleted node's location: 4
+
+Successfully deleted node at 4
+
+List: 1 <-> 2 <-> 3 <-> 4 <-> 6
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 8
+
+------------ DELETING AT END ------------
+
+Successfully deleted the node at end
+
+List: 1 <-> 2 <-> 3 <-> 4
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 9
+
+------------ SEARCHING IN LIST ------------
+Enter the element to be searched: 3
+
+3 found at position 3 in the list
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 10
+
+------------ REVERSING THE LIST ------------
+
+List: 4 <-> 3 <-> 2 <-> 1
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 0
+
+########### EXITING... ###########
+
+########### MEMORY IS FREED ###########
