@@ -40,22 +40,20 @@ Enter the new node's data : 4
 
 Do you want to enter more nodes? y/n: n
                                                                                                                                                                                                                                            
-List: 1 -> 2 -> 3 -> 4                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                           
-1. CREATE                                                                                                                                                                                                                                  
-2. TRAVERSE                                                                                                                                                                                                                                
-3. INSERT AT BEGINNING                                                                                                                                                                                                                     
-4. INSERT AT LOCATION                                                                                                                                                                                                                      
-5. INSERT AT END                                                                                                                                                                                                                           
-6. DELETE AT BEGINNING                                                                                                                                                                                                                     
-7. DELETE AT LOCATION                                                                                                                                                                                                                      
-8. DELETE AT END                                                                                                                                                                                                                           
-9. SEARCH IN LIST                                                                                                                                                                                                                          
-10. REVERSE THE LIST                                                                                                                                                                                                                       
-0. EXIT                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                           
-Enter the number of your choice: 2                                                                                                                                                                                                         
-
+List: 1 -> 2 -> 3 -> 4                                                                                                                                                                                                                                                          
+1. CREATE           
+2. TRAVERSE                             
+3. INSERT AT BEGINNING                       
+4. INSERT AT LOCATION                        
+5. INSERT AT END                       
+6. DELETE AT BEGINNING                      
+7. DELETE AT LOCATION                       
+8. DELETE AT END                        
+9. SEARCH IN LIST                            
+10. REVERSE THE LIST                         
+0. EXIT                                      
+                                             
+Enter the number of your choice: 2                                                                                                                                                                    
 ------------ TRAVERSING LIST ------------
 
 List: 1 -> 2 -> 3 -> 4
