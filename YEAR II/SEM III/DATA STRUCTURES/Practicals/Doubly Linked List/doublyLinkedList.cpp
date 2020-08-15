@@ -452,6 +452,8 @@ int main()
 		choice = ob.choice();
 		if(choice == 0)
 			break;
+		if(choice == 1)
+			ob.~doublyLinkedList();
 		ob.choiceCalling(choice);
 	}while(1);
 	
