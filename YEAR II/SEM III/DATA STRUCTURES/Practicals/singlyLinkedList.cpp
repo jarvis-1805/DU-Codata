@@ -114,7 +114,6 @@ void singlyLinkedList<T>::choiceCalling(int ch)
 			break;
 		default:
 			cout << "\n########### WRONG CHOICE... ###########\n";
-			options();
 	}
 }
 
@@ -441,7 +440,7 @@ bool singlyLinkedList<T>::emptyListChecker()
 int main()
 {
 	int choice;
-	singlyLinkedList<char> ob;
+	singlyLinkedList<int> ob;
 	cout << "\n=========== SINGLY LINKED LIST ===========\n";
 	do
 	{
