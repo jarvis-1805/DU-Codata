@@ -344,7 +344,7 @@ void doublyLinkedList<T>::delete_at_end()
 		temp = head;
 		if(c == 1)
 		{
-			delete(temp -> next);
+			delete(temp);
 			head = NULL;
 			cout << "\nSuccessfully deleted the node at end\n";
 		}
