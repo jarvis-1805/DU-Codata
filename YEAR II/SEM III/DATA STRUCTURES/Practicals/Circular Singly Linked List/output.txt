@@ -1,3 +1,9 @@
+###############################################################################################################################
+The output contains memory details to ensure that the memory is freed, by using valgrind(in linux).
+Note: There is no such code written in singlyLinkedList.cpp for memory checking.
+###############################################################################################################################
+
+
 ==15139== Memcheck, a memory error detector
 ==15139== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==15139== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
