@@ -1,6 +1,6 @@
 ###############################################################################################################################
 The output contains memory details to ensure that the memory is freed, by using valgrind(in linux).
-Note: There is no such code written in singlyLinkedList.cpp for memory checking.
+Note: There is no such code written in doublyLinkedList.cpp for memory checking.
 ###############################################################################################################################
 
 
