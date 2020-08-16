@@ -1,0 +1,256 @@
+==15139== Memcheck, a memory error detector
+==15139== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==15139== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==15139== Command: ./circularSinglyLinkedList
+==15139== 
+
+=========== CIRCULAR SINGLY LINKED LIST ===========
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 1
+
+########### MEMORY IS FREED ###########
+
+------------ CREATING NEW LIST ------------
+Enter the new node's data : 1
+
+Do you want to enter more nodes? y/n: y
+Enter the new node's data : 2
+
+Do you want to enter more nodes? y/n: y
+Enter the new node's data : 3
+
+Do you want to enter more nodes? y/n: y
+Enter the new node's data : 4
+
+Do you want to enter more nodes? y/n: n
+
+List: 1 -> 2 -> 3 -> 4
+      ^______________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 2
+
+------------ TRAVERSING LIST ------------
+
+List: 1 -> 2 -> 3 -> 4
+      ^______________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 3
+
+------------ INSERTING AT BEGINNING ------------
+Enter the new node's data : 0
+
+Successfully inserted the node at beginning
+
+List: 0 -> 1 -> 2 -> 3 -> 4
+      ^___________________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 4
+
+------------ INSERTING AT LOCATION ------------
+Enter the new node's location: 3
+Enter the new node's data : 5
+
+Successfully inserted the node at 3
+
+List: 0 -> 1 -> 5 -> 2 -> 3 -> 4
+      ^________________________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 5
+
+------------ INSERTING AT END ------------
+Enter the new node's data : 6
+
+Successfully inserted the node at end
+
+List: 0 -> 1 -> 5 -> 2 -> 3 -> 4 -> 6
+      ^_____________________________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 6
+
+------------ DELETING AT BEGINNING ------------
+
+Successfully deleted the node at beginning
+
+List: 1 -> 5 -> 2 -> 3 -> 4 -> 6
+      ^________________________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 7
+
+------------ DELETING AT LOACTION ------------
+Enter the to be deleted node's location: 3
+
+Successfully deleted node at 3
+
+List: 1 -> 5 -> 3 -> 4 -> 6
+      ^___________________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 8
+
+------------ DELETING AT END ------------
+
+Successfully deleted the node at end
+
+List: 1 -> 5 -> 3 -> 4
+      ^______________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 9
+
+------------ SEARCHING IN LIST ------------
+Enter the element to be searched: 3
+
+3 found at position 3 in the list
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 10
+
+------------ REVERSING THE LIST ------------
+
+List: 4 -> 3 -> 5 -> 1
+      ^______________|
+
+1. CREATE
+2. TRAVERSE
+3. INSERT AT BEGINNING
+4. INSERT AT LOCATION
+5. INSERT AT END
+6. DELETE AT BEGINNING
+7. DELETE AT LOCATION
+8. DELETE AT END
+9. SEARCH IN LIST
+10. REVERSE THE LIST
+0. EXIT
+
+Enter the number of your choice: 0
+
+########### EXITING... ###########
+
+########### MEMORY IS FREED ###########
+==15139== 
+==15139== HEAP SUMMARY:
+==15139==     in use at exit: 0 bytes in 0 blocks
+==15139==   total heap usage: 10 allocs, 10 frees, 74,864 bytes allocated
+==15139== 
+==15139== All heap blocks were freed -- no leaks are possible
+==15139== 
+==15139== For lists of detected and suppressed errors, rerun with: -s
+==15139== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
