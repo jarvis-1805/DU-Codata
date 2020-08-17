@@ -263,17 +263,11 @@ void singlyLinkedList<T>::delete_at_beginning()
 		return;
 	else
 	{
-		int c = countList();
-		if(c == 0)
-			cout << "The list is empty";
-		else
-		{
-			temp = head;
-			head = head -> next;
-			delete(temp);
-			cout << "\nSuccessfully deleted the node at beginning\n";
-			traverse();
-		}
+		temp = head;
+		head = head -> next;
+		delete(temp);
+		cout << "\nSuccessfully deleted the node at beginning\n";
+		traverse();
 	}
 }
 
@@ -310,13 +304,13 @@ void singlyLinkedList<T>::delete_at_location()
 			}
 			else
 			{
-				temp = temp1 = head;
+				temp = head;
 				while(i < loc-1)
 				{
 					temp = temp -> next;
-					temp1 = temp -> next;
 					++i;
 				}
+				temp1 = temp -> next;
 				temp -> next = temp1 -> next;
 				delete(temp1);
 				cout << "\nSuccessfully deleted node at " << loc << endl;
@@ -440,7 +434,7 @@ bool singlyLinkedList<T>::emptyListChecker()
 int main()
 {
 	int choice;
-	singlyLinkedList<int> ob;
+	singlyLinkedList<char> ob;
 	cout << "\n=========== SINGLY LINKED LIST ===========\n";
 	do
 	{

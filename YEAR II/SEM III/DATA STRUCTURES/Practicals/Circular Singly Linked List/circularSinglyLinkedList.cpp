@@ -30,10 +30,9 @@ class circularSinglyLinkedList
 		void delete_at_location();
 		void delete_at_end();
 		void search_in_list();
-		void reverse_the_list();
 		
 		int countList();
-		//int countDoubleDigit();
+		int countDoubleDigit();
 		bool emptyListChecker();
 };
 
@@ -65,7 +64,6 @@ void circularSinglyLinkedList<T>::options()
 		<<	"\n7. DELETE AT LOCATION"
 		<<	"\n8. DELETE AT END"
 		<<	"\n9. SEARCH IN LIST"
-		<<	"\n10. REVERSE THE LIST"
 		<<	"\n0. EXIT";
 }
 
@@ -109,9 +107,6 @@ void circularSinglyLinkedList<T>::choiceCalling(int ch)
 			break;
 		case 9:
 			search_in_list();
-			break;
-		case 10:
-			reverse_the_list();
 			break;
 		case 0:
 			break;
@@ -169,6 +164,10 @@ void circularSinglyLinkedList<T>::traverse()
 		int c=countList();
 		for(int i=1; i<=((4*(c-1))+(c-2)); i++)
 			cout << "_";
+		int x=countDoubleDigit();
+		if(x != 0)
+			for(int j=1; j<=x; j++)
+				cout << "_";
 		cout << "|\n";
 	}
 }
@@ -279,9 +278,8 @@ void circularSinglyLinkedList<T>::delete_at_beginning()
 	{
 		int c = countList();
 		temp = head;
-		if(c == 0)
-			cout << "The list is empty";
-		else if(c == 1)
+		
+		if(c == 1)
 		{
 			delete(temp);
 			head = NULL;
@@ -335,13 +333,13 @@ void circularSinglyLinkedList<T>::delete_at_location()
 			}
 			else
 			{
-				temp = temp1 = head;
+				temp = head;
 				while(i < loc-1)
 				{
 					temp = temp -> next;
-					temp1 = temp -> next;
 					++i;
 				}
+				temp1 = temp -> next;
 				temp -> next = temp1 -> next;
 				delete(temp1);
 				cout << "\nSuccessfully deleted node at " << loc << endl;
@@ -415,31 +413,6 @@ void circularSinglyLinkedList<T>::search_in_list()
 }
 
 template <typename T>
-void circularSinglyLinkedList<T>::reverse_the_list()
-{
-	cout << "\n------------ REVERSING THE LIST ------------\n";
-	emp = emptyListChecker();
-	if(emp != true)
-		return;
-	else
-	{
-		struct node *prevNode, *nextNode;
-		prevNode = NULL;
-		temp = nextNode = head;
-		do
-		{
-			nextNode = nextNode -> next;
-			temp -> next = prevNode;
-			prevNode = temp;
-			temp = nextNode;
-		}while(nextNode != head);
-		nextNode -> next = prevNode;
-		head = prevNode;
-		traverse();
-	}
-}
-
-template <typename T>
 int circularSinglyLinkedList<T>::countList()
 {
 	int count=0;
@@ -451,7 +424,7 @@ int circularSinglyLinkedList<T>::countList()
 	}while(temp != head);
 	return count;
 }
-/*
+
 template <typename T>
 int circularSinglyLinkedList<T>::countDoubleDigit()
 {
@@ -459,12 +432,13 @@ int circularSinglyLinkedList<T>::countDoubleDigit()
 	temp = head;
 	do
 	{
+		if((temp -> data >= 10) && (temp -> data <=99))
+			count ++;
 		temp = temp -> next;
-		count ++;
 	}while(temp != head);
 	return count;
 }
-*/
+
 template <typename T>
 bool circularSinglyLinkedList<T>::emptyListChecker()
 {

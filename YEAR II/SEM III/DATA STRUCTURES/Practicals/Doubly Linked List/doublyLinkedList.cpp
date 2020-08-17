@@ -31,7 +31,6 @@ class doublyLinkedList
 		void delete_at_location();
 		void delete_at_end();
 		void search_in_list();
-		void reverse_the_list();
 		
 		int countList();
 		bool emptyListChecker();
@@ -63,7 +62,6 @@ void doublyLinkedList<T>::options()
 		<<	"\n7. DELETE AT LOCATION"
 		<<	"\n8. DELETE AT END"
 		<<	"\n9. SEARCH IN LIST"
-		<<	"\n10. REVERSE THE LIST"
 		<<	"\n0. EXIT";
 }
 
@@ -107,9 +105,6 @@ void doublyLinkedList<T>::choiceCalling(int ch)
 			break;
 		case 9:
 			search_in_list();
-			break;
-		case 10:
-			reverse_the_list();
 			break;
 		case 0:
 			break;
@@ -313,13 +308,13 @@ void doublyLinkedList<T>::delete_at_location()
 			}
 			else
 			{
-				temp = temp1 = head;
+				temp = head;
 				while(i < loc-1)
 				{
 					temp = temp -> next;
-					temp1 = temp -> next;
 					++i;
 				}
+				temp1 = temp -> next;
 				temp -> next = temp1 -> next;
 				temp1 -> next -> prev = temp;
 				delete(temp1);
@@ -390,30 +385,6 @@ void doublyLinkedList<T>::search_in_list()
 			cout << endl << ele << " found at position " << count+1 << " in the list\n";
 		else
 			cout << endl << ele << " not found in the list\n";
-	}
-}
-
-template <typename T>
-void doublyLinkedList<T>::reverse_the_list()
-{
-	cout << "\n------------ REVERSING THE LIST ------------\n";
-	emp = emptyListChecker();
-	if(emp != true)
-		return;
-	else
-	{
-		struct node *prevNode, *nextNode;
-		prevNode = NULL;
-		temp = nextNode = head;
-		while(nextNode != NULL)
-		{
-			nextNode = nextNode -> next;
-			temp -> next = prevNode;
-			prevNode = temp;
-			temp = nextNode;
-		}
-		head = prevNode;
-		traverse();
 	}
 }
 
