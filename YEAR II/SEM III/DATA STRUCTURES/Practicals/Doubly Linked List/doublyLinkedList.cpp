@@ -12,7 +12,7 @@ class doublyLinkedList
 			T data;
 			struct node *next;
 		};
-		struct node *head=NULL, *newNode, *temp;
+		struct node *head=NULL, *tail=NULL, *newNode, *temp;
 		int ch;
 		bool emp;
 		
@@ -31,6 +31,7 @@ class doublyLinkedList
 		void delete_at_location();
 		void delete_at_end();
 		void search_in_list();
+		void reverse_the_list();
 		
 		int countList();
 		bool emptyListChecker();
@@ -62,6 +63,7 @@ void doublyLinkedList<T>::options()
 		<<	"\n7. DELETE AT LOCATION"
 		<<	"\n8. DELETE AT END"
 		<<	"\n9. SEARCH IN LIST"
+		<<	"\n10. REVERSE THE LIST"
 		<<	"\n0. EXIT";
 }
 
@@ -106,6 +108,9 @@ void doublyLinkedList<T>::choiceCalling(int ch)
 		case 9:
 			search_in_list();
 			break;
+		case 10:
+			reverse_the_list();
+			break;
 		case 0:
 			break;
 		default:
@@ -128,13 +133,13 @@ void doublyLinkedList<T>::create()
 		newNode -> prev = NULL;
 		if(head == NULL)
 		{
-			head = temp = newNode;
+			head = tail = newNode;
 		}
 		else
 		{
-			temp -> next = newNode;
-			newNode -> prev = temp;
-			temp = newNode;
+			tail -> next = newNode;
+			newNode -> prev = tail;
+			tail = newNode;
 		}
 		cout << "\nDo you want to enter more nodes? y/n: ";
 		cin >> ch;
@@ -220,9 +225,9 @@ void doublyLinkedList<T>::insert_at_location()
 					temp = temp -> next;
 					++i;
 				}
+				newNode -> prev = temp;
 				newNode -> next = temp -> next;
 				temp -> next = newNode;
-				newNode -> prev = temp;
 				newNode -> next -> prev = newNode;
 				cout << "\nSuccessfully inserted the node at " << loc << endl;
 				traverse();
@@ -245,13 +250,9 @@ void doublyLinkedList<T>::insert_at_end()
 		cout << "Enter the new node's data : ";
 		cin >> newNode -> data;
 		newNode -> next = NULL;
-		temp = head;
-		while(temp -> next != NULL)
-		{
-			temp = temp -> next;
-		}
-		temp -> next = newNode;
-		newNode -> prev = temp;
+		tail -> next = newNode;
+		newNode -> prev = tail;
+		tail = newNode;
 		cout << "\nSuccessfully inserted the node at end\n";
 		traverse();
 	}
@@ -266,10 +267,19 @@ void doublyLinkedList<T>::delete_at_beginning()
 		return;
 	else
 	{
+		int c = countList();
 		temp = head;
-		head = head -> next;
-		head -> prev = NULL;
-		delete(temp);
+		if(c == 1)
+		{
+			delete(temp);
+			head = temp = NULL;
+		}
+		else
+		{
+			head = head -> next;
+			head -> prev = NULL;
+			delete(temp);
+		}
 		cout << "\nSuccessfully deleted the node at beginning\n";
 		traverse();
 	}
@@ -284,7 +294,6 @@ void doublyLinkedList<T>::delete_at_location()
 		return;
 	else
 	{
-		struct node *temp1;
 		int loc, i=1, count;
 		count = countList();
 		while(1)
@@ -309,15 +318,14 @@ void doublyLinkedList<T>::delete_at_location()
 			else
 			{
 				temp = head;
-				while(i < loc-1)
+				while(i < loc)
 				{
 					temp = temp -> next;
 					++i;
 				}
-				temp1 = temp -> next;
-				temp -> next = temp1 -> next;
-				temp1 -> next -> prev = temp;
-				delete(temp1);
+				temp -> prev -> next = temp -> next;
+				temp -> next -> prev = temp -> prev;
+				delete(temp);
 				cout << "\nSuccessfully deleted node at " << loc << endl;
 				traverse();
 				break;
@@ -336,23 +344,19 @@ void doublyLinkedList<T>::delete_at_end()
 	else
 	{
 		int c = countList();
-		temp = head;
+		temp = tail;
 		if(c == 1)
 		{
 			delete(temp);
-			head = NULL;
-			cout << "\nSuccessfully deleted the node at end\n";
+			head = temp = NULL;
 		}
 		else
 		{
-			while(temp -> next -> next != NULL)
-			{
-				temp = temp -> next;
-			}
-			delete(temp -> next);
-			temp -> next = NULL;
-			cout << "\nSuccessfully deleted the node at end\n";
+			tail -> prev -> next = NULL;
+			tail = tail -> prev;
+			delete(temp);
 		}
+		cout << "\nSuccessfully deleted the node at end\n";
 		traverse();
 	}
 }
@@ -385,6 +389,31 @@ void doublyLinkedList<T>::search_in_list()
 			cout << endl << ele << " found at position " << count+1 << " in the list\n";
 		else
 			cout << endl << ele << " not found in the list\n";
+	}
+}
+
+template <typename T>
+void doublyLinkedList<T>::reverse_the_list()
+{
+	cout << "\n------------ REVERSING THE LIST ------------\n";
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
+	{
+		struct node *currNode, *nextNode;
+		currNode = head;
+		while(currNode != NULL)
+		{
+			nextNode = currNode -> next;
+			currNode -> next = currNode -> prev;
+			currNode -> prev = nextNode;
+			currNode = nextNode;
+		}
+		temp = head;
+		head = tail;
+		tail = temp;
+		traverse();
 	}
 }
 

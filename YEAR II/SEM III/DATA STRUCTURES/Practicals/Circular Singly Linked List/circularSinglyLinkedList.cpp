@@ -11,7 +11,7 @@ class circularSinglyLinkedList
 			T data;
 			struct node *next;
 		};
-		struct node *head=NULL, *newNode, *temp;
+		struct node *tail=NULL, *newNode, *temp;
 		int ch;
 		bool emp;
 		
@@ -30,6 +30,7 @@ class circularSinglyLinkedList
 		void delete_at_location();
 		void delete_at_end();
 		void search_in_list();
+		void reverse_the_list();
 		
 		int countList();
 		int countDoubleDigit();
@@ -40,15 +41,15 @@ template <typename T>
 circularSinglyLinkedList<T>::~circularSinglyLinkedList()
 {
 	struct node *temp1;
-	temp = head;
+	temp = tail;
 	do
 	{
-		if(head == NULL)
+		if(tail == NULL)
 			break;
 		temp1 = temp -> next;
 		delete(temp);
 		temp = temp1;
-	}while(temp != head);
+	}while(temp != tail -> next);
 	cout << "\n########### MEMORY IS FREED ###########\n";
 }
 
@@ -64,6 +65,7 @@ void circularSinglyLinkedList<T>::options()
 		<<	"\n7. DELETE AT LOCATION"
 		<<	"\n8. DELETE AT END"
 		<<	"\n9. SEARCH IN LIST"
+		<<	"\n10. REVERSE THE LIST"
 		<<	"\n0. EXIT";
 }
 
@@ -108,6 +110,9 @@ void circularSinglyLinkedList<T>::choiceCalling(int ch)
 		case 9:
 			search_in_list();
 			break;
+		case 10:
+			reverse_the_list();
+			break;
 		case 0:
 			break;
 		default:
@@ -119,23 +124,24 @@ template <typename T>
 void circularSinglyLinkedList<T>::create()
 {
 	cout << "\n------------ CREATING NEW LIST ------------\n";
-	head = NULL;
+	tail = NULL;
 	char ch;
 	do
 	{
 		newNode = (struct node *)new struct node;
 		cout << "Enter the new node's data : ";
 		cin >> newNode -> data;
-		if(head == NULL)
+		if(tail == NULL)
 		{
-			head = temp = newNode;
+			tail = newNode;
+			tail -> next = newNode;
 		}
 		else
 		{
-			temp -> next = newNode;
-			temp = newNode;
+			newNode -> next = tail -> next;
+			tail -> next = newNode;
+			tail = newNode;
 		}
-		temp -> next = head;
 		cout << "\nDo you want to enter more nodes? y/n: ";
 		cin >> ch;
 	}while(ch == 'y');
@@ -150,15 +156,15 @@ void circularSinglyLinkedList<T>::traverse()
 		return;
 	else
 	{
-		temp = head;
+		temp = tail -> next;
 		cout << endl << "List: ";
 		do
 		{
 			cout << temp -> data;
 			temp = temp -> next;
-			if(temp != head)
+			if(temp != tail -> next)
 				cout << " -> ";
-		}while(temp != head);
+		}while(temp != tail -> next);
 		cout << endl;
 		cout << "      ^";
 		int c=countList();
@@ -184,14 +190,8 @@ void circularSinglyLinkedList<T>::insert_at_beginning()
 		newNode = (struct node *)new struct node;
 		cout << "Enter the new node's data : ";
 		cin >> newNode -> data;
-		newNode -> next = head;
-		temp = head;
-		do
-		{
-			temp = temp -> next;
-		}while(temp -> next != head);
-		head = newNode;
-		temp -> next = head;
+		newNode -> next = tail -> next;
+		tail -> next = newNode;
 		cout << "\nSuccessfully inserted the node at beginning\n";
 		traverse();
 	}
@@ -227,7 +227,7 @@ void circularSinglyLinkedList<T>::insert_at_location()
 				newNode = (struct node *)new struct node;
 				cout << "Enter the new node's data : ";
 				cin >> newNode -> data;
-				temp = head;
+				temp = tail -> next;
 				while(i < loc-1)
 				{
 					temp = temp -> next;
@@ -255,13 +255,9 @@ void circularSinglyLinkedList<T>::insert_at_end()
 		newNode = (struct node *)new struct node;
 		cout << "Enter the new node's data : ";
 		cin >> newNode -> data;
-		newNode -> next = head;
-		temp = head;
-		do
-		{
-			temp = temp -> next;
-		}while(temp -> next != head);
-		temp -> next = newNode;
+		newNode -> next = tail -> next;
+		tail -> next = newNode;
+		tail = newNode;
 		cout << "\nSuccessfully inserted the node at end\n";
 		traverse();
 	}
@@ -277,25 +273,19 @@ void circularSinglyLinkedList<T>::delete_at_beginning()
 	else
 	{
 		int c = countList();
-		temp = head;
+		temp = tail -> next;
 		
 		if(c == 1)
 		{
 			delete(temp);
-			head = NULL;
-			cout << "\nSuccessfully deleted the node at beginning\n";
+			tail = NULL;
 		}
 		else
 		{
-			do
-			{
-				temp = temp -> next;
-			}while(temp -> next != head);
-			head = head -> next;
-			delete(temp -> next);
-			temp -> next = head;
-			cout << "\nSuccessfully deleted the node at beginning\n";
+			tail -> next = temp -> next;
+			delete(temp);
 		}
+		cout << "\nSuccessfully deleted the node at beginning\n";
 		traverse();
 	}
 }
@@ -333,7 +323,7 @@ void circularSinglyLinkedList<T>::delete_at_location()
 			}
 			else
 			{
-				temp = head;
+				temp = tail -> next;
 				while(i < loc-1)
 				{
 					temp = temp -> next;
@@ -360,23 +350,23 @@ void circularSinglyLinkedList<T>::delete_at_end()
 	else
 	{
 		int c = countList();
-		temp = head;
+		temp = tail -> next;
 		if(c == 1)
 		{
 			delete(temp);
-			head = NULL;
-			cout << "\nSuccessfully deleted the node at end\n";
+			tail = NULL;
 		}
 		else
 		{
-			while(temp -> next -> next != head)
+			while(temp -> next -> next != tail -> next)
 			{
 				temp = temp -> next;
 			}
-			delete(temp -> next);
-			temp -> next = head;
-			cout << "\nSuccessfully deleted the node at end\n";
+			temp -> next = tail -> next;
+			delete(tail);
+			tail = temp;
 		}
+		cout << "\nSuccessfully deleted the node at end\n";
 		traverse();
 	}
 }
@@ -394,7 +384,7 @@ void circularSinglyLinkedList<T>::search_in_list()
 	{
 		cout << "Enter the element to be searched: ";
 		cin >> ele;
-		temp = head;
+		temp = tail -> next;
 		do
 		{
 			if(temp -> data == ele)
@@ -404,7 +394,7 @@ void circularSinglyLinkedList<T>::search_in_list()
 			}
 			temp = temp -> next;
 			count++;
-		}while(temp != head);
+		}while(temp != tail -> next);
 		if(flag == true)
 			cout << endl << ele << " found at position " << count+1 << " in the list\n";
 		else
@@ -413,15 +403,40 @@ void circularSinglyLinkedList<T>::search_in_list()
 }
 
 template <typename T>
+void circularSinglyLinkedList<T>::reverse_the_list()
+{
+	cout << "\n------------ REVERSING THE LIST ------------\n";
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
+	{
+		struct node *prevNode, *nextNode;
+		temp = tail -> next;
+		nextNode = temp -> next;
+		while(temp != tail)
+		{
+			prevNode = temp;
+			temp = nextNode;
+			nextNode = temp -> next;
+			temp -> next = prevNode;
+		}
+		nextNode -> next = tail;
+		tail = nextNode;
+		traverse();
+	}
+}
+
+template <typename T>
 int circularSinglyLinkedList<T>::countList()
 {
 	int count=0;
-	temp = head;
+	temp = tail -> next;
 	do
 	{
 		temp = temp -> next;
 		count ++;
-	}while(temp != head);
+	}while(temp != tail -> next);
 	return count;
 }
 
@@ -429,20 +444,20 @@ template <typename T>
 int circularSinglyLinkedList<T>::countDoubleDigit()
 {
 	int count=0;
-	temp = head;
+	temp = tail -> next;
 	do
 	{
 		if((temp -> data >= 10) && (temp -> data <=99))
 			count ++;
 		temp = temp -> next;
-	}while(temp != head);
+	}while(temp != tail -> next);
 	return count;
 }
 
 template <typename T>
 bool circularSinglyLinkedList<T>::emptyListChecker()
 {
-	if(head == NULL)
+	if(tail == NULL)
 	{
 		cout << "\n########### The list is empty ###########\n";
 		return false;

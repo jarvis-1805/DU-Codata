@@ -12,7 +12,7 @@ class circularDoublyLinkedList
 			T data;
 			struct node *next;
 		};
-		struct node *head=NULL, *newNode, *temp;
+		struct node *head=NULL, *tail=NULL, *newNode, *temp;
 		int ch;
 		bool emp;
 		
@@ -31,6 +31,7 @@ class circularDoublyLinkedList
 		void delete_at_location();
 		void delete_at_end();
 		void search_in_list();
+		void reverse_the_list();
 		
 		int countList();
 		int countDoubleDigit();
@@ -129,16 +130,16 @@ void circularDoublyLinkedList<T>::create()
 		cin >> newNode -> data;
 		if(head == NULL)
 		{
-			head = temp = newNode;
+			head = tail = newNode;
 		}
 		else
 		{
-			temp -> next = newNode;
-			newNode -> prev = temp;
-			temp = newNode;
+			tail -> next = newNode;
+			newNode -> prev = tail;
+			tail = newNode;
 		}
-		temp -> next = head;
-		head -> prev = temp;
+		tail -> next = head;
+		head -> prev = tail;
 		cout << "\nDo you want to enter more nodes? y/n: ";
 		cin >> ch;
 	}while(ch == 'y');
@@ -188,15 +189,10 @@ void circularDoublyLinkedList<T>::insert_at_beginning()
 		cout << "Enter the new node's data : ";
 		cin >> newNode -> data;
 		head -> prev = newNode;
-		temp = head;
-		do
-		{
-			temp = temp -> next;
-		}while(temp -> next != head);
-		temp -> next = newNode;
 		newNode -> next = head;
-		newNode -> prev = temp;
 		head = newNode;
+		tail -> next = head;
+		head -> prev = tail;
 		cout << "\nSuccessfully inserted the node at beginning\n";
 		traverse();
 	}
@@ -264,13 +260,9 @@ void circularDoublyLinkedList<T>::insert_at_end()
 		cin >> newNode -> data;
 		newNode -> next = head;
 		head -> prev = newNode;
-		temp = head;
-		do
-		{
-			temp = temp -> next;
-		}while(temp -> next != head);
-		temp -> next = newNode;
-		newNode -> prev = temp;
+		tail -> next = newNode;
+		newNode -> prev = tail;
+		tail = newNode;
 		cout << "\nSuccessfully inserted the node at end\n";
 		traverse();
 	}
@@ -290,21 +282,16 @@ void circularDoublyLinkedList<T>::delete_at_beginning()
 		if(c == 1)
 		{
 			delete(temp);
-			head = NULL;
-			cout << "\nSuccessfully deleted the node at beginning\n";
+			head = tail = NULL;
 		}
 		else
 		{
-			do
-			{
-				temp = temp -> next;
-			}while(temp -> next != head);
 			head = head -> next;
-			head -> prev = temp;
-			delete(temp -> next);
-			temp -> next = head;
-			cout << "\nSuccessfully deleted the node at beginning\n";
+			head -> prev = tail;
+			tail -> next = head;
+			delete(temp);
 		}
+		cout << "\nSuccessfully deleted the node at beginning\n";
 		traverse();
 	}
 }
@@ -318,7 +305,6 @@ void circularDoublyLinkedList<T>::delete_at_location()
 		return;
 	else
 	{
-		struct node *temp1;
 		int loc, i=1, count;
 		count = countList();
 		while(1)
@@ -343,15 +329,14 @@ void circularDoublyLinkedList<T>::delete_at_location()
 			else
 			{
 				temp = head;
-				while(i < loc-1)
+				while(i < loc)
 				{
 					temp = temp -> next;
 					++i;
 				}
-				temp1 = temp -> next;
-				temp -> next = temp1 -> next;
-				temp1 -> next -> prev = temp;
-				delete(temp1);
+				temp -> prev -> next = temp -> next;
+				temp -> next -> prev = temp -> prev;
+				delete(temp);
 				cout << "\nSuccessfully deleted node at " << loc << endl;
 				traverse();
 				break;
@@ -370,24 +355,20 @@ void circularDoublyLinkedList<T>::delete_at_end()
 	else
 	{
 		int c = countList();
-		temp = head;
+		temp = tail;
 		if(c == 1)
 		{
 			delete(temp);
-			head = NULL;
-			cout << "\nSuccessfully deleted the node at end\n";
+			head = tail = NULL;
 		}
 		else
 		{
-			do
-			{
-				temp = temp -> next;
-			}while(temp -> next -> next != head);
-			delete(temp -> next);
-			temp -> next = head;
-			head -> prev = temp;
-			cout << "\nSuccessfully deleted the node at end\n";
+			tail = tail -> prev;
+			tail -> next = head;
+			head -> prev = tail;
+			delete(temp);
 		}
+		cout << "\nSuccessfully deleted the node at end\n";
 		traverse();
 	}
 }
@@ -420,6 +401,31 @@ void circularDoublyLinkedList<T>::search_in_list()
 			cout << endl << ele << " found at position " << count+1 << " in the list\n";
 		else
 			cout << endl << ele << " not found in the list\n";
+	}
+}
+
+template <typename T>
+void circularDoublyLinkedList<T>::reverse_the_list()
+{
+	cout << "\n------------ REVERSING THE LIST ------------\n";
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
+	{
+		struct node *currNode, *nextNode;
+		currNode = head;
+		do
+		{
+			nextNode = currNode -> next;
+			currNode -> next = currNode -> prev;
+			currNode -> prev = nextNode;
+			currNode = nextNode;
+		}while(currNode != head);
+		temp = head;
+		head = tail;
+		tail = temp;
+		traverse();
 	}
 }
 
