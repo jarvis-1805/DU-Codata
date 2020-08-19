@@ -31,6 +31,7 @@ class singlyLinkedList
 		void delete_at_end();
 		void search_in_list();
 		void reverse_the_list();
+		void operator +(singlyLinkedList);
 		
 		int countList();
 		bool emptyListChecker();
@@ -47,7 +48,6 @@ singlyLinkedList<T>::~singlyLinkedList()
 		delete(temp);
 		temp = temp1;
 	}
-	cout << "\n########### MEMORY IS FREED ###########\n";
 }
 
 template <typename T>
@@ -63,6 +63,7 @@ void singlyLinkedList<T>::options()
 		<<	"\n8. DELETE AT END"
 		<<	"\n9. SEARCH IN LIST"
 		<<	"\n10. REVERSE THE LIST"
+		<<	"\n11. CONCATENATE ANOTHER LIST"
 		<<	"\n0. EXIT";
 }
 
@@ -109,6 +110,8 @@ void singlyLinkedList<T>::choiceCalling(int ch)
 			break;
 		case 10:
 			reverse_the_list();
+			break;
+		case 11:
 			break;
 		case 0:
 			break;
@@ -408,6 +411,33 @@ void singlyLinkedList<T>::reverse_the_list()
 }
 
 template <typename T>
+void singlyLinkedList<T>::operator + (singlyLinkedList ob1)
+{
+	cout << "\n------------ CONCATINATING ANOTHER LIST ------------\n";
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
+	{
+    struct node *node,
+                *temp = head,
+                *temp1 = ob1.head;
+      while(temp->next != NULL)
+        temp = temp->next;
+      while (temp1 != NULL)
+      {
+        node = new struct node();
+        node->data = temp1->data;
+        node->next = NULL;
+        temp->next = node;
+        temp = temp->next;
+        temp1 = temp1->next;
+      }
+		traverse();
+	}
+}
+
+template <typename T>
 int singlyLinkedList<T>::countList()
 {
 	int count=0;
@@ -433,8 +463,8 @@ bool singlyLinkedList<T>::emptyListChecker()
 
 int main()
 {
-	int choice;
-	singlyLinkedList<char> ob;
+	int choice, ch;
+	singlyLinkedList<int> ob, ob1, ob2, ob3;
 	cout << "\n=========== SINGLY LINKED LIST ===========\n";
 	do
 	{
@@ -444,9 +474,15 @@ int main()
 			break;
 		if(choice == 1)
 			ob.~singlyLinkedList();
+		if(choice == 11)
+		{
+			ob1.create();
+			ob + ob1;
+		}
 		ob.choiceCalling(choice);
 	}while(1);
 	
 	cout << "\n########### EXITING... ###########\n";
+	cout << "\n########### MEMORY IS FREED ###########\n";
 	return 0;
 }
