@@ -66,6 +66,7 @@ void circularDoublyLinkedList<T>::options()
 		<<	"\n7. DELETE AT LOCATION"
 		<<	"\n8. DELETE AT END"
 		<<	"\n9. SEARCH IN LIST"
+		<<	"\n10. REVERSE THE LIST"
 		<<	"\n0. EXIT";
 }
 
@@ -109,6 +110,9 @@ void circularDoublyLinkedList<T>::choiceCalling(int ch)
 			break;
 		case 9:
 			search_in_list();
+			break;
+		case 10:
+			reverse_the_list();
 			break;
 		case 0:
 			break;
