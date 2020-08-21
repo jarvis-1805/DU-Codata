@@ -1,4 +1,5 @@
 #include<iostream>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -7,23 +8,17 @@ class singlyLinkedList
 	public:
 		struct node
 		{
-			bool flg;
 			int data;
 			int exp;
 			struct node *next;
 		};
 		struct node *head=NULL, *newNode, *temp;
-		int ch;
-	//	bool emp;
 		
 		~singlyLinkedList();
 		
 		void create();
 		void traverse();
 		void operator +(singlyLinkedList);
-		
-		//int countList();
-		//bool emptyListChecker();
 };
 
 singlyLinkedList::~singlyLinkedList()
@@ -36,7 +31,6 @@ singlyLinkedList::~singlyLinkedList()
 		delete(temp);
 		temp = temp1;
 	}
-	cout << "\n########### MEMORY IS FREED ###########\n";
 }
 
 void singlyLinkedList::create()
@@ -46,8 +40,7 @@ void singlyLinkedList::create()
 	char ch='y';
 	while(ch == 'y')
 	{
-		newNode = (struct node *)new struct node;
-		newNode -> flg = false;
+		newNode = (struct node *)malloc(sizeof(struct node));
 		cout << "Enter the exponent of x : ";
 		cin >> newNode -> exp;
 		cout << "Enter the coefficient of x^" << newNode -> exp << " : ";
@@ -75,109 +68,99 @@ void singlyLinkedList::create()
 
 void singlyLinkedList::traverse()
 {
-	//emp = emptyListChecker();
-	//if(emp != true)
-	//	return;
-	//else
-	//{
 		temp = head;
-		cout << endl << "List: ";
+		cout << endl << "POLYNOMIAL: ";
 		while(temp != NULL)
 		{
 			cout << temp -> data << "x^" << temp -> exp;
 			temp = temp -> next;
 			if(temp != NULL)
-				cout << " -> ";
+				cout << " + ";
 		}
 		cout << endl;
-	//}
 }
 
 void singlyLinkedList::operator + (singlyLinkedList ob2)
 {
-	cout << "\n------------ CONCATINATING ANOTHER LIST ------------\n";
-	//emp = emptyListChecker();
-	//if(emp != true)
-		//return;
-	//else
-	//{
-		
-	struct node *temp1, *temp2, *head2=NULL;
-	temp = this -> head;
-	while(temp != NULL)
+	cout << "\n------------ RESULT ------------\n";
+	
+	singlyLinkedList ob3;
+	struct node *temp1, *temp2, *temp3=NULL;
+	temp1 = this -> head;
+	temp2 = ob2.head;
+	ob3.head = NULL;
+	do
 	{
-		temp1 = ob2.head;
-		newNode = (struct node *)new struct node;
-		
-		while(temp1 != NULL)
+		newNode = (struct node *)malloc(sizeof(struct node));
+		newNode -> next = NULL;
+		if(ob3.head == NULL)
 		{
-			if(temp -> exp == temp1 -> exp)
-			{
-				newNode -> data = temp -> data + temp1 -> data;
-				newNode -> exp = temp -> exp;
-				if(head2 == NULL)
-				{
-					head2 = temp2 = newNode;
-				}
-				else
-				{
-					temp2 -> next = newNode;
-					temp2 = newNode;
-				}
-				break;
-			}
-			/*else if(temp -> exp > temp1 -> exp)
-			{
-				newNode -> data = temp -> data;
-				newNode -> exp = temp -> exp;
-			}
-			else if(temp -> exp < temp1 -> exp)
-			{
-			}*/
-				temp1 = temp1 -> next;
+			temp3 = ob3.temp = newNode;
+			ob3.head = temp3;
 		}
-		temp = temp -> next;
-	}
-	head = head2;
-	traverse();
-	//}
-}
-/*
-template <typename T>
-int singlyLinkedList<T>::countList()
-{
-	int count=0;
-	temp = head;
-	while(temp != NULL)
+		else
+		{
+			temp3 -> next = newNode;
+			temp3 = newNode;
+		}
+		if(temp1 -> exp > temp2 -> exp)
+		{
+			temp3 -> data = temp1 -> data;
+			temp3 -> exp = temp1 -> exp;
+			temp1 = temp1 -> next;
+		}
+		else if(temp1 -> exp < temp2 -> exp)
+		{
+			temp3 -> data = temp2 -> data;
+			temp3 -> exp = temp2 -> exp;
+			temp2 = temp2 -> next;
+		}
+		else
+		{
+			temp3 -> data = temp1 -> data + temp2 -> data;
+			temp3 -> exp = temp1 -> exp;
+			temp1 = temp1 -> next;
+			temp2 = temp2 -> next;
+		}
+		
+	}while(temp1 && temp2);
+	
+	while(temp1 || temp2)
 	{
-		temp = temp -> next;
-		count ++;
+		newNode = (struct node *)malloc(sizeof(struct node));
+		newNode -> next = NULL;
+		temp3 -> next = newNode;
+		temp3 = newNode;
+		if(temp1)
+		{
+			temp3 -> exp = temp1 -> exp;
+			temp3 -> data = temp1 -> data;
+			temp1 = temp1 -> next;
+		}
+		if(temp2)
+		{
+			temp3 -> exp = temp2 -> exp;
+			temp3 -> data = temp2 -> data;
+			temp2 = temp2 -> next;
+		}
 	}
-	return count;
+	//this -> traverse();
+	//ob2.traverse();
+	
+	ob3.traverse();
 }
 
-template <typename T>
-bool singlyLinkedList<T>::emptyListChecker()
-{
-	if(head == NULL)
-	{
-		cout << "\n########### The list is empty ###########\n";
-		return false;
-	}
-	return true;
-}
-*/
 int main()
 {
 	int choice, ch;
 	singlyLinkedList ob1, ob2;
-	cout << "\n=========== SINGLY LINKED LIST ===========\n";
+	cout << "\n=========== ADDITION OF TWO POLYNOMIALS ===========\n";
 	
 	ob1.create();
 	ob2.create();
 	ob1 + ob2;
 	
 	cout << "\n########### EXITING... ###########\n";
-	
+	cout << "\n########### MEMORY IS FREED ###########\n";
 	return 0;
 }
