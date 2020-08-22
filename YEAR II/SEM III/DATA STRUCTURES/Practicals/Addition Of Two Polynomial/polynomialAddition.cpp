@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class singlyLinkedList
+class polynomialAddition
 {
 	public:
 		struct node
@@ -14,14 +14,14 @@ class singlyLinkedList
 		};
 		struct node *head=NULL, *newNode, *temp;
 		
-		~singlyLinkedList();
+		~polynomialAddition();
 		
 		void create();
 		void traverse();
-		void operator +(singlyLinkedList);
+		void operator +(polynomialAddition);
 };
 
-singlyLinkedList::~singlyLinkedList()
+polynomialAddition::~polynomialAddition()
 {
 	struct node *temp1;
 	temp = head;
@@ -33,7 +33,7 @@ singlyLinkedList::~singlyLinkedList()
 	}
 }
 
-void singlyLinkedList::create()
+void polynomialAddition::create()
 {
 	cout << "\n------------ CREATING NEW POLYNOMIAL ------------\n";
 	head = NULL;
@@ -66,7 +66,7 @@ void singlyLinkedList::create()
 	traverse();
 }
 
-void singlyLinkedList::traverse()
+void polynomialAddition::traverse()
 {
 		temp = head;
 		cout << endl << "POLYNOMIAL: ";
@@ -80,11 +80,11 @@ void singlyLinkedList::traverse()
 		cout << endl;
 }
 
-void singlyLinkedList::operator + (singlyLinkedList ob2)
+void polynomialAddition::operator + (polynomialAddition ob2)
 {
 	cout << "\n------------ RESULT ------------\n";
 	
-	singlyLinkedList ob3;
+	polynomialAddition ob3;
 	struct node *temp1, *temp2, *temp3=NULL;
 	temp1 = this -> head;
 	temp2 = ob2.head;
@@ -153,7 +153,7 @@ void singlyLinkedList::operator + (singlyLinkedList ob2)
 int main()
 {
 	int choice, ch;
-	singlyLinkedList ob1, ob2;
+	polynomialAddition ob1, ob2;
 	cout << "\n=========== ADDITION OF TWO POLYNOMIALS ===========\n";
 	
 	ob1.create();
