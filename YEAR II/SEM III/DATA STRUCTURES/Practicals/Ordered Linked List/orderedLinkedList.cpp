@@ -9,7 +9,6 @@ class orderedLinkedList
 		struct node
 		{
 			int data;
-			//int exp;
 			struct node *next;
 		};
 		struct node *head=NULL, *newNode, *temp;
@@ -25,7 +24,6 @@ class orderedLinkedList
 		void traverse();
 		void insert();
 		void deleting();
-		void merge();
 		void operator +(orderedLinkedList);
 };
 
@@ -67,7 +65,6 @@ void orderedLinkedList::choiceCalling(int)
 			deleting();
 			break;
 		case 3:
-			merge();
 			break;
 		case 0:
 			break;
@@ -84,8 +81,6 @@ void orderedLinkedList::create()
 	while(ch == 'y')
 	{
 		newNode = (struct node *)malloc(sizeof(struct node));
-		//cout << "Enter the exponent of x : ";
-		//cin >> newNode -> exp;
 		cout << "Enter the new node's data : ";
 		cin >> newNode -> data;
 		if(head == NULL || head -> data >= newNode -> data)
@@ -188,106 +183,52 @@ void orderedLinkedList::deleting()
 	traverse();
 }
 
-void orderedLinkedList::merge()
+void orderedLinkedList::operator + (orderedLinkedList ob1)
 {
 	cout << "\n------------ MERGING NEW LIST ------------\n";
-}
-/*
-void orderedLinkedList::operator + (orderedLinkedList ob2)
-{
-	cout << "\n------------ RESULT ------------\n";
-	
-	orderedLinkedList ob3;
-	struct node *temp1, *temp2, *temp3=NULL;
-	temp1 = this -> head;
-	temp2 = ob2.head;
-	ob3.head = NULL;
-	do
+	ob1.create();
+	struct node *temp1 = ob1.head;
+	while(temp1 != NULL)
 	{
-		newNode = (struct node *)malloc(sizeof(struct node));
-		newNode -> next = NULL;
-		if(ob3.head == NULL)
+		newNode = temp1;
+		temp1 = temp1 -> next;
+		if(head -> data >= newNode -> data)
 		{
-			temp3 = ob3.temp = newNode;
-			ob3.head = temp3;
+			newNode -> next = head;
+			head = newNode;
 		}
 		else
 		{
-			temp3 -> next = newNode;
-			temp3 = newNode;
-		}
-		if(temp1 -> exp > temp2 -> exp)
-		{
-			temp3 -> data = temp1 -> data;
-			temp3 -> exp = temp1 -> exp;
-			temp1 = temp1 -> next;
-		}
-		else if(temp1 -> exp < temp2 -> exp)
-		{
-			temp3 -> data = temp2 -> data;
-			temp3 -> exp = temp2 -> exp;
-			temp2 = temp2 -> next;
-		}
-		else
-		{
-			temp3 -> data = temp1 -> data + temp2 -> data;
-			temp3 -> exp = temp1 -> exp;
-			temp1 = temp1 -> next;
-			temp2 = temp2 -> next;
-		}
-		
-	}while(temp1 && temp2);
-	
-	while(temp1 || temp2)
-	{
-		newNode = (struct node *)malloc(sizeof(struct node));
-		newNode -> next = NULL;
-		temp3 -> next = newNode;
-		temp3 = newNode;
-		if(temp1)
-		{
-			temp3 -> exp = temp1 -> exp;
-			temp3 -> data = temp1 -> data;
-			temp1 = temp1 -> next;
-		}
-		if(temp2)
-		{
-			temp3 -> exp = temp2 -> exp;
-			temp3 -> data = temp2 -> data;
-			temp2 = temp2 -> next;
+			temp = head;
+			while(temp -> next != NULL && temp -> next -> data < newNode -> data)
+			{
+				temp = temp -> next;
+			}
+			newNode -> next = temp -> next;
+			temp -> next = newNode;
 		}
 	}
-	//this -> traverse();
-	//ob2.traverse();
-	
-	ob3.traverse();
+	cout << "\n------------ RESULT ------------\n";
+	traverse();
 }
-*/
+
 int main()
 {
 	int choice, ch;
-	orderedLinkedList ob1, ob2;
+	orderedLinkedList ob, ob1;
 	cout << "\n=========== ORDERED LINKED LIST ===========\n";
 	
-	ob1.create();
-	//ob1.traverse();
+	ob.create();
 	do
 	{
-		ob1.options();
-		choice = ob1.choice();
+		ob.options();
+		choice = ob.choice();
 		if(choice == 0)
 			break;
-		//if(choice == 1)
-			//ob.~singlyLinkedList();
-		//if(choice == 11)
-		//{
-			//ob1.create();
-			//ob + ob1;
-		//}
-		ob1.choiceCalling(choice);
+		if(choice == 3)
+			ob + ob1;
+		ob.choiceCalling(choice);
 	}while(1);
-	//ob2.create();
-	//ob1 + ob2;
 	
 	cout << "\n########### EXITING... ###########\n";
 	cout << "\n########### MEMORY IS FREED ###########\n";
