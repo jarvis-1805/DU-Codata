@@ -1,0 +1,42 @@
+
+=========== ADDITION OF TWO POLYNOMIALS ===========
+
+------------ CREATING NEW POLYNOMIAL ------------
+Enter the exponent of x : 10
+Enter the coefficient of x^10 : 15
+
+Do you want to enter more terms? y/n: y
+Enter the exponent of x : 0
+Enter the coefficient of x^0 : 10
+
+Do you want to enter more terms? y/n: y
+Enter the exponent of x : 5
+Enter the coefficient of x^5 : 3
+
+Do you want to enter more terms? y/n: n
+
+POLYNOMIAL: 15x^10 + 3x^5 + 10x^0
+
+------------ CREATING NEW POLYNOMIAL ------------
+Enter the exponent of x : 5
+Enter the coefficient of x^5 : 16
+
+Do you want to enter more terms? y/n: y
+Enter the exponent of x : 2
+Enter the coefficient of x^2 : 5
+
+Do you want to enter more terms? y/n: y
+Enter the exponent of x : 8
+Enter the coefficient of x^8 : 10
+
+Do you want to enter more terms? y/n: n
+
+POLYNOMIAL: 10x^8 + 16x^5 + 5x^2
+
+------------ RESULT ------------
+
+POLYNOMIAL: 15x^10 + 10x^8 + 19x^5 + 5x^2 + 10x^0
+
+########### EXITING... ###########
+
+########### MEMORY IS FREED ###########
