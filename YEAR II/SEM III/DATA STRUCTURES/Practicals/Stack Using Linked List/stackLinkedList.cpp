@@ -115,31 +115,24 @@ void stackLinkedList::push()
 
 int stackLinkedList::pop()
 {
-	if(isEmpty())
+	int ele = top -> data;
+	if(top == head)
 	{
-		cout << "\n########### The stack is empty ###########\n";
+		delete(head);
+		top = head = NULL;
 	}
 	else
 	{
-		int ele = top -> data;
-		if(top == head)
+		temp = head;
+		while(temp -> next -> next != NULL)
 		{
-			delete(head);
-			top = head = NULL;
+			temp = temp -> next;
 		}
-		else
-		{
-			temp = head;
-			while(temp -> next -> next != NULL)
-			{
-				temp = temp -> next;
-			}
-			delete(top);
-			temp -> next = NULL;
-			top = temp;
-		}
-		return ele;
+		delete(top);
+		temp -> next = NULL;
+		top = temp;
 	}
+	return ele;
 }
 
 void stackLinkedList::clear()

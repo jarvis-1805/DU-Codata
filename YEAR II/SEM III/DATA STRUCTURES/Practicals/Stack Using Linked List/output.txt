@@ -1,0 +1,132 @@
+
+=========== STACK IN LINKED LIST ===========
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : 2
+
+Pushed : 2
+
+Stack: 2
+        ^top
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : 4
+
+Pushed : 4
+
+Stack: 2 -> 4
+            ^top
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : 6
+
+Pushed : 6
+
+Stack: 2 -> 4 -> 6
+                 ^top
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : 8
+
+Pushed : 8
+
+Stack: 2 -> 4 -> 6 -> 8
+                      ^top
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : 10
+
+Pushed : 10
+
+Stack: 2 -> 4 -> 6 -> 8 -> 10
+                            ^top
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+------------ POPING FROM STACK ------------
+
+Poped : 10
+
+Stack: 2 -> 4 -> 6 -> 8
+                      ^top
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+------------ POPING FROM STACK ------------
+
+Poped : 8
+
+Stack: 2 -> 4 -> 6
+                 ^top
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 3
+
+------------ CLEARING THE STACK ------------
+Poped : 6
+Poped : 4
+Poped : 2
+
+########### The stack is cleared ###########
+
+Stack: EMPTY
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 0
+
+########### EXITING... ###########
+
+########### MEMORY IS FREED ###########
