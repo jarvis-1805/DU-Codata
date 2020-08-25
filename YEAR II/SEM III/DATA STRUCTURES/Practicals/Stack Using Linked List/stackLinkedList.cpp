@@ -22,7 +22,7 @@ class stackLinkedList
 		void choiceCalling(int);
 		
 		void push();
-		void pop();
+		int pop();
 		void clear();
 		void traverse();
 		
@@ -75,8 +75,8 @@ void stackLinkedList::choiceCalling(int ch)
 				if((top -> data >= 10) && (top -> data <=99))
 					x--;
 				c--;
-				pop();
-				cout << "\nSuccessfully poped the top element\n";
+				int ele = pop();
+				cout << "\nPoped : " << ele << "\n";
 				traverse();
 			}
 			break;
@@ -106,14 +106,14 @@ void stackLinkedList::push()
 		top -> next = newNode;
 		top = temp = newNode;
 	}
-	cout << "\nSuccessfully pushed the element in stack\n";
+	cout << "\nPushed : " << top -> data << "\n";
 	if((top -> data >= 10) && (top -> data <=99))
 		x++;
 	c++;
 	traverse();
 }
 
-void stackLinkedList::pop()
+int stackLinkedList::pop()
 {
 	if(isEmpty())
 	{
@@ -121,6 +121,7 @@ void stackLinkedList::pop()
 	}
 	else
 	{
+		int ele = top -> data;
 		if(top == head)
 		{
 			delete(head);
@@ -137,6 +138,7 @@ void stackLinkedList::pop()
 			temp -> next = NULL;
 			top = temp;
 		}
+		return ele;
 	}
 }
 
@@ -150,8 +152,14 @@ void stackLinkedList::clear()
 	else
 	{
 		while(!isEmpty())
-			pop();
+		{
+			int ele = pop();
+			cout << "Poped : " << ele << "\n";
+		}
+		c = 0;
+		x = 0;
 		cout << "\n########### The stack is cleared ###########\n";
+		traverse();
 	}
 }
 
