@@ -1,0 +1,158 @@
+
+=========== STACK IN ARRAY ===========
+
+Enter the size of the stack : 5
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : j
+
+Pushed : j
+
+Stack: j  <-- Top
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : y
+
+Pushed : y
+
+Stack: y  <-- Top
+       j
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 5
+
+########### WRONG CHOICE... ###########
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : i
+
+Pushed : i
+
+Stack: i  <-- Top
+       y
+       j
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : p
+
+Pushed : p
+
+Stack: p  <-- Top
+       i
+       y
+       j
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+------------ PUSHING IN STACK ------------
+Enter the data : w
+
+Pushed : w
+
+Stack: w  <-- Top
+       p
+       i
+       y
+       j
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+########### The stack is full ###########
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+------------ POPING FROM STACK ------------
+
+Poped : w
+
+Stack: p  <-- Top
+       i
+       y
+       j
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+------------ POPING FROM STACK ------------
+
+Poped : p
+
+Stack: i  <-- Top
+       y
+       j
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 3
+
+------------ CLEARING THE STACK ------------
+Poped : i
+Poped : y
+Poped : j
+
+########### The stack is cleared ###########
+
+Stack: EMPTY
+
+1. PUSH
+2. POP
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 0
+
+########### EXITING... ###########

@@ -1,8 +1,9 @@
 #include<iostream>
+#define MAX 100
 
 using namespace std;
 
-template <typename T>
+template <class T>
 class stackArray
 {
 	public:
@@ -10,7 +11,7 @@ class stackArray
 		int top;
 		int ch;
 		int size;
-		T stack[];
+		T stack[MAX];
 		
 		stackArray();
 		
@@ -26,17 +27,17 @@ class stackArray
 		bool isEmpty();
 };
 
-template <typename T>
+template <class T>
 stackArray<T>::stackArray()
 {
+  int s;
 	cout << "\nEnter the size of the stack : ";
-	cin >> size;
-	this -> size = size;
-	this -> stack[size];
+	cin >> s;
+	this -> size = s;
 	top = -1;
 }
 
-template <typename T>
+template <class T>
 void stackArray<T>::options()
 {
 	cout << "\n1. PUSH"
@@ -45,7 +46,7 @@ void stackArray<T>::options()
 		<<	"\n0. EXIT";
 }
 
-template <typename T>
+template <class T>
 int stackArray<T>::choice()
 {
 	cout << "\n\nEnter the number of your choice: ";
@@ -53,7 +54,7 @@ int stackArray<T>::choice()
 	return ch;
 }
 
-template <typename T>
+template <class T>
 void stackArray<T>::choiceCalling(int ch)
 {
 	switch(ch)
@@ -95,7 +96,7 @@ void stackArray<T>::choiceCalling(int ch)
 	}
 }
 
-template <typename T>
+template <class T>
 void stackArray<T>::push(T data)
 {
 	stack[++top] = data;
@@ -103,14 +104,14 @@ void stackArray<T>::push(T data)
 	traverse();
 }
 
-template <typename T>
+template <class T>
 T stackArray<T>::pop()
 {
 	T ele = stack[top--];
 	return ele;
 }
 
-template <typename T>
+template <class T>
 void stackArray<T>::clear()
 {
 	if(top == -1)
@@ -130,7 +131,7 @@ void stackArray<T>::clear()
 	}
 }
 
-template <typename T>
+template <class T>
 void stackArray<T>::traverse()
 {
 	cout << endl << "Stack: ";
@@ -154,7 +155,7 @@ void stackArray<T>::traverse()
 	}
 }
 
-template <typename T>
+template <class T>
 bool stackArray<T>::isEmpty()
 {
 	if(top == size-1)
@@ -168,7 +169,7 @@ int main()
 {
 	int choice, size;
 	cout << "\n=========== STACK IN ARRAY ===========\n";
-	stackArray<int> ob;
+	stackArray<char> ob;
 	
 	do
 	{
