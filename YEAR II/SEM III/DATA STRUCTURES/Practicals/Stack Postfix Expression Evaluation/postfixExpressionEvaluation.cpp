@@ -102,7 +102,7 @@ void postfixExpressionEvaluation::stackEvaluation()
 
 int main()
 {
-	cout << "\n=========== STACK ADDITION OF TWO LARGE INTEGERS ===========\n";
+	cout << "\n=========== STACK POSTFIX EXPRESSION EVALUATION ===========\n";
 	postfixExpressionEvaluation ob1;
 	cout << "\nENTER THE EXPRESSION (with space in b/w only): ";
 	ob1.takeExp();
