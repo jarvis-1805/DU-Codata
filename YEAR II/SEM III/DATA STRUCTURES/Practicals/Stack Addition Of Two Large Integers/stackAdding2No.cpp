@@ -21,8 +21,6 @@ class stackAdding2No
 		void traverse();
 		
 		void operator +(stackAdding2No);
-		
-		bool isEmpty();
 };
 
 stackAdding2No::stackAdding2No()
