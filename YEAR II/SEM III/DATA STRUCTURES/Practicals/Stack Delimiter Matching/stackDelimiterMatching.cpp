@@ -19,7 +19,6 @@ class stackDelimiterMatching
 		
 		void takeExp();
 		void stackEvaluation();
-		void traverse();
 };
 
 stackDelimiterMatching::stackDelimiterMatching()
@@ -128,16 +127,6 @@ void stackDelimiterMatching::stackEvaluation()
 		cout << "\nThe Expression Is Balanced\n";
 	else
 		cout << "\nThe Expression Is Not Balanced\n";
-}
-
-void stackDelimiterMatching::traverse()
-{
-	cout << "\nRESULT : ";
-	for(int i=top; i>=0; i--)
-	{
-		cout << stack[i];
-	}
-	cout << "\n";
 }
 
 int main()
