@@ -1,0 +1,30 @@
+OUTPUT 1-
+
+
+=========== STACK DELIMITER MATCHING ===========
+
+ENTER THE EXPRESSION (with space in b/w only): [ { 5 + /* ( 2 * 6 ) */ - 3 } * 5 ]
+
+The Expression Is Balanced
+
+
+
+OUTPUT 2-
+
+
+=========== STACK DELIMITER MATCHING ===========
+
+ENTER THE EXPRESSION (with space in b/w only): [ { 5 + /* ( 2 * 6 ) */ - 3 } * 5
+
+The Expression Is Not Balanced
+
+
+
+OUTPUT 3-
+
+
+=========== STACK DELIMITER MATCHING ===========
+
+ENTER THE EXPRESSION (with space in b/w only): [ ( ] )
+
+The Expression Is Not Balanced
