@@ -1,0 +1,62 @@
+
+=========== STACK EXPRESSION CONVERSION ===========
+
+1. INFIX TO POSTFIX
+2. INFIX TO PREFIX
+3. POSTFIX TO INFIX
+4. PREFIX TO INFIX
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter Infix Expression : a+b*(c^d-e)^(f+g*h)-i
+The Postfix Expression : abcd^e-fgh*+^*+i-
+
+=========== STACK EXPRESSION CONVERSION ===========
+
+1. INFIX TO POSTFIX
+2. INFIX TO PREFIX
+3. POSTFIX TO INFIX
+4. PREFIX TO INFIX
+0. EXIT
+
+Enter the number of your choice: 2
+
+Enter Infix Expression : a+b*(c^d-e)^(f+g*h)-i
+The Prefix Expression : -+a*b^-^cde+f*ghi
+
+=========== STACK EXPRESSION CONVERSION ===========
+
+1. INFIX TO POSTFIX
+2. INFIX TO PREFIX
+3. POSTFIX TO INFIX
+4. PREFIX TO INFIX
+0. EXIT
+
+Enter the number of your choice: 3
+
+Enter Postfix Expression : abcd^e-fgh*+^*+i-
+The Infix Expression : ((a+(b*(((c^d)-e)^(f+(g*h)))))-i)
+
+=========== STACK EXPRESSION CONVERSION ===========
+
+1. INFIX TO POSTFIX
+2. INFIX TO PREFIX
+3. POSTFIX TO INFIX
+4. PREFIX TO INFIX
+0. EXIT
+
+Enter the number of your choice: 4
+
+Enter Prefix Expression : -+a*b^-^cde+f*ghi
+The Infix Expression : ((a+(b*(((c^d)-e)^(f+(g*h)))))-i)
+
+=========== STACK EXPRESSION CONVERSION ===========
+
+1. INFIX TO POSTFIX
+2. INFIX TO PREFIX
+3. POSTFIX TO INFIX
+4. PREFIX TO INFIX
+0. EXIT
+
+Enter the number of your choice: 0
