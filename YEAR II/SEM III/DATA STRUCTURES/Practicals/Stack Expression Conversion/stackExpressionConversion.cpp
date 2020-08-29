@@ -9,7 +9,7 @@ class stackExpressionConversion
 		
 		int top, ch;
 		string exp;
-		char stack[size];
+		string stack[size];
 		
 		stackExpressionConversion();
 		
@@ -17,15 +17,15 @@ class stackExpressionConversion
 		int choice();
 		void choiceCalling(int);
 		
-		void push(char);
-		char pop();
-		char peek();
+		void push(string);
+		string pop();
+		string peek();
 		bool isEmpty();
 		
 		void takeExp();
 		
-		int precedence(char);
-		string associativity(char);
+		int precedence(string);
+		string associativity(string);
 		
 		void infixToPostfix();
 		void infixToPrefix();
@@ -77,18 +77,18 @@ void stackExpressionConversion::choiceCalling(int ch)
 	}
 }
 
-void stackExpressionConversion::push(char data)
+void stackExpressionConversion::push(string data)
 {
 	stack[++top] = data;
 }
 
-char stackExpressionConversion::pop()
+string stackExpressionConversion::pop()
 {
-	char ele = stack[top--];
+	string ele = stack[top--];
 	return ele;
 }
 
-char stackExpressionConversion::peek()
+string stackExpressionConversion::peek()
 {
 	return stack[top];
 }
@@ -107,23 +107,23 @@ void stackExpressionConversion::takeExp()
 	cin >> exp;
 }
 
-int stackExpressionConversion::precedence(char c)
+int stackExpressionConversion::precedence(string c)
 {
-    if(c == '^')
+    if(c == "^")
 		return 3;
-    else if(c == '*' || c == '/')
+    else if(c == "*" || c == "/")
 		return 2;
-    else if(c == '+' || c == '-')
+    else if(c == "+" || c == "-")
 		return 1;
 	else
 		return -1;
 }
 
-string stackExpressionConversion::associativity(char c)
+string stackExpressionConversion::associativity(string c)
 {
-    if(c == '^')
+    if(c == "^")
 		return "rTl";
-    else if(c == '*' || c == '/' || c == '+' || c == '-')
+    else if(c == "*" || c == "/" || c == "+" || c == "-")
 		return "lTr";
 	else
 		return "";
@@ -132,27 +132,27 @@ string stackExpressionConversion::associativity(char c)
 void stackExpressionConversion::infixToPostfix()
 {
 	string str;
-	char c;
+	string c;
 	cout << "\nEnter Infix Expression : ";
 	takeExp();
 	for(int i=0; i<exp.length(); i++)
 	{
 		c = exp.at(i);
-		if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		if((c >= "a" && c <= "z") || (c >= "A" && c <= "Z") || (c >= "0" && c <= "9"))
 		{
 			str = str + c;
 		}
-		else if(isEmpty() || peek() == '(')
+		else if(isEmpty() || peek() == "(")
 			push(c);
-		else if(c == '(')
+		else if(c == "(")
 			push(c);
-		else if(c == ')')
+		else if(c == ")")
 		{
-			while(!isEmpty() && peek() != '(')
+			while(!isEmpty() && peek() != "(")
 			{
 				str = str + pop();
 			}
-			if(peek() == '(')
+			if(peek() == "(")
 				pop();
 		}
 		else
@@ -184,17 +184,103 @@ void stackExpressionConversion::infixToPostfix()
 
 void stackExpressionConversion::infixToPrefix()
 {
-	
+	string str;
+	string c;
+	cout << "\nEnter Infix Expression : ";
+	takeExp();
+	for(int i=exp.length()-1; i>=0; i--)
+	{
+		c = exp.at(i);
+		if((c >= "a" && c <= "z") || (c >= "A" && c <= "Z") || (c >= "0" && c <= "9"))
+		{
+			str = c + str;
+		}
+		else if(isEmpty() || peek() == ")")
+			push(c);
+		else if(c == ")")
+			push(c);
+		else if(c == "(")
+		{
+			while(!isEmpty() && peek() != ")")
+			{
+				str = pop() +  str;
+			}
+			if(peek() == ")")
+				pop();
+		}
+		else
+		{
+			while(!isEmpty() && precedence(c) <= precedence(peek()))
+			{
+				if(precedence(c) < precedence(peek()))
+					str = pop() +  str;
+				else if(precedence(c) == precedence(peek()))
+				{
+					if(associativity(c) == "lTr")
+						break;
+					else if(associativity(c) == "rTl")
+					{
+						str = pop() +  str;
+						break;
+					}
+				}
+			}
+			push(c);
+		}
+	}
+	while(!isEmpty()) 
+    { 
+        str = pop() +  str; 
+    }
+	cout << "The Prefix Expression : " << str << endl;
 }
 
 void stackExpressionConversion::postfixToInfix()
 {
-	
+	string str;
+	string c, c1, c2;
+	cout << "\nEnter Postfix Expression : ";
+	takeExp();
+	for(int i=0; i<exp.length(); i++)
+	{
+		c = exp.at(i);
+		if((c >= "a" && c <= "z") || (c >= "A" && c <= "Z") || (c >= "0" && c <= "9"))
+		{
+			push(c);
+		}
+		else
+		{
+			c1 = pop();
+			c2 = pop();
+			str = '(' + c2 + c + c1 + ')';
+			push(str);
+		}
+	}
+	cout << "The Infix Expression : " << peek() << endl;
 }
 
 void stackExpressionConversion::prefixToInfix()
 {
-	
+	string str;
+	string c, c1, c2;
+	cout << "\nEnter Prefix Expression : ";
+	takeExp();
+	for(int i=exp.length()-1; i>=0; i--)
+	{
+		c = exp.at(i);
+		if((c >= "a" && c <= "z") || (c >= "A" && c <= "Z") || (c >= "0" && c <= "9"))
+		{
+			push(c);
+		}
+		else
+		{
+			c1 = pop();
+			c2 = pop();
+			str = '(' + c1 + c + c2 + ')';
+			push(str);
+		}
+	}
+	cout << "The Infix Expression : " << peek() << endl;
 }
 
 int main()
