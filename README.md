@@ -1,1 +1,1 @@
-# @@@@@ This Repository contains all the codes for CS Honours. @@@@@
+@@@@@ This Repository contains all the codes for CS Honours. @@@@@
