@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class queueLinkedList
+class queueCircularLinkedList
 {
 	public:
 		struct node
@@ -13,8 +13,8 @@ class queueLinkedList
 		struct node *front, *rear, *newNode, *temp;
 		int ch;
 		
-		queueLinkedList();
-		~queueLinkedList();
+		queueCircularLinkedList();
+		~queueCircularLinkedList();
 		
 		void options();
 		int choice();
@@ -28,19 +28,19 @@ class queueLinkedList
 		bool isEmpty();
 };
 
-queueLinkedList::queueLinkedList()
+queueCircularLinkedList::queueCircularLinkedList()
 {
 	this -> front = NULL;
 	this -> rear = NULL;
 }
 
-queueLinkedList::~queueLinkedList()
+queueCircularLinkedList::~queueCircularLinkedList()
 {
 	while(!isEmpty())
 		dequeue();
 }
 
-void queueLinkedList::options()
+void queueCircularLinkedList::options()
 {
 	cout << "\n---------- MENU ----------";
 	cout << "\n1. ENQUEUE"
@@ -51,14 +51,14 @@ void queueLinkedList::options()
 		<<	"\n0. EXIT";
 }
 
-int queueLinkedList::choice()
+int queueCircularLinkedList::choice()
 {
 	cout << "\n\nEnter the number of your choice: ";
 	cin >> ch;
 	return ch;
 }
 
-void queueLinkedList::choiceCalling(int ch)
+void queueCircularLinkedList::choiceCalling(int ch)
 {
 	switch(ch)
 	{
@@ -103,7 +103,7 @@ void queueLinkedList::choiceCalling(int ch)
 	}
 }
 
-void queueLinkedList::enqueue(int n)
+void queueCircularLinkedList::enqueue(int n)
 {
 	newNode = new struct node;
 	newNode -> data = n;
@@ -111,39 +111,42 @@ void queueLinkedList::enqueue(int n)
 	if(front == NULL && rear == NULL)
 	{
 		front = rear = newNode;
+		rear -> next = front;
 	}
 	else
 	{
 		rear -> next = newNode;
 		rear = newNode;
+		rear -> next = front;
 	}
 	cout << "\nEnqueued : " << n << endl;
 }
 
-int queueLinkedList::dequeue()
+int queueCircularLinkedList::dequeue()
 {
 	int x;
-	temp = front;
+	temp = front;	
 	if(front == rear)
 	{
 		x = front -> data;
 		front = rear = NULL;
 	}
 	else
-	{	
+	{
 		x = temp -> data;
 		front = temp -> next;
+		rear -> next = front;
 	}
 	delete(temp);
 	return x;
 }
 
-int queueLinkedList::frontEle()
+int queueCircularLinkedList::frontEle()
 {
 	return front -> data;
 }
 
-void queueLinkedList::traverse()
+void queueCircularLinkedList::traverse()
 {
 	temp = front;
 	cout << endl << "Queue: ";
@@ -152,33 +155,32 @@ void queueLinkedList::traverse()
 		cout << "Empty\n";
 		return;
 	}
-	while(temp != NULL)
+	do
 	{
 		cout << temp -> data;
 		temp = temp -> next;
-		if(temp != NULL)
+		if(temp != front)
 			cout << " : ";
-	}
+	}while(temp != front);
 	cout << endl;
 }
 
-void queueLinkedList::clear()
+void queueCircularLinkedList::clear()
 {
 	if(isEmpty())
 	{
 		cout << "\nThe queue is empty\n";
 		return;
 	}
-	this -> ~queueLinkedList();
+	this -> ~queueCircularLinkedList();
 	this -> front = NULL;
 	this -> rear = NULL;
 	cout << "\nSuccessfully cleared the Queue!\n";
 }
 
-bool queueLinkedList::isEmpty()
+bool queueCircularLinkedList::isEmpty()
 {
-	temp = front;
-	if(temp == NULL)
+	if(front == NULL)
 		return true;
 	return false;
 }
@@ -186,8 +188,8 @@ bool queueLinkedList::isEmpty()
 int main()
 {
 	int choice;
-	queueLinkedList ob;
-	cout << "\n=========== QUEUE LINKED LIST ===========\n";
+	queueCircularLinkedList ob;
+	cout << "\n=========== QUEUE CIRCULAR LINKED LIST ===========\n";
 	do
 	{
 		ob.options();
