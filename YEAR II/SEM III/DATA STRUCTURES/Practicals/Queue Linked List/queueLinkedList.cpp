@@ -187,7 +187,7 @@ int main()
 {
 	int choice;
 	queueLinkedList ob;
-	cout << "\n=========== QUEUE LINKED LIST ===========\n";
+	cout << "\n=========== QUEUE CIRCULAR LINKED LIST ===========\n";
 	do
 	{
 		ob.options();
