@@ -1,0 +1,196 @@
+
+=========== QUEUE LINKED LIST ===========
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 10
+
+Enqueued : 10
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 30
+
+Enqueued : 30
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 50
+
+Enqueued : 50
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 70
+
+Enqueued : 70
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 90
+
+Enqueued : 90
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 4
+
+Queue: 10 : 30 : 50 : 70 : 90
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 3
+
+Front : 10
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+Dequeued : 10
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+Dequeued : 30
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 4
+
+Queue: 50 : 70 : 90
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 10
+
+Enqueued : 10
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 4
+
+Queue: 50 : 70 : 90 : 10
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 5
+
+Successfully cleared the Queue!
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 4
+
+Queue: Empty
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. FRONT
+4. DISPLAY
+5. CLEAR
+0. EXIT
+
+Enter the number of your choice: 0
+
+########### EXITING... ###########
+
+########### MEMORY IS FREED ###########
