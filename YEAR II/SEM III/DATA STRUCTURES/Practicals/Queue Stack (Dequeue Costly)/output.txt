@@ -1,0 +1,153 @@
+
+
+=========== QUEUE USING STACK ===========
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 10
+
+Enqueued : 10
+
+Queue: 10
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 20
+
+Enqueued : 20
+
+Queue: 10 : 20
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 30
+
+Enqueued : 30
+
+Queue: 10 : 20 : 30
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 40
+
+Enqueued : 40
+
+Queue: 10 : 20 : 30 : 40
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+Dequeued : 10
+
+Queue: 20 : 30 : 40
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+Dequeued : 20
+
+Queue: 30 : 40
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 50
+
+Enqueued : 50
+
+Queue: 30 : 40 : 50
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 1
+
+Enter the new data : 60
+
+Enqueued : 60
+
+Queue: 30 : 40 : 50 : 60
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 2
+
+Dequeued : 30
+
+Queue: 40 : 50 : 60
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 3
+
+------------ CLEARING THE QUEUE ------------
+
+Dequeued : 40
+
+Dequeued : 50
+
+Dequeued : 60
+
+########### The queue is cleared ###########
+
+Queue: EMPTY
+
+---------- MENU ----------
+1. ENQUEUE
+2. DEQUEUE
+3. CLEAR
+0. EXIT
+
+Enter the number of your choice: 0
+
+########### EXITING... ###########
