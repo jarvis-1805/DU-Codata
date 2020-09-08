@@ -3,36 +3,36 @@
 
 using namespace std;
 
-class queueStackDequeueCostly
+class queueStackEnqueueCostly
 {
 	public:
 		int top;
 		int stack[MAX];
 		int ch;
 		
-		queueStackDequeueCostly();
+		queueStackEnqueueCostly();
 		
 		void options();
 		int choice();
-		void choiceCalling(int, queueStackDequeueCostly);
+		void choiceCalling(int, queueStackEnqueueCostly);
 		
 		void push(int);
 		int pop();
 		void traverse();
 		
-		void enqueue(int);
-		int dequeue(queueStackDequeueCostly);
-		void clear(queueStackDequeueCostly);
+		void enqueue(int, queueStackEnqueueCostly);
+		int dequeue();
+		void clear(queueStackEnqueueCostly);
 		
 		bool isEmpty();
 };
 
-queueStackDequeueCostly::queueStackDequeueCostly()
+queueStackEnqueueCostly::queueStackEnqueueCostly()
 {
 	this -> top = -1;
 }
 
-void queueStackDequeueCostly::options()
+void queueStackEnqueueCostly::options()
 {
   cout << "\n---------- MENU ----------";
 	cout << "\n1. ENQUEUE"
@@ -41,14 +41,14 @@ void queueStackDequeueCostly::options()
 		<<	"\n0. EXIT";
 }
 
-int queueStackDequeueCostly::choice()
+int queueStackEnqueueCostly::choice()
 {
 	cout << "\n\nEnter the number of your choice: ";
 	cin >> ch;
 	return ch;
 }
 
-void queueStackDequeueCostly::choiceCalling(int ch, queueStackDequeueCostly ob2)
+void queueStackEnqueueCostly::choiceCalling(int ch, queueStackEnqueueCostly ob2)
 {
 	switch(ch)
 	{
@@ -56,7 +56,7 @@ void queueStackDequeueCostly::choiceCalling(int ch, queueStackDequeueCostly ob2)
 			int n;
 			cout << "\nEnter the new data : ";
 			cin >> n;
-			this -> enqueue(n);
+			this -> enqueue(n, ob2);
 			this -> traverse();
 			break;
 		case 2:
@@ -66,7 +66,7 @@ void queueStackDequeueCostly::choiceCalling(int ch, queueStackDequeueCostly ob2)
 				break;
 			}
 			int a;
-			a = this -> dequeue(ob2);
+			a = this -> dequeue();
 			cout << "\nDequeued : " << a << endl;
 			this -> traverse();
 			break;
@@ -80,28 +80,32 @@ void queueStackDequeueCostly::choiceCalling(int ch, queueStackDequeueCostly ob2)
 	}
 }
 
-void queueStackDequeueCostly::enqueue(int n)
+void queueStackEnqueueCostly::enqueue(int n, queueStackEnqueueCostly ob2)
 {
-	push(n);
-	cout << "\nEnqueued : " << n << "\n";
+	if(this -> isEmpty())
+		this -> push(n);
+	else
+	{
+    
+		while(this -> isEmpty() != true)
+		{
+			ob2.push(this -> pop());
+		}
+		ob2.push(n);
+		while(ob2.isEmpty() != true)
+		{
+			this -> push(ob2.pop());
+		}
+	}
+	cout << "\nEnqueued2: " << n << "\n";
 }
 
-int queueStackDequeueCostly::dequeue(queueStackDequeueCostly ob2)
+int queueStackEnqueueCostly::dequeue()
 {
-	int x;
-	while(this -> isEmpty() != true)
-	{
-		ob2.push(this -> pop());
-	}
-	x = ob2.pop();
-	while(ob2.isEmpty() != true)
-	{
-		this -> push(ob2.pop());
-	}
-	return x;
+	return pop();
 }
 
-void queueStackDequeueCostly::clear(queueStackDequeueCostly ob2)
+void queueStackEnqueueCostly::clear(queueStackEnqueueCostly ob2)
 {
 	cout << "\n------------ CLEARING THE QUEUE ------------\n";
 	if(isEmpty())
@@ -112,7 +116,7 @@ void queueStackDequeueCostly::clear(queueStackDequeueCostly ob2)
 	{
 		while(!isEmpty())
 		{
-			int ele = dequeue(ob2);
+			int ele = dequeue();
 			cout << "\nDequeued : " << ele << "\n";
 		}
 		cout << "\n########### The queue is cleared ###########\n";
@@ -120,19 +124,19 @@ void queueStackDequeueCostly::clear(queueStackDequeueCostly ob2)
 	}
 }
 
-void queueStackDequeueCostly::push(int n)
+void queueStackEnqueueCostly::push(int n)
 {
 	stack[++top] = n;
 	return;
 }
 
-int queueStackDequeueCostly::pop()
+int queueStackEnqueueCostly::pop()
 {
 	int ele = stack[top--];
 	return ele;
 }
 
-void queueStackDequeueCostly::traverse()
+void queueStackEnqueueCostly::traverse()
 {
 	cout << endl << "Queue: ";
 	if(isEmpty())
@@ -141,17 +145,17 @@ void queueStackDequeueCostly::traverse()
 	}
 	else
 	{
-		for(int i=0; i<=top; i++)
+		for(int i=top; i>=0; i--)
 		{
 			cout << stack[i];
-      if(i != top)
+      if(i != 0)
         cout << " : ";
 		}
     cout << endl;
 	}
 }
 
-bool queueStackDequeueCostly::isEmpty()
+bool queueStackEnqueueCostly::isEmpty()
 {
 	if(top == -1)
 	{
@@ -163,7 +167,7 @@ bool queueStackDequeueCostly::isEmpty()
 int main()
 {
 	int choice, ch;
-	queueStackDequeueCostly ob1, ob2;
+	queueStackEnqueueCostly ob1, ob2;
 	cout << "\n=========== QUEUE USING STACK ===========\n";
 	do
 	{
