@@ -8,15 +8,16 @@ def maxOfString():
 def replaceVowels():
     str = input("Enter the string: ")
     sym = input("Enter the character to replace vowel: ")
+    str1 = ""
     for i in range(len(str)):
         ch = str[i]
-        print(ch)
-        if ch == 'a' or ch == 'e' or ch == 'ch' or ch == 'o' or ch == 'u' or\
+        if ch == 'a' or ch == 'e' or ch == 'i' or ch == 'o' or ch == 'u' or\
            ch == 'A' or ch == 'E' or ch == 'I' or ch == 'O' or ch == 'U':
-           print(ch)
-           str[i] = sym
+           str1 = str1 + sym
+        else:
+            str1 += ch
     
-    print(str)
+    print(str1)
     
 def wordsInString():
     pass
