@@ -1,0 +1,99 @@
+OUTPUT:
+
+
+
+
+========= Menu =========
+1. Length of string
+2. Maximum of three strings
+3. Replace vowels
+4. Number of words in a string
+5. Check palindrome
+0. Exit
+
+Enter your choice:1
+
+Enter the string: Python is a very easy language to code
+Length of Python is a very easy language to code is 38
+
+========= Menu =========
+1. Length of string
+2. Maximum of three strings
+3. Replace vowels
+4. Number of words in a string
+5. Check palindrome
+0. Exit
+
+Enter your choice:2
+
+Enter the string 1: Python is a coding language
+Enter the string 2: Python is very easy
+Enter the string 3: Python is Python
+
+The maximum of three strings is: Python is very easy
+
+========= Menu =========
+1. Length of string
+2. Maximum of three strings
+3. Replace vowels
+4. Number of words in a string
+5. Check palindrome
+0. Exit
+
+Enter your choice:3
+
+Enter the string: Python is a very easy language to code
+Enter the character to replace vowel: #
+
+The new string is: Pyth#n #s # v#ry ##sy l#ng##g# t# c#d#
+
+========= Menu =========
+1. Length of string
+2. Maximum of three strings
+3. Replace vowels
+4. Number of words in a string
+5. Check palindrome
+0. Exit
+
+Enter your choice:4
+
+Enter the string: Python is a very easy language to code
+Number of words in the string are: 8
+
+========= Menu =========
+1. Length of string
+2. Maximum of three strings
+3. Replace vowels
+4. Number of words in a string
+5. Check palindrome
+0. Exit
+
+Enter your choice:5
+
+Enter the string: Malayalam
+
+malayalam is palindrome!
+
+========= Menu =========
+1. Length of string
+2. Maximum of three strings
+3. Replace vowels
+4. Number of words in a string
+5. Check palindrome
+0. Exit
+
+Enter your choice:5
+
+Enter the string: Python is a very easy language to code
+
+python is a very easy language to code is not palindrome!
+
+========= Menu =========
+1. Length of string
+2. Maximum of three strings
+3. Replace vowels
+4. Number of words in a string
+5. Check palindrome
+0. Exit
+
+Enter your choice:0
