@@ -38,7 +38,7 @@ class singlyLinkedList
 };
 
 template <typename T>
-singlyLinkedList<T>::~singlyLinkedList()
+singlyLinkedList<T>::~singlyLinkedList()		//Destructor to free up the memory
 {
 	struct node *temp1;
 	temp = head;
@@ -132,11 +132,11 @@ void singlyLinkedList<T>::create()
 		cout << "Enter the new node's data : ";
 		cin >> newNode -> data;
 		newNode -> next = NULL;
-		if(head == NULL)
+		if(head == NULL)				//For first node (head)
 		{
 			head = temp = newNode;
 		}
-		else
+		else						//For rest of the nodes
 		{
 			temp -> next = newNode;
 			temp = newNode;
@@ -247,7 +247,7 @@ void singlyLinkedList<T>::insert_at_end()
 		cin >> newNode -> data;
 		newNode -> next = NULL;
 		temp = head;
-		while(temp -> next != NULL)
+		while(temp -> next != NULL)				//traversing up to last node
 		{
 			temp = temp -> next;
 		}
@@ -308,7 +308,7 @@ void singlyLinkedList<T>::delete_at_location()
 			else
 			{
 				temp = head;
-				while(i < loc-1)
+				while(i < loc-1)				//traversing up to location - 1
 				{
 					temp = temp -> next;
 					++i;
@@ -343,7 +343,7 @@ void singlyLinkedList<T>::delete_at_end()
 		}
 		else
 		{
-			while(temp -> next -> next != NULL)
+			while(temp -> next -> next != NULL)				//traversing up to second last node
 			{
 				temp = temp -> next;
 			}
@@ -411,7 +411,7 @@ void singlyLinkedList<T>::reverse_the_list()
 }
 
 template <typename T>
-void singlyLinkedList<T>::operator + (singlyLinkedList ob1)
+void singlyLinkedList<T>::operator + (singlyLinkedList ob1)				//operator overloading
 {
 	cout << "\n------------ CONCATINATING ANOTHER LIST ------------\n";
 	emp = emptyListChecker();
@@ -464,7 +464,7 @@ bool singlyLinkedList<T>::emptyListChecker()
 int main()
 {
 	int choice, ch;
-	singlyLinkedList<int> ob, ob1, ob2, ob3;
+	singlyLinkedList<int> ob, ob1;
 	cout << "\n=========== SINGLY LINKED LIST ===========\n";
 	do
 	{
