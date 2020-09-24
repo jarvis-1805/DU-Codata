@@ -1,21 +1,21 @@
 def input_list():
     l = []
-    n = int(input("Enter the number of students: "))
+    n = int(input("\nEnter the number of students: "))
     for i in range(0, n, 1):
-        l.append(input(f"Enter the name {i}: "))
+        l.append(input(f"Enter the name {i+1}: ").lower())
 
-    return l, n
+    return n, l
 
-def linear_Search():
-    from Linear_Search import main as ls
-    l, n = input_list()
-    x = input("Enter the name to be searched: ")
+def linear_Search(n, l):
+    import linearSearch as ls
+    
+    x = input("\nEnter the name to be searched: ").lower()
     flag, i = ls.linear_search(n, l, x)
     
     if flag == True:
-        print("Element found at position", i+1)
+        print("\nElement found at position", i+1)
     else:
-        print("Element not found")
+        print("\nElement not found!")
 
 def binary_search():
     pass
@@ -40,7 +40,8 @@ sort_switcher = {
                     3: selection_sort
                 }
 
-def main():
+def main(n, l):
+    
     print("\n========= Menu =========")
     print("1. Search an element\
          \n2. Sort the elements\
@@ -53,7 +54,7 @@ def main():
                 \n2. Binary Search")
         choice = int(input("\nEnetr your choice: "))
         func = search_switcher.get(choice, lambda: print("Invlaid Choice!"))
-        func()
+        func(n, l)
     elif ch == 2:
         print("\n========= Sorting Menu =========")
         print("1. Bubble Sort\
@@ -63,7 +64,9 @@ def main():
         func = sort_switcher.get(choice, lambda: print("Invlaid Choice!"))
         func()
     elif ch == 0:
-        exit
+        exit()
 
 if __name__ == "__main__":
-    main()
+    n, l = input_list()
+    while True:
+        main(n, l)
