@@ -18,7 +18,7 @@ def linear_Search(n, l):
         print("\nElement not found!")
 
 def binary_search():
-    pass
+    x = input("\nEnter the name to be searched: ").lower()
 
 def bubble_sort():
     pass
