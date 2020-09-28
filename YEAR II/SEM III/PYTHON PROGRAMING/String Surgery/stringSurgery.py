@@ -1,6 +1,9 @@
 def lenOfString():
     str = input("\nEnter the string: ")
-    print("Length of {} is {}".format(str, len(str)))
+    position = 0
+    while str[position:]:
+        position += 1
+    print("Length of {} is {}".format(str, position))
 
 def maxOfString():
     str1 = input("\nEnter the string 1: ")
@@ -70,7 +73,7 @@ def main():
          \n5. Check palindrome\
          \n0. Exit")
          
-    ch = int(input("\nEnter your choice:"))
+    ch = int(input("\nEnter your choice: "))
     func = switcher.get(ch, lambda: print("Invlaid Choice!"))
     if ch == 2:
         print("\nThe maximum of three strings is:",func())
