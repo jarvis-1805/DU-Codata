@@ -1,7 +1,12 @@
+'''
+Write a function that finds the sum of then terms of the following series.
+1–x2/2!+x4/4!–x6/6!+...xn/n!
+'''
+
 def factorial(num):
     fact = 1
     for i in range(2, num+1):
-        fact = fact * i;
+        fact = fact * i
     
     return fact
 
