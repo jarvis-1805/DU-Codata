@@ -74,7 +74,7 @@ def main():
          \n0. Exit")
          
     ch = int(input("\nEnter your choice: "))
-    func = switcher.get(ch, lambda: print("Invlaid Choice!"))
+    func = switcher.get(ch, lambda: print("\nInvlaid Choice!"))
     if ch == 2:
         print("\nThe maximum of three strings is:",func())
     else:
