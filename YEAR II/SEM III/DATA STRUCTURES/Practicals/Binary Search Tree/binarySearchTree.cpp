@@ -8,7 +8,7 @@ struct node
 	int data;
 	struct node *right;
 };
-struct node *root, *newNode;
+struct node *root, *newNode, *temp;
 struct node *insert(node *, int);
 
 class binarySearchTree
@@ -22,7 +22,8 @@ class binarySearchTree
 		int choice();
 		void choiceCalling(int);
 
-        
+        void search(int);
+		bool isEmpty();
 };
 
 binarySearchTree::binarySearchTree()
@@ -32,7 +33,9 @@ binarySearchTree::binarySearchTree()
 
 void binarySearchTree::options()
 {
+	cout << "\n\n------- MENU -------";
     cout << "\n1. INSERT"
+		<< "\n2. SEARCH"
 		<<	"\n0. EXIT";
 }
 
@@ -45,14 +48,18 @@ int binarySearchTree::choice()
 
 void binarySearchTree::choiceCalling(int ch)
 {
+	int k;
     switch(ch)
 	{
 		case 1:
-			int k;
 			cout << "\nEnter the data: ";
 		    cin >> k;
 			root = insert(root, k);
 			break;
+		case 2:
+			cout << "\nEnter the node to be searched: ";
+			cin >> k;
+			search(k);
 		case 0:
 			break;
 		default:
@@ -78,6 +85,40 @@ struct node *insert(node *root, int k)
 		root -> right = insert(root -> right, k);
 	}
 	return root;
+}
+
+void binarySearchTree::search(int k)
+{
+	if(isEmpty())
+		cout << "\nTree is empty!";
+	else
+	{
+		temp = root;
+		while(temp != NULL)
+		{
+			if(k == temp -> data)
+			{
+				cout << "\nNode is present in Tree.";
+				return;
+			}
+			else if(k < temp -> data)
+			{
+				temp = temp -> left;
+			}
+			else if(k > temp -> data)
+			{
+				temp = temp -> right;
+			}
+		}
+		cout << "\nNode is absent in Tree.";
+	}
+}
+
+bool binarySearchTree::isEmpty()
+{
+	if(root == NULL)
+		return true;
+	return false;
 }
 
 int main()
