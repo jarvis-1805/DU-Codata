@@ -153,6 +153,8 @@ struct node *insert(node *root, int k)
 		newNode -> data = k;
 		return newNode;
 	}
+	if(k == root -> data)
+		cout << "\n" << k << " is already present in tree!\n";
 	if(k < root -> data)
 	{
 		root -> left = insert(root -> left, k);
