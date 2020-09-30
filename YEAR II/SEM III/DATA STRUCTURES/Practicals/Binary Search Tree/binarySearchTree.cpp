@@ -14,7 +14,7 @@ struct node *insert(node *, int);
 class binarySearchTree
 {
     public:
-	    int ch;
+	    int ch, ch1;
 
 		binarySearchTree();
 
@@ -22,7 +22,16 @@ class binarySearchTree
 		int choice();
 		void choiceCalling(int);
 
+		void sub_options();
+		void sub_choiceCalling(int, int);
+
         void search(int);
+		void rec_pre_order(node *);
+		void rec_post_order(node *);
+		void rec_in_order(node *);
+		void itr_pre_order(node *);
+		void itr_post_order(node *);
+		void itr_in_order(node *);
 		bool isEmpty();
 };
 
@@ -33,9 +42,12 @@ binarySearchTree::binarySearchTree()
 
 void binarySearchTree::options()
 {
-	cout << "\n\n------- MENU -------";
-    cout << "\n1. INSERT"
-		<< "\n2. SEARCH"
+	cout << "\n------- MENU -------";
+    cout << "\n1. INSERT A NODE"
+		<< "\n2. SEARCH A NODE"
+		<< "\n3. PREORDER TRAVERSAL"
+		<< "\n4. POST ORDER TRAVERSAL"
+		<< "\n5. INORDER TRAVERSAL"
 		<<	"\n0. EXIT";
 }
 
@@ -57,14 +69,79 @@ void binarySearchTree::choiceCalling(int ch)
 			root = insert(root, k);
 			break;
 		case 2:
-			cout << "\nEnter the node to be searched: ";
-			cin >> k;
-			search(k);
+			if(isEmpty())
+				cout << "\nTree is empty!";
+			else
+			{
+				cout << "\nEnter the node to be searched: ";
+				cin >> k;
+				search(k);
+			}
+			break;
+		case 3:
+		case 4:
+		case 5:
+			if(isEmpty())
+				cout << "\nTree is empty!";
+			else
+			{
+				sub_options();
+				ch1 = choice();
+				sub_choiceCalling(ch1, ch);
+			}
+			break;
 		case 0:
 			break;
 		default:
 			cout << "\n########### WRONG CHOICE... ###########\n";
 	}
+}
+
+void binarySearchTree::sub_options()
+{
+	cout << "\n------- SUB MENU -------";
+    cout << "\n1. RECURSIVE METHOD"
+		<< "\n2. ITERATIVE METHOD";
+}
+
+void binarySearchTree::sub_choiceCalling(int ch1, int ch)
+{
+	temp = root;
+	if(ch1 == 1 && ch == 3)
+	{
+		cout << "\nPre Order Recursive: ";
+		rec_pre_order(temp);
+	}
+	else if(ch1 == 1 && ch == 4)
+	{
+		cout << "\nPost Order Recursive: ";
+		rec_post_order(temp);
+	}
+	else if(ch1 == 1 && ch == 5)
+	{
+		cout << "\nIn Order Recursive: ";
+		rec_in_order(temp);
+	}
+	else if(ch1 == 2 && ch == 6)
+	{
+		cout << "\nPre Order Iterative: ";
+		itr_pre_order(temp);
+	}
+	else if(ch1 == 2 && ch == 7)
+	{
+		cout << "\nPre Order Iterative: ";
+		itr_post_order(temp);
+	}
+	else if(ch1 == 2 && ch == 8)
+	{
+		cout << "\nPre Order Iterative: ";
+		itr_in_order(temp);
+	}
+	else
+	{
+		cout << "\n########### WRONG CHOICE... ###########\n";
+	}
+	cout << endl;
 }
 
 struct node *insert(node *root, int k)
@@ -89,29 +166,69 @@ struct node *insert(node *root, int k)
 
 void binarySearchTree::search(int k)
 {
-	if(isEmpty())
-		cout << "\nTree is empty!";
-	else
+	temp = root;
+	while(temp != NULL)
 	{
-		temp = root;
-		while(temp != NULL)
+		if(k == temp -> data)
 		{
-			if(k == temp -> data)
-			{
-				cout << "\nNode is present in Tree.";
-				return;
-			}
-			else if(k < temp -> data)
-			{
-				temp = temp -> left;
-			}
-			else if(k > temp -> data)
-			{
-				temp = temp -> right;
-			}
+			cout << "\nNode is present in Tree.\n";
+			return;
 		}
-		cout << "\nNode is absent in Tree.";
+		else if(k < temp -> data)
+		{
+			temp = temp -> left;
+		}
+		else if(k > temp -> data)
+		{
+			temp = temp -> right;
+		}
 	}
+	cout << "\nNode is absent in Tree.\n";
+}
+
+void binarySearchTree::rec_pre_order(node *temp)
+{
+	if(temp != NULL)
+	{
+		cout << temp -> data << " ";
+		rec_pre_order(temp -> left);
+		rec_pre_order(temp -> right);
+	}
+}
+
+void binarySearchTree::rec_post_order(node *temp)
+{
+	if(temp != NULL)
+	{
+		rec_post_order(temp -> left);
+		rec_post_order(temp -> right);
+		cout << temp -> data << " ";
+	}
+}
+
+void binarySearchTree::rec_in_order(node *temp)
+{
+	if(temp != NULL)
+	{
+		rec_in_order(temp -> left);
+		cout << temp -> data << " ";
+		rec_in_order(temp -> right);
+	}
+}
+
+void binarySearchTree::itr_pre_order(node *temp)
+{
+	//if(!temp)
+}
+
+void binarySearchTree::itr_post_order(node *temp)
+{
+	
+}
+
+void binarySearchTree::itr_in_order(node *temp)
+{
+	
 }
 
 bool binarySearchTree::isEmpty()
@@ -130,7 +247,7 @@ int main()
 	{
 		ob.options();
 		choice = ob.choice();
-		if(choice == 0)
+		if(ob.ch == 0)
 			break;
 		ob.choiceCalling(choice);
 	}while(1);
