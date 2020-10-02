@@ -1,4 +1,5 @@
 #include<iostream>
+#include "queueLinkedList.hpp"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ struct node *insert(node *, int);
 
 class binarySearchTree
 {
+	queueLinkedList<node *> q;
     public:
 	    int ch, ch1;
 
@@ -32,6 +34,7 @@ class binarySearchTree
 		void itr_pre_order(node *);
 		void itr_post_order(node *);
 		void itr_in_order(node *);
+		void breadth_first_search();
 		bool isEmpty();
 };
 
@@ -48,6 +51,7 @@ void binarySearchTree::options()
 		<< "\n3. PREORDER TRAVERSAL"
 		<< "\n4. POST ORDER TRAVERSAL"
 		<< "\n5. INORDER TRAVERSAL"
+		<< "\n6. BREADTH FIRST SEARCH"
 		<<	"\n0. EXIT";
 }
 
@@ -70,7 +74,7 @@ void binarySearchTree::choiceCalling(int ch)
 			break;
 		case 2:
 			if(isEmpty())
-				cout << "\nTree is empty!";
+				cout << "\nTree is empty!\n";
 			else
 			{
 				cout << "\nEnter the node to be searched: ";
@@ -82,13 +86,19 @@ void binarySearchTree::choiceCalling(int ch)
 		case 4:
 		case 5:
 			if(isEmpty())
-				cout << "\nTree is empty!";
+				cout << "\nTree is empty!\n";
 			else
 			{
 				sub_options();
 				ch1 = choice();
 				sub_choiceCalling(ch1, ch);
 			}
+			break;
+		case 6:
+			if(isEmpty())
+				cout << "\nTree is empty!\n";
+			else
+				breadth_first_search();
 			break;
 		case 0:
 			break;
@@ -231,6 +241,21 @@ void binarySearchTree::itr_post_order(node *temp)
 void binarySearchTree::itr_in_order(node *temp)
 {
 	
+}
+
+void binarySearchTree::breadth_first_search()
+{
+	q.enqueue(root);
+	while(!q.isEmpty())
+	{
+		temp = q.frontEle();
+		cout << temp -> data << " ";
+		if(temp -> left != NULL)
+			q.enqueue(temp -> left);
+		if(temp -> right != NULL)
+			q.enqueue(temp -> right);
+		q.dequeue();
+	}
 }
 
 bool binarySearchTree::isEmpty()
