@@ -98,7 +98,9 @@ void binarySearchTree::choiceCalling(int ch)
 			if(isEmpty())
 				cout << "\nTree is empty!\n";
 			else
+				cout << "\nBreadth First Search Traversal(BFS): ";
 				breadth_first_search();
+				cout << endl;
 			break;
 		case 0:
 			break;
