@@ -17,16 +17,39 @@ def linear_Search(n, l):
     else:
         print("\nElement not found!")
 
-def binary_search():
+def binary_search(n, l):
+    l1 = bubble_sort(n, l.copy())
+    flag = False
     x = input("\nEnter the name to be searched: ").lower()
+    lb, ub = 0, n-1
+    
+    while lb <= ub:
+        mid = (lb+ub)//2
+        if x == l1[mid]:
+            flag = True
+            break
+        if x < l1[mid]:
+            ub = mid - 1
+        if x > l1[mid]:
+            lb = mid + 1
+    
+    if flag == True:
+        print("\nElement found!")
+    else:
+        print("\nElement not found!")
 
-def bubble_sort():
+def bubble_sort(n, l1):
+    for i in range(0, n, 1):
+        for j in range(0, n-i-1, 1):
+            if l1[j] > l1[j+1]:
+                l1[j], l1[j+1] = l1[j+1], l1[j]
+    
+    return l1
+
+def insertion_sort(n, l1):
     pass
 
-def insertion_sort():
-    pass
-
-def selection_sort():
+def selection_sort(n, l1):
     pass
 
 search_switcher = {
@@ -53,18 +76,24 @@ def main(n, l):
         print("1. Linear Search\
                 \n2. Binary Search")
         choice = int(input("\nEnetr your choice: "))
-        func = search_switcher.get(choice, lambda: print("Invlaid Choice!"))
+        func = search_switcher.get(choice, lambda n,l: print("\nInvlaid Choice!"))
         func(n, l)
     elif ch == 2:
         print("\n========= Sorting Menu =========")
         print("1. Bubble Sort\
                 \n2. Insersion Sort\
-                \n0. Selection Sort")
-        choice = int(input("\nEnetr your choice: "))
-        func = sort_switcher.get(choice, lambda: print("Invlaid Choice!"))
-        func()
+                \n3. Selection Sort")
+        choice = int(input("\nEnter your choice: "))
+        func = sort_switcher.get(choice, lambda n,l: print("\nInvlaid Choice!"))
+        if choice == 1:
+            l1 = func(n, l.copy())
+            print("\nBubble Sorted List:", l1)
+        else:
+            func(n,l.copy())
     elif ch == 0:
         exit()
+    else:
+        print("\nInvalid Choice!")
 
 if __name__ == "__main__":
     n, l = input_list()
