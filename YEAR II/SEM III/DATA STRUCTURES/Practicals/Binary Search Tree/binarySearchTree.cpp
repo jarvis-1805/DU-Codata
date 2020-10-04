@@ -1,5 +1,6 @@
 #include<iostream>
 #include "queueLinkedList.hpp"
+#include "stackLinkedList.hpp"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ struct node *insert(node *, int);
 class binarySearchTree
 {
 	queueLinkedList<node *> q;
+	stackLinkedList<node *> s;
     public:
 	    int ch, ch1;
 
@@ -40,7 +42,7 @@ class binarySearchTree
 
 binarySearchTree::binarySearchTree()
 {
-	root = NULL;
+	root = nullptr;
 }
 
 void binarySearchTree::options()
@@ -134,17 +136,17 @@ void binarySearchTree::sub_choiceCalling(int ch1, int ch)
 		cout << "\nIn Order Recursive: ";
 		rec_in_order(temp);
 	}
-	else if(ch1 == 2 && ch == 6)
+	else if(ch1 == 2 && ch == 3)
 	{
 		cout << "\nPre Order Iterative: ";
 		itr_pre_order(temp);
 	}
-	else if(ch1 == 2 && ch == 7)
+	else if(ch1 == 2 && ch == 4)
 	{
 		cout << "\nPre Order Iterative: ";
 		itr_post_order(temp);
 	}
-	else if(ch1 == 2 && ch == 8)
+	else if(ch1 == 2 && ch == 5)
 	{
 		cout << "\nPre Order Iterative: ";
 		itr_in_order(temp);
@@ -158,10 +160,10 @@ void binarySearchTree::sub_choiceCalling(int ch1, int ch)
 
 struct node *insert(node *root, int k)
 {
-	if(root == NULL)
+	if(root == nullptr)
 	{
 		newNode = (struct node *)malloc(sizeof(newNode));
-		newNode -> left = newNode -> right = NULL;
+		newNode -> left = newNode -> right = nullptr;
 		newNode -> data = k;
 		return newNode;
 	}
@@ -181,7 +183,7 @@ struct node *insert(node *root, int k)
 void binarySearchTree::search(int k)
 {
 	temp = root;
-	while(temp != NULL)
+	while(temp != nullptr)
 	{
 		if(k == temp -> data)
 		{
@@ -202,7 +204,7 @@ void binarySearchTree::search(int k)
 
 void binarySearchTree::rec_pre_order(node *temp)
 {
-	if(temp != NULL)
+	if(temp != nullptr)
 	{
 		cout << temp -> data << " ";
 		rec_pre_order(temp -> left);
@@ -212,7 +214,7 @@ void binarySearchTree::rec_pre_order(node *temp)
 
 void binarySearchTree::rec_post_order(node *temp)
 {
-	if(temp != NULL)
+	if(temp != nullptr)
 	{
 		rec_post_order(temp -> left);
 		rec_post_order(temp -> right);
@@ -222,7 +224,7 @@ void binarySearchTree::rec_post_order(node *temp)
 
 void binarySearchTree::rec_in_order(node *temp)
 {
-	if(temp != NULL)
+	if(temp != nullptr)
 	{
 		rec_in_order(temp -> left);
 		cout << temp -> data << " ";
@@ -232,7 +234,22 @@ void binarySearchTree::rec_in_order(node *temp)
 
 void binarySearchTree::itr_pre_order(node *temp)
 {
-	//if(!temp)
+	temp = root;
+	while(!s.isEmpty() || temp != nullptr)
+	{
+		while(temp != nullptr)
+		{
+			cout << temp -> data << " ";
+			if(temp -> right)
+				s.push(temp -> right);
+			temp = temp -> left;
+		}
+		if(!s.isEmpty())
+		{
+			temp = s.top_ele();
+			s.pop();
+		}
+	}
 }
 
 void binarySearchTree::itr_post_order(node *temp)
@@ -252,9 +269,9 @@ void binarySearchTree::breadth_first_search()
 	{
 		temp = q.frontEle();
 		cout << temp -> data << " ";
-		if(temp -> left != NULL)
+		if(temp -> left != nullptr)
 			q.enqueue(temp -> left);
-		if(temp -> right != NULL)
+		if(temp -> right != nullptr)
 			q.enqueue(temp -> right);
 		q.dequeue();
 	}
@@ -262,7 +279,7 @@ void binarySearchTree::breadth_first_search()
 
 bool binarySearchTree::isEmpty()
 {
-	if(root == NULL)
+	if(root == nullptr)
 		return true;
 	return false;
 }
