@@ -143,12 +143,12 @@ void binarySearchTree::sub_choiceCalling(int ch1, int ch)
 	}
 	else if(ch1 == 2 && ch == 4)
 	{
-		cout << "\nPre Order Iterative: ";
+		cout << "\nPost Order Iterative: ";
 		itr_post_order(temp);
 	}
 	else if(ch1 == 2 && ch == 5)
 	{
-		cout << "\nPre Order Iterative: ";
+		cout << "\nIn Order Iterative: ";
 		itr_in_order(temp);
 	}
 	else
@@ -234,7 +234,6 @@ void binarySearchTree::rec_in_order(node *temp)
 
 void binarySearchTree::itr_pre_order(node *temp)
 {
-	temp = root;
 	while(!s.isEmpty() || temp != nullptr)
 	{
 		while(temp != nullptr)
@@ -254,7 +253,28 @@ void binarySearchTree::itr_pre_order(node *temp)
 
 void binarySearchTree::itr_post_order(node *temp)
 {
-	
+	do
+	{
+		while(temp)
+		{
+			if(temp -> right)
+				s.push(temp -> right);
+			s.push(temp);
+			temp = temp -> left;
+		}
+		temp = s.pop();
+		if(!s.isEmpty() && temp -> right == s.peek())
+		{
+			s.pop();
+			s.push(temp);
+			temp = temp -> right;
+		}
+		else
+		{
+			cout << temp -> data << " ";
+			temp = nullptr;
+		}
+	}while(!s.isEmpty());
 }
 
 void binarySearchTree::itr_in_order(node *temp)
