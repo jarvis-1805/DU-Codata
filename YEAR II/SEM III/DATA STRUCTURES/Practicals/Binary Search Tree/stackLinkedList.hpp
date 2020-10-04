@@ -18,7 +18,7 @@ class stackLinkedList
 				
 		void push(Type);
 		Type pop();
-        Type top_ele();
+        Type peek();
 		
 		bool isEmpty();
 };
@@ -77,7 +77,7 @@ Type stackLinkedList<Type>::pop()
 }
 
 template<class Type>
-Type stackLinkedList<Type>::top_ele()
+Type stackLinkedList<Type>::peek()
 {
     return top -> data;
 }

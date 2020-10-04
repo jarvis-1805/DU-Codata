@@ -246,7 +246,7 @@ void binarySearchTree::itr_pre_order(node *temp)
 		}
 		if(!s.isEmpty())
 		{
-			temp = s.top_ele();
+			temp = s.peek();
 			s.pop();
 		}
 	}
