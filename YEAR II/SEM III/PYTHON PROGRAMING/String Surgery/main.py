@@ -1,4 +1,16 @@
+'''
+7. Write a menu driven program to perform the following on strings:
+a) Find the length of string.
+b) Return maximum of three strings.
+c) Accept a string and replace all vowels with “#”
+d) Find number of words in the given string.
+e) Check whether the string is a palindrome or not.
+'''
+
 def lenOfString():
+    '''
+    Prints the lenght of string iterative method.
+    '''
     str = input("\nEnter the string: ")
     position = 0
     while str[position:]:
@@ -6,6 +18,10 @@ def lenOfString():
     print("Length of {} is {}".format(str, position))
 
 def maxOfString():
+    '''
+    Calculates the maximium of the three input strings.
+    Returns: corresponding maximum string.
+    '''
     str1 = input("\nEnter the string 1: ")
     str2 = input("Enter the string 2: ")
     str3 = input("Enter the string 3: ")
@@ -17,6 +33,9 @@ def maxOfString():
         return str3
     
 def replaceVowels():
+    '''
+    Prints the input string after replacing all vowels with input character.
+    '''
     str = input("\nEnter the string: ")
     sym = input("Enter the character to replace vowel: ")
     str1 = ""
@@ -31,6 +50,9 @@ def replaceVowels():
     print("\nThe new string is:",str1)
     
 def wordsInString():
+    '''
+    Prints the no. of words present in the input string.
+    '''
     str = input("\nEnter the string: ")
     str = str + ' '
     c = 0
@@ -41,6 +63,9 @@ def wordsInString():
     print("Number of words in the string are:", c)
     
 def palindrome():
+    '''
+    Calculates and print for the palindrome of the input string.
+    '''
     str = input("\nEnter the string: ")
     str = str.lower()
     str1 = ''

@@ -1,5 +1,6 @@
 '''
-Write a Python program to perform the following using list:
+8. Write a Python program to perform the following using list:
+
 a) Check if all elements in list are numbers or not.
 b) If it is a numeric list, then count number of odd values in it.
 c) If list contains all Strings, then display largest String in the list.
@@ -11,6 +12,11 @@ h) Accept 2 lists and find the common members in them.
 '''
 
 def check_num(l1):
+    '''
+    Checks if all elements in list are numbers.
+    Parameters: l1 -> list
+    Return: True or False
+    '''
     for i in l1:
         if i.isdigit():
             continue
@@ -20,6 +26,11 @@ def check_num(l1):
     return False
 
 def check_string(l1):
+    '''
+    Checks if all elements in list are strings.
+    Parameters: l1 -> list
+    Return: True or False
+    '''
     for i in l1:
         if not i.isdigit():
             continue
@@ -29,6 +40,10 @@ def check_string(l1):
     return False
 
 def odd_num(l1):
+    '''
+    Prints if all elements in list are numbers then prints all odd numbers.
+    Parameters: l1 -> list
+    '''
     l2 = []
     flag = check_num(l1)
     if flag:
@@ -42,6 +57,10 @@ def odd_num(l1):
     print("\nOdd numbers in the list are:", l2)
 
 def largest_string(l1):
+    '''
+    Prints if all elements in list are string then prints largest string.
+    Parameters: l1 -> list
+    '''
     flag = check_string(l1)
     maxim = l1[0]
     if flag:
@@ -54,6 +73,10 @@ def largest_string(l1):
     print("\nLargest string in the list is:", maxim)
 
 def reverse_list(l1):
+    '''
+    Prints the list in reverse order.
+    Parameters: l1 -> list
+    '''
     l2 = []
     print("\nThe list in reverse order is:", end = ' ')
     for i in range(-1, -(len(l1))-1, -1):
@@ -61,6 +84,10 @@ def reverse_list(l1):
     print(l2)
 
 def find_element(l1):
+    '''
+    Prints if input element is present in list.
+    Parameters: l1 -> list
+    '''
     ele = input('\nEnter the element to be searched: ') 
     for i in range(0, len(l1), 1):
         if l1[i] == ele:
@@ -69,6 +96,10 @@ def find_element(l1):
     print(f"\n{ele} is not present in list.")
 
 def remove_element(l1):
+    '''
+    Removes the input element from the list.
+    Parameters: l1 -> list
+    '''
     ele = input('\nEnter the element to be deleted: ')
     if ele in l1:
         l1.remove(ele)
@@ -77,14 +108,23 @@ def remove_element(l1):
         print(f"\n{ele} is not pesent in list")
 
 def sort_descend(l1):
+    '''
+    Prints the sorted descending order list.
+    Parameters: l1 -> list
+    '''
     for i in range(0, len(l1), 1):
         for j in range(0, len(l1)-i-1):
             if l1[j] < l1[j+1]:
                 l1[j], l1[j+1] = l1[j+1], l1[j]
     
     print("\nSuccessfully sorted the list in descending order.")
+    print('List: ', l1)
 
 def common_element(l1):
+    '''
+    Prints the common elements in two  list. Taking second list as input from user.
+    Parameters: l1 -> list
+    '''
     n = int(input("\nEnter the range of list l2: "))
     l2 = []
     l3 = []

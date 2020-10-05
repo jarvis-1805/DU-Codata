@@ -1,16 +1,16 @@
 '''
-Write a function that finds the sum of then terms of the following series.
+5. Write a function that finds the sum of then terms of the following series.
 1–x2/2!+x4/4!–x6/6!+...xn/n!
 '''
 
-def factorial(num):
-    fact = 1
-    for i in range(2, num+1):
-        fact = fact * i
-    
-    return fact
-
 def series_sum(n, x):
+    '''
+    Calculates the sum of series 1–x2/2!+x4/4!–x6/6!+...xn/n!
+    Parameters: n -> limit of series
+                x -> value of x
+    Return: sum -> sum of series
+    '''
+    from factorial_ques3 import factorial
     sum = 1
     for i in range(2, n+2, 4):
         sum -= (x*i)/factorial(i)
