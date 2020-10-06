@@ -1,3 +1,7 @@
+'''
+11. c
+'''
+
 def input_list():
     l = []
     n = int(input("\nEnter the number of students: "))

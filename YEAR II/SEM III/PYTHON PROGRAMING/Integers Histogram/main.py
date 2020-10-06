@@ -1,3 +1,8 @@
+'''
+12. Write a program that makes use of a function to accept a list of n integers
+and displays a histogram.
+'''
+
 def calc_freq(l, n):
     import json
     l_set = set(l)
