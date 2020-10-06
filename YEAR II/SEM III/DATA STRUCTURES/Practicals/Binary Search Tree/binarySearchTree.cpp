@@ -279,7 +279,18 @@ void binarySearchTree::itr_post_order(node *temp)
 
 void binarySearchTree::itr_in_order(node *temp)
 {
-	
+	while(temp != NULL || s.isEmpty() == false)
+	{
+		while(temp != NULL)
+		{
+			s.push(temp);
+			temp = temp -> left;
+		}
+		temp = s.peek();
+		cout << s.peek() -> data;
+		cout << temp -> data << " ";
+		temp = temp -> right;
+	}
 }
 
 void binarySearchTree::breadth_first_search()
