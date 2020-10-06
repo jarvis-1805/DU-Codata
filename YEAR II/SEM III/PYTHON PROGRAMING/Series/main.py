@@ -1,6 +1,6 @@
 '''
 5. Write a function that finds the sum of then terms of the following series.
-1–x2/2!+x4/4!–x6/6!+...xn/n!
+1–x2/2!+x4/4!–x6/6!+...xn/n!. Import the factorial function created in question4.
 '''
 
 def series_sum(n, x):
