@@ -14,30 +14,33 @@ def input_list():
     return n, l
 
 def linear_Search(n, l):
-    import linearSearch as ls
     
     x = input("\nEnter the name to be searched: ").lower()
-    flag, i = ls.linear_search(n, l, x)
-    
+    flag = False
+    for i in range(0, n, 1):
+        if l[i] == x:
+            flag = True
+            break
+        
     if flag == True:
         print("\nElement found at position", i+1)
     else:
         print("\nElement not found!")
 
 def binary_search(n, l):
-    l1 = bubble_sort(n, l.copy())
+    l = bubble_sort(n, l.copy())
     flag = False
     x = input("\nEnter the name to be searched: ").lower()
     lb, ub = 0, n-1
     
     while lb <= ub:
         mid = (lb+ub)//2
-        if x == l1[mid]:
+        if x == l[mid]:
             flag = True
             break
-        if x < l1[mid]:
+        if x < l[mid]:
             ub = mid - 1
-        if x > l1[mid]:
+        if x > l[mid]:
             lb = mid + 1
     
     if flag == True:
@@ -54,7 +57,15 @@ def bubble_sort(n, l1):
     return l1
 
 def insertion_sort(n, l1):
-    pass
+    for i in range(1, n, 1):
+        key = l1[i]
+        j = i-1
+        while j>=0 and key<l1[j]:
+            l1[j+1] = l1[j]
+            j -= 1
+        l1[j+1] = key
+    else:
+        print("\nInsertion Sorted List:", l1)
 
 def selection_sort(n, l1):
     pass
@@ -97,10 +108,12 @@ def main(n, l):
             print("\nBubble Sorted List:", l1)
         else:
             func(n,l.copy())
+        
     elif ch == 0:
         exit()
     else:
         print("\nInvalid Choice!")
+    print(l)
 
 if __name__ == "__main__":
     n, l = input_list()
