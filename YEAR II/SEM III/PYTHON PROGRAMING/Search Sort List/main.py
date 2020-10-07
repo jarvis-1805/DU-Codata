@@ -14,6 +14,11 @@ def input_list():
     return n, l
 
 def linear_Search(n, l):
+    '''
+    Performs linear search algorithm.
+    Parameters: n -> length of list
+                l -> list
+    '''
     x = input("\nEnter the name to be searched: ").lower()
     flag = False
     for i in range(0, n, 1):
@@ -27,6 +32,11 @@ def linear_Search(n, l):
         print("\nElement not found!")
 
 def binary_search(n, l):
+    '''
+    Performs binary search algorithm.
+    Parameters: n -> length of list
+                l -> list
+    '''
     l = bubble_sort(n, l.copy())
     flag = False
     x = input("\nEnter the name to be searched: ").lower()
@@ -50,6 +60,9 @@ def binary_search(n, l):
 def bubble_sort(n, l1):
     '''
     Time Complexity: O(n^2)
+    Parameters: n -> length of list
+                l1 -> list
+    Return: l1 -> sorted list
     '''
     for i in range(0, n, 1):
         for j in range(0, n-i-1, 1):
@@ -69,6 +82,8 @@ def insertion_sort(n, l1):
         Move the greater elements one position up to make
         space for the swapped element.
     Time Complexity: O(n^2)
+    Parameters: n -> length of list
+                l1 -> list
     '''
     for i in range(1, n, 1):
         key = l1[i]
@@ -88,6 +103,8 @@ def selection_sort(n, l1):
     In every iteration of selection sort, the minimum element
     from the unsorted subarray is picked and moved to the sorted subarray.
     Time Complexity: O(n^2) as there are two nested loops.
+    Parameters: n -> length of list
+                l1 -> list
     '''
     for i in range(0, n, 1):
         minim = i
