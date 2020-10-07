@@ -14,7 +14,6 @@ def input_list():
     return n, l
 
 def linear_Search(n, l):
-    
     x = input("\nEnter the name to be searched: ").lower()
     flag = False
     for i in range(0, n, 1):
@@ -49,6 +48,9 @@ def binary_search(n, l):
         print("\nElement not found!")
 
 def bubble_sort(n, l1):
+    '''
+    Time Complexity: O(n^2)
+    '''
     for i in range(0, n, 1):
         for j in range(0, n-i-1, 1):
             if l1[j] > l1[j+1]:
@@ -57,6 +59,17 @@ def bubble_sort(n, l1):
     return l1
 
 def insertion_sort(n, l1):
+    '''
+    Algorithm
+    To sort an array of size n in ascending order:
+    1: Iterate from arr[1] to arr[n] over the array.
+    2: Compare the current element (key) to its predecessor.
+    3: If the key element is smaller than its predecessor,
+        compare it to the elements before.
+        Move the greater elements one position up to make
+        space for the swapped element.
+    Time Complexity: O(n^2)
+    '''
     for i in range(1, n, 1):
         key = l1[i]
         j = i-1
@@ -68,7 +81,22 @@ def insertion_sort(n, l1):
         print("\nInsertion Sorted List:", l1)
 
 def selection_sort(n, l1):
-    pass
+    '''
+    The algorithm maintains two subarrays in a given array.
+    1) The subarray which is already sorted.
+    2) Remaining subarray which is unsorted.
+    In every iteration of selection sort, the minimum element
+    from the unsorted subarray is picked and moved to the sorted subarray.
+    Time Complexity: O(n^2) as there are two nested loops.
+    '''
+    for i in range(0, n, 1):
+        minim = i
+        for j in range(i+1, n, 1):
+            if l1[minim]>l1[j]:
+                minim = j
+        l1[i], l1[minim] = l1[minim], l1[i]
+    else:
+        print("\nSelection Sorted List:", l1)
 
 search_switcher = {
                     1: linear_Search,
@@ -113,7 +141,6 @@ def main(n, l):
         exit()
     else:
         print("\nInvalid Choice!")
-    print(l)
 
 if __name__ == "__main__":
     n, l = input_list()
