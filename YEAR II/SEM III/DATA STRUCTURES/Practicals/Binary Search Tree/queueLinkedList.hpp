@@ -84,15 +84,15 @@ template<class Type>
 int queueLinkedList<Type>::size()
 {
 	int ctr=0;
-	temp = front;
+	temp1 = front;
 	if(isEmpty())
 		return ctr;
 	else
 	{
-		while(temp != nullptr)
+		while(temp1 != nullptr)
 		{
 			ctr++;
-			temp = temp -> next;
+			temp1 = temp1 -> next;
 		}
 		return ctr;
 	}
