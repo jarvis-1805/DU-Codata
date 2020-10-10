@@ -19,15 +19,16 @@ def calc_area(a, b, c):
     s = (a+b+c)/2
     area = (s*(s-a)*(s-b)*(s-c))**0.5
     perimeter = a+b+c
-    return area, perimeter
+    t = (area, perimeter)
+    return t
 
 def main():
     a = int(input("Enter the side1 : "))
     b = int(input("Enter the side2 : "))
     c = int(input("Enter the side3 : "))
-    area, perimeter = calc_area(a, b, c)
-    print("\nThe area of triangle is : %0.2f" %area)
-    print("\nThe perimter of triangle is : %0.2f" %perimeter)
+    t = calc_area(a, b, c)
+    print("\nThe area of triangle is : %0.2f" %t[0])
+    print("\nThe perimter of triangle is : %0.2f" %t[1])
 
 if __name__ == "__main__":
     main()
