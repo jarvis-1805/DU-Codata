@@ -37,6 +37,9 @@ class binarySearchTree
 		void itr_post_order(node *);
 		void itr_in_order(node *);
 		void breadth_first_search();
+		void mirror_image();
+		void nodes_counter();
+		void height_counter();
 		bool isEmpty();
 };
 
@@ -54,6 +57,9 @@ void binarySearchTree::options()
 		<< "\n4. POST ORDER TRAVERSAL"
 		<< "\n5. INORDER TRAVERSAL"
 		<< "\n6. BREADTH FIRST SEARCH"
+		<< "\n7. MIRROR IMAGE"
+		<< "\n8. COUNT NODES"
+		<< "\n9. COUNT HEIGHT"
 		<<	"\n0. EXIT";
 }
 
@@ -100,9 +106,27 @@ void binarySearchTree::choiceCalling(int ch)
 			if(isEmpty())
 				cout << "\nTree is empty!\n";
 			else
+			{
 				cout << "\nBreadth First Search Traversal(BFS): ";
 				breadth_first_search();
 				cout << endl;
+			}
+			break;
+		case 7:
+			if(isEmpty())
+				cout << "\nTree is empty!\n";
+			else
+			{
+				cout << "\nMirror Image: ";
+				mirror_image();
+				cout << endl;
+			}
+			break;
+		case 8:
+			nodes_counter();
+			break;
+		case 9:
+			height_counter();
 			break;
 		case 0:
 			break;
@@ -306,6 +330,72 @@ void binarySearchTree::breadth_first_search()
 			q.enqueue(temp -> right);
 		q.dequeue();
 	}
+}
+
+void binarySearchTree::mirror_image()
+{
+	q.enqueue(root);
+	while(!q.isEmpty())
+	{
+		temp = q.frontEle();
+		cout << temp -> data << " ";
+		if(temp -> right != nullptr)
+			q.enqueue(temp -> right);
+		if(temp -> left)
+			q.enqueue(temp -> left);
+		q.dequeue();
+	}
+}
+
+void binarySearchTree::nodes_counter()
+{
+	int non_leaf=0, leaf=0;
+	q.enqueue(root);
+	while(!q.isEmpty())
+	{
+		temp = q.frontEle();
+		if(temp -> left != nullptr || temp -> right != nullptr)
+			non_leaf++;
+		if(temp -> left == nullptr && temp -> right == nullptr)
+			leaf++;
+		if(temp -> left != nullptr)
+			q.enqueue(temp -> left);
+		if(temp -> right != nullptr)
+			q.enqueue(temp -> right);
+		q.dequeue();
+	}
+	cout << "\nNon-leaves: " << non_leaf
+			 << "\nLeaves: " << leaf
+			 << "\nNodes: " << non_leaf+leaf << endl;
+}
+
+void binarySearchTree::height_counter()
+{
+	int size, height=0;
+	if(isEmpty())
+		true;
+	else
+	{
+		q.enqueue(root);
+		while(true)
+		{
+			size = q.size();
+			if(size == 0)
+				break;
+			while(size > 0)
+			{
+				temp = q.frontEle();
+				if(temp -> left != nullptr)
+					q.enqueue(temp -> left);
+				if(temp -> right != nullptr)
+					q.enqueue(temp -> right);
+				q.dequeue();
+				size--;
+			}
+			height++;
+		}
+	}
+	cout << "\nHeight of tree is: " << height << endl;
 }
 
 bool binarySearchTree::isEmpty()
