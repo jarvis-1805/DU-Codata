@@ -206,21 +206,24 @@ struct node *insert(node *root, int k)
 
 void binarySearchTree::search(int k)
 {
+	int i = 1;
 	temp = root;
 	while(temp != nullptr)
 	{
 		if(k == temp -> data)
 		{
-			cout << "\nNode is present in Tree.\n";
+			cout << "\nNode is present in Tree at level " << i << "\n";
 			return;
 		}
 		else if(k < temp -> data)
 		{
 			temp = temp -> left;
+			i++;
 		}
 		else if(k > temp -> data)
 		{
 			temp = temp -> right;
+			i++;
 		}
 	}
 	cout << "\nNode is absent in Tree.\n";
