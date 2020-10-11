@@ -16,20 +16,21 @@ class CRC
         void generate_codeword();
         void sender();
         void noisy_channel();
+        void remainder_calc();
         void receiver();
 };
 
 CRC::CRC()
 {
-    cout << "\nEnter Message Size: ";
+    cout << "\nEnter The Message Size: ";
     cin >> messageSize;
-    cout << "Enter Message: ";
+    cout << "Enter The Message: ";
     for(int i=0; i<messageSize; i++)
         cin >> message[i];
     
-    cout << "\nEnter Generator Size: ";
+    cout << "\nEnter The Generator Size: ";
     cin >> generatorSize;
-    cout << "Enter Generator: ";
+    cout << "Enter The Generator: ";
     for(int i=0; i<generatorSize; i++)
         cin >> generator[i];
 }
@@ -83,7 +84,7 @@ void CRC::sender()
         cout << crc[i] << " ";
     
     cout << "\nTransmitted Codeword: ";
-    for(int i=messageSize, j=0; i<(messageSize+generatorSize-1), j<generatorSize-1; i++, j++)
+    for(int i=messageSize, j=0; i<(messageSize+generatorSize-1) && j<generatorSize-1; i++, j++)
         codeword[i] = crc[j];
     for(int i=0; i<(messageSize+generatorSize-1); i++)
         cout << codeword[i] << " ";
@@ -92,34 +93,72 @@ void CRC::sender()
 void CRC::noisy_channel()
 {
     int nBits, pos;
-    cout << "Enter number of Bits to Flip: ";
+    cout << "Enter the number of Bits to Flip: ";
     cin >> nBits;
     if(nBits == -1 || nBits > (messageSize+generatorSize-1))
-        cout << "\nInvalid Request! Codeword not changed.";
+        cout << "Invalid Request! Codeword not changed.\n";
     else
         for(int i=0; i<nBits; i++)
         {
-            cout << "Enter Bit position to Flip: ";
+            cout << "Enter the Bit position to Flip: ";
             cin >> pos;
             codeword[pos-1] ? codeword[pos-1] = 0 : codeword[pos-1] = 1;
         }
 }
 
+void CRC::remainder_calc()
+{
+    for(int i=0; i<(messageSize+generatorSize-1); i++)
+        temp1[i] = codeword[i];
+        
+    for(int i=0; i<messageSize; i++)
+    {
+        int j = 0, k = i;
+        if(temp1[i] >= generator[j])
+            for(j=0; j<generatorSize; j++)
+            {
+                temp1[k] = temp1[k] ^ generator[j];
+                k++;
+            }
+    }
+
+    for(int i=0, j=messageSize; i<generatorSize-1, j<(messageSize+generatorSize-1); i++, j++)
+    {
+        rem[i] = temp1[j];
+    }
+}
+
 void CRC::receiver()
 {
+    bool error;
     cout << "Received Codeword: ";
     for(int i=0; i<(messageSize+generatorSize-1); i++)
         cout << codeword[i] << " ";
+    
+    cout << "\nRemainder: ";
+    remainder_calc();
+    for(int i=0; i<generatorSize-1; i++)
+        cout << rem[i] << " ";
+    
+    for(int i=0; i<generatorSize-1; i++)
+        if(rem[i] == 0)
+            error = false;
+        else
+        {
+            error = true;
+            break;
+        }
+    error ? cout << "\n\nTRANSMISSION ERROR DETECTED!" : cout << "\n\nTRANSMISSION SUCCESSFUL!";
 }
 
 int main()
 {
     cout << "\n============= CRC =============\n";
     CRC ob;
-    cout << "\nSENDER\n======\n";
+    cout << "\nSENDER\n======>\n";
     ob.sender();
-    cout << "\n\nNOISY CHANNEL SIMULATION\n========================\n";
+    cout << "\n\nNOISY CHANNEL SIMULATION\n========================>\n";
     ob.noisy_channel();
-    cout << "\nRECEIVER\n========\n";
+    cout << "\nRECEIVER\n========>\n";
     ob.receiver();
 }
