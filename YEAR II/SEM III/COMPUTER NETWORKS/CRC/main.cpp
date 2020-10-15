@@ -28,11 +28,20 @@ CRC::CRC()
     for(int i=0; i<messageSize; i++)
         cin >> message[i];
     
-    cout << "\nEnter The Generator Size: ";
-    cin >> generatorSize;
-    cout << "Enter The Generator: ";
-    for(int i=0; i<generatorSize; i++)
-        cin >> generator[i];
+    label:
+        cout << "\nEnter The Generator Size: ";
+        cin >> generatorSize;
+        if(generatorSize <= messageSize)
+        {
+            cout << "Enter The Generator: ";
+            for(int i=0; i<generatorSize; i++)
+                cin >> generator[i];
+        }
+        else
+        {
+            cout << "\nGenerator Size exceeded Message Size!\n";
+            goto label;
+        }
 }
 
 void CRC::generate_codeword()
@@ -95,7 +104,7 @@ void CRC::noisy_channel()
     int nBits, pos;
     cout << "Enter the number of Bits to Flip: ";
     cin >> nBits;
-    if(nBits == -1 || nBits > (messageSize+generatorSize-1))
+    if(nBits <= 0 || nBits > (messageSize+generatorSize-1))
         cout << "Invalid Request! Codeword not changed.\n";
     else
         for(int i=0; i<nBits; i++)
