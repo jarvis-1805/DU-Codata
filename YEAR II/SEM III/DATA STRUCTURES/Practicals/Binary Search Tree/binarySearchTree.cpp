@@ -140,10 +140,12 @@ void binarySearchTree::choiceCalling(int ch)
 			if(isEmpty())
 				cout << "\nTree is empty!\n";
 			else
+			{
 				cout << "\nEnter the node to be deleted: ";
 		    	cin >> key;
 				temp = root;
 				delete_node(temp, key);
+			}
 			break;
 		case 0:
 			break;
@@ -436,8 +438,15 @@ void binarySearchTree::delete_node(node *temp, int key)
 {
 	node *parent = temp;
 	node *temp1 = temp;
+	bool flag = false;
+	
 	while(temp != nullptr)
 	{
+		if(key == temp -> data)
+		{
+			flag = true;
+			break;
+		}
 		parent = temp;
 		if(key < temp -> data)
 		{
@@ -447,37 +456,41 @@ void binarySearchTree::delete_node(node *temp, int key)
 		{
 			temp = temp -> right;
 		}
-		if(key == temp -> data)
-			break;
 	}
-	cout << endl << parent -> data << "@" << temp -> data;
-	//Case 1: If the node has no child, i.e., leaf node.
-	if((temp -> left == nullptr) && (temp -> right == nullptr))
+	
+	if(!flag)
+		cout << "\nNode not present in Tree!";
+	else
 	{
-		delete_no_child(parent, temp);
-		cout << "\nSuccessfuly deleted the leaf node " << key;
-	}
+		//cout << endl << parent -> data << "@" << temp -> data;
+		//Case 1: If the node has no child, i.e., leaf node.
+		if((temp -> left == nullptr) && (temp -> right == nullptr))
+		{
+			delete_no_child(parent, temp);
+			cout << "\nSuccessfuly deleted the leaf node " << key;
+		}
 
-	//Case 2: If the node has one child.
-	else if((temp -> left != nullptr && temp -> right == nullptr) || (temp -> left == nullptr && temp -> right != nullptr))
-	{
-		delete_one_child(parent, temp);
-		cout << "\nSuccessfuly deleted the node " << key;
-	}
+		//Case 2: If the node has one child.
+		else if((temp -> left != nullptr && temp -> right == nullptr) || (temp -> left == nullptr && temp -> right != nullptr))
+		{
+			delete_one_child(parent, temp);
+			cout << "\nSuccessfuly deleted the node " << key;
+		}
 
-	//Case 3: If the node has both left and right child.
-	else if((temp -> left != nullptr) && (temp -> right != nullptr))
-	{
-		sub_options_2();
-		cout << "\n\nThe node " << key << " has two children.";
-		ch1 = choice();
-		
-		if(ch1 == 1)
-			merge_deletion(temp, key);
-		else if(ch1 == 2)
-			copy_deletion(temp, key);
-		else
-			cout << "\n########### WRONG CHOICE... ###########\n";
+		//Case 3: If the node has both left and right child.
+		else if((temp -> left != nullptr) && (temp -> right != nullptr))
+		{
+			sub_options_2();
+			cout << "\n\nThe node " << key << " has two children.";
+			ch1 = choice();
+			
+			if(ch1 == 1)
+				merge_deletion(temp, key);
+			else if(ch1 == 2)
+				copy_deletion(temp, key);
+			else
+				cout << "\n########### WRONG CHOICE... ###########\n";
+		}
 	}
 	cout << endl;
 }
@@ -521,33 +534,40 @@ void binarySearchTree::copy_deletion(node *temp, int key)
 	sub_options_3();
 	ch2 = choice();
 
-	node *temp1;
+	node *temp1, *parent;
+
 	//Inorder Predesessor Method
 	if(ch2 == 1)
 	{
 		temp1 = temp -> left;
-		if(temp1 -> left != nullptr && temp1 -> right == nullptr)
+		parent = temp1;
+		while(temp1 -> right != nullptr)
 		{
-			temp -> data = temp1 -> data;
-			delete_one_child(temp, temp1);
+			parent = temp1;
+			temp1 = temp1 -> right;
+		}
+		
+		temp -> data = temp1 -> data;
+		if(temp1 == parent)
+		{
+			if(temp1 -> left != nullptr)
+				temp -> left = temp1 -> left;
+			else if(temp1 -> left == nullptr)
+				temp -> left = nullptr;
+			delete(temp1);
+		}
+		else if(temp1 -> left != nullptr && temp1 -> right == nullptr)
+		{
+			delete_one_child(parent, temp1);
 		}
 		else if(temp1 -> right == nullptr && temp1 -> left == nullptr)
 		{
-			temp -> data = temp1 -> data;
-			delete_no_child(temp, temp1);
-		}
-		else
-		{
-			while(temp1 -> right -> right != nullptr)
-				temp1 = temp1 -> right;
-			temp -> data = temp1 -> right -> data;
-			delete(temp1 -> right);
-			temp1 -> right = nullptr;
+			delete_no_child(parent, temp1);
 		}
 	}
 
 	//Inorder Successor Method
-	/*else if(ch2 == 2)
+	if(ch2 == 2)
 	{
 		temp1 = temp -> right;
 		parent = temp1;
@@ -556,10 +576,25 @@ void binarySearchTree::copy_deletion(node *temp, int key)
 			parent = temp1;
 			temp1 = temp1 -> left;
 		}
+		
 		temp -> data = temp1 -> data;
-		parent -> left = nullptr;
-		delete(temp1);
-	}*/
+		if(temp1 == parent)
+		{
+			if(temp1 -> right != nullptr)
+				temp -> right = temp1 -> right;
+			else if(temp1 -> right == nullptr)
+				temp -> right = nullptr;
+			delete(temp1);
+		}
+		else if(temp1 -> right != nullptr && temp1 -> left == nullptr)
+		{
+			delete_one_child(parent, temp1);
+		}
+		else if(temp1 -> right == nullptr && temp1 -> left == nullptr)
+		{
+			delete_no_child(parent, temp1);
+		}
+	}
 	cout << "\nSuccessfuly deleted the node " << key;
 }
 
