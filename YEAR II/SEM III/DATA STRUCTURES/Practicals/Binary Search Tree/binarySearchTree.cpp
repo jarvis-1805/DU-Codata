@@ -42,11 +42,12 @@ class binarySearchTree
 		void mirror_image();
 		void nodes_counter();
 		void height_counter();
-		void delete_node(node *, int);
+		bool delete_node(node *, int);
 		void delete_no_child(node *, node *);
 		void delete_one_child(node *, node *);
 		void merge_deletion(node *, node *, int);
 		void copy_deletion(node *, int);
+		void replace_node(node *);
 		bool isEmpty();
 };
 
@@ -68,6 +69,7 @@ void binarySearchTree::options()
 		<< "\n8. COUNT NODES"
 		<< "\n9. COUNT HEIGHT"
 		<< "\n10. DELETE NODE"
+		<< "\n11. REPLACE NODE"
 		<<	"\n0. EXIT";
 }
 
@@ -145,6 +147,15 @@ void binarySearchTree::choiceCalling(int ch)
 		    	cin >> key;
 				temp = root;
 				delete_node(temp, key);
+			}
+			break;
+		case 11:
+			if(isEmpty())
+				cout << "\nTree is empty!\n";
+			else
+			{
+				temp = root;
+				replace_node(temp);
 			}
 			break;
 		case 0:
@@ -434,7 +445,7 @@ void binarySearchTree::height_counter()
 	cout << "\nHeight of tree is: " << height << endl;
 }
 
-void binarySearchTree::delete_node(node *temp, int key)
+bool binarySearchTree::delete_node(node *temp, int key)
 {
 	node *parent = temp;
 	node *temp1 = temp;
@@ -492,10 +503,12 @@ void binarySearchTree::delete_node(node *temp, int key)
 		}
 	}
 	cout << endl;
+	return flag;
 }
 
 void binarySearchTree::delete_no_child(node *parent, node *temp)
 {
+	//If root is to be deleted
 	if(parent == temp)
 		root = nullptr;
 	else if(parent -> left == temp)
@@ -507,6 +520,7 @@ void binarySearchTree::delete_no_child(node *parent, node *temp)
 
 void binarySearchTree::delete_one_child(node *parent, node *temp)
 {
+	//If root is to be deleted
 	if(parent == temp)
 	{
 		if(temp -> left != nullptr)
@@ -665,6 +679,21 @@ void binarySearchTree::copy_deletion(node *temp, int key)
 		}
 	}
 	cout << "\nSuccessfuly deleted the node " << key;
+}
+
+void binarySearchTree::replace_node(node *temp)
+{
+	int key, key1;
+	cout << "\nEnter the node to be replaced: ";
+	cin >> key;
+	bool flag = delete_node(temp, key);
+	if(flag)
+	{
+		cout << "\nEnter the node to be replaced with: ";
+		cin >> key1;
+		root = insert(root, key1);
+		cout << "\nSuccessfully replaced " << key << " with " << key1 << endl;
+	}
 }
 
 bool binarySearchTree::isEmpty()
