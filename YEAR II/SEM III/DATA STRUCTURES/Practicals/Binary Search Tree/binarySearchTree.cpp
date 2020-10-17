@@ -45,7 +45,7 @@ class binarySearchTree
 		void delete_node(node *, int);
 		void delete_no_child(node *, node *);
 		void delete_one_child(node *, node *);
-		void merge_deletion(node *, int);
+		void merge_deletion(node *, node *, int);
 		void copy_deletion(node *, int);
 		bool isEmpty();
 };
@@ -462,7 +462,6 @@ void binarySearchTree::delete_node(node *temp, int key)
 		cout << "\nNode not present in Tree!";
 	else
 	{
-		//cout << endl << parent -> data << "@" << temp -> data;
 		//Case 1: If the node has no child, i.e., leaf node.
 		if((temp -> left == nullptr) && (temp -> right == nullptr))
 		{
@@ -485,7 +484,7 @@ void binarySearchTree::delete_node(node *temp, int key)
 			ch1 = choice();
 			
 			if(ch1 == 1)
-				merge_deletion(temp, key);
+				merge_deletion(parent, temp, key);
 			else if(ch1 == 2)
 				copy_deletion(temp, key);
 			else
@@ -497,7 +496,9 @@ void binarySearchTree::delete_node(node *temp, int key)
 
 void binarySearchTree::delete_no_child(node *parent, node *temp)
 {
-	if(parent -> left == temp)
+	if(parent == temp)
+		root = nullptr;
+	else if(parent -> left == temp)
 		parent -> left = nullptr;
 	else if(parent -> right == temp)
 		parent -> right = nullptr;
@@ -506,7 +507,14 @@ void binarySearchTree::delete_no_child(node *parent, node *temp)
 
 void binarySearchTree::delete_one_child(node *parent, node *temp)
 {
-	if(parent -> left == temp)
+	if(parent == temp)
+	{
+		if(temp -> left != nullptr)
+			root = temp -> left;
+		else if(temp -> right != nullptr)
+			root = temp -> right;
+	}
+	else if(parent -> left == temp)
 	{
 		if(temp -> left != nullptr)
 			parent -> left = temp -> left;
@@ -523,9 +531,70 @@ void binarySearchTree::delete_one_child(node *parent, node *temp)
 	delete(temp);
 }
 
-void binarySearchTree::merge_deletion(node *temp, int key)
+void binarySearchTree::merge_deletion(node *parent, node *temp, int key)
 {
+	int ch2;
+	sub_options_3();
+	ch2 = choice();
 
+	node *temp1, *parent1;
+
+	//Inorder Predecessor Method
+	if(ch2 == 1)
+	{
+		temp1 = temp -> left;
+		parent1 = temp1;
+		while(temp1 -> right != nullptr)
+		{
+			parent1 = temp1;
+			temp1 = temp1 -> right;
+		}
+
+		//If root is to be deleted
+		if(key == root -> data)
+		{
+			root = root -> left;
+		}
+		else if(parent -> left == temp)
+		{
+			parent -> left = parent1;
+		}
+		else if(parent -> right == temp)
+		{
+			parent -> right = parent1;
+		}
+		temp1 -> right = temp -> right;
+		delete(temp);
+	}
+	
+	//Inorder Successor Method
+	if(ch2 == 2)
+	{
+		temp1 = temp -> right;
+		parent1 = temp1;
+		while(temp1 -> left != nullptr)
+		{
+			parent1 = temp1;
+			temp1 = temp1 -> left;
+		}
+
+		//If root is to be deleted
+		if(key == root -> data)
+		{
+			root = root -> right;
+		}
+		else if(parent -> right == temp)
+		{
+			parent -> right = parent1;
+		}
+		else if(parent -> left == temp)
+		{
+			parent -> left = parent1;
+		}
+		temp1 -> left = temp -> left;
+		delete(temp);
+	}
+	cout << "\nSuccessfuly deleted the node " << key;
 }
 
 void binarySearchTree::copy_deletion(node *temp, int key)
@@ -536,7 +605,7 @@ void binarySearchTree::copy_deletion(node *temp, int key)
 
 	node *temp1, *parent;
 
-	//Inorder Predesessor Method
+	//Inorder Predecessor Method
 	if(ch2 == 1)
 	{
 		temp1 = temp -> left;
@@ -608,15 +677,21 @@ bool binarySearchTree::isEmpty()
 int main()
 {
     int choice;
-	cout << "\n=========== BINARY SEARCH TREE ===========\n";
 	binarySearchTree ob;
 	do
 	{
+		cout << "\n=========== BINARY SEARCH TREE ===========\n";
 		ob.options();
 		choice = ob.choice();
 		if(ob.ch == 0)
 			break;
+		system("clear");
+		cout << "\n=========== BINARY SEARCH TREE ===========\n";
 		ob.choiceCalling(choice);
+		cout << "\nPress Enter to continue...";
+		cin.ignore();
+		getchar();
+		system("clear");
 	}while(1);
 	
 	return 0;
