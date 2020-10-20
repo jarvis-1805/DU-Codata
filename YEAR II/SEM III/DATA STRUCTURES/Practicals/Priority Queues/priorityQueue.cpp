@@ -19,15 +19,23 @@ class priorityQueue
         
 		void sub_options_1();
 		void sub_choiceCalling_1(int);
+		void sub_options_2();
+		void sub_choiceCalling_2(int);
 
         int *swap(int *, int, int);
         
-        void build_max_heap();
         void max_heapify(int *, int);
+        void min_heapify(int *, int);
+        void build_max_heap();
+        void build_min_heap();
         void heap_increase_key(int *, int, int);
         void max_heap_insert(int *, int);
         int heap_maximum(int *);
         int heap_extract_max(int *);
+        void heap_decrease_key(int *, int, int);
+        void min_heap_insert(int *, int);
+        int heap_minimum(int *);
+        int heap_extract_min(int *);
 };
 
 priorityQueue::priorityQueue()
@@ -44,9 +52,12 @@ void priorityQueue::options()
 {
 	cout << "\n------- MENU -------";
     cout << "\n1. MAX HEAPIFY"
-		<<	"\n2. BUILD MAX HEAP"
-		<<	"\n3. MAX PRIORITY QUEUE"
-		<<	"\n5. DISPLAY"
+		<<	"\n2. MIN HEAPIFY"
+		<<	"\n3. BUILD MAX HEAP"
+		<<	"\n4. BUILD MIN HEAP"
+		<<	"\n5. MAX PRIORITY QUEUE"
+		<<	"\n6. MIN PRIORITY QUEUE"
+		<<	"\n7. DISPLAY"
 		<<	"\n0. EXIT";
 }
 
@@ -65,25 +76,44 @@ void priorityQueue::choiceCalling(int ch)
 		case 1:
 			cout << "\nEnter index from " << floor(size/2) << " upto 1: ";
 		    cin >> i;
-			max_heapify(array, i);
-            for(int x=1; x<=size; x++)
+            if(i >= floor(size/2) && i <=1)
             {
-                cout << array[x] << " ";
+                max_heapify(array, i);
+                cout << "\nSuccessfully Max Heapified at " << i << ".\n";
             }
+            else
+                cout << "\n########### WRONG CHOICE... ###########\n";
 			break;
 		case 2:
-			build_max_heap();
-            for(int x=1; x<=size; x++)
+			cout << "\nEnter index from " << floor(size/2) << " upto 1: ";
+		    cin >> i;
+            if(i >= floor(size/2) && i <=1)
             {
-                cout << array[x] << " ";
+                min_heapify(array, i);
+                cout << "\nSuccessfully Min Heapified at " << i << ".\n";
             }
+            else
+                cout << "\n########### WRONG CHOICE... ###########\n";
 			break;
 		case 3:
+			build_max_heap();
+            cout << "\nSuccessfully built Max Heap.\n";
+			break;
+		case 4:
+			build_min_heap();
+            cout << "\nSuccessfully built Min Heap.\n";
+			break;
+		case 5:
             sub_options_1();
             ch1 = choice();
 			sub_choiceCalling_1(ch1);
 			break;
-		case 5:
+		case 6:
+            sub_options_2();
+            ch1 = choice();
+			sub_choiceCalling_2(ch1);
+			break;
+		case 7:
             cout << "\nArray: ";
             for(int x=1; x<=size; x++)
                 cout << array[x] << " ";
@@ -139,6 +169,49 @@ void priorityQueue::sub_choiceCalling_1(int ch1)
 	}
 }
 
+void priorityQueue::sub_options_2()
+{
+	cout << "\n------- SUB MENU -------";
+    cout << "\n1. HEAP DECREASE KEY"
+		<< "\n2. MIN HEAP INSERT"
+		<< "\n3. HEAP MINIMUM"
+		<< "\n4. HEAP EXTRACT MIN";
+}
+
+void priorityQueue::sub_choiceCalling_2(int ch1)
+{
+    int i;
+    int key;
+    switch(ch1)
+	{
+		case 1:
+			cout << "\nEnter index to be decreased: ";
+		    cin >> i;
+			cout << "\nEnter the data: ";
+		    cin >> key;
+            heap_decrease_key(array, i, key);
+			break;
+		case 2:
+			cout << "\nEnter the data: ";
+		    cin >> key;
+            min_heap_insert(array, key);
+			break;
+		case 3:
+            key = heap_minimum(array);
+            cout << "\nMinimum Key: " << key << endl;
+			break;
+		case 4:
+            key = heap_extract_min(array);
+            if(key == -1000)
+                cout << "\nHeap Underflow!" << endl;
+            else
+                cout << "\nExtracted minimum Key: " << key << endl;
+			break;
+		default:
+			cout << "\n########### WRONG CHOICE... ###########\n";
+	}
+}
+
 int *priorityQueue::swap(int *array, int maxim, int i)
 {
     int temp = array[maxim];
@@ -152,6 +225,12 @@ void priorityQueue::build_max_heap()
 {
     for(int i=floor(size/2); i>=1; i--)
         max_heapify(array, i);
+}
+
+void priorityQueue::build_min_heap()
+{
+    for(int i=floor(size/2); i>=1; i--)
+        min_heapify(array, i);
 }
 
 void priorityQueue::max_heapify(int *array, int i)
@@ -171,6 +250,26 @@ void priorityQueue::max_heapify(int *array, int i)
     {
         array = swap(array, maxim, i);
         max_heapify(array, maxim);
+    }
+}
+
+void priorityQueue::min_heapify(int *array, int i)
+{
+    int left = 2*i;
+    int right = 2*i + 1;
+    int minim;
+    if(left <= size && array[left] < array[i])
+        minim = left;
+    else
+        minim = i;
+    
+    if(right <= size && array[right] < array[minim])
+        minim = right;
+    
+    if(minim != i)
+    {
+        array = swap(array, minim, i);
+        min_heapify(array, minim);
     }
 }
 
@@ -211,6 +310,45 @@ int priorityQueue::heap_extract_max(int *array)
     array[1] = array[size--];
     max_heapify(array, 1);
     return maxim;
+}
+
+void priorityQueue::heap_decrease_key(int *array, int i, int key)
+{
+    if(key > array[i])
+    {
+        cout << "\nData entered is greater than " << i << "th elemnt " << array[i] << endl;
+        return;
+    }
+    int parent = floor(i/2);
+    array[i] = key;
+    while(i > 1 && array[parent] > array[i])
+    {
+        array = swap(array, parent, i);
+        i = parent;
+        parent = floor(i/2);
+    }
+}
+
+void priorityQueue::min_heap_insert(int *array, int key)
+{
+    array[++size] = 999;
+    heap_decrease_key(array, size, key);
+}
+
+int priorityQueue::heap_minimum(int *array)
+{
+    return array[1];
+}
+
+int priorityQueue::heap_extract_min(int *array)
+{
+    if(size < 1)
+        return -1000;
+    
+    int minim = array[1];
+    array[1] = array[size--];
+    min_heapify(array, 1);
+    return minim;
 }
 
 int main()
