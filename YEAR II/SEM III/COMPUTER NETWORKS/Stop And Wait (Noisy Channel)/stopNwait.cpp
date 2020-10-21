@@ -44,7 +44,7 @@ void stopNwait::sender()
         }
         else
         {
-            printf("\nReceived Control Frame [<kind: '%s'><ack:'%i'>]", show_kind(receiverFrame.kind).c_str(), receiverFrame.ack);
+            printf("\nReceived ControlFrame [<kind: '%s'><ack:'%i'>]", show_kind(receiverFrame.kind).c_str(), receiverFrame.ack);
             if(flag)
             {
                 count--;

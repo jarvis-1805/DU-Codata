@@ -97,7 +97,7 @@ void protocol::from_physical_layer(frame &f)
 {
     printf("\nReceived DataFrame [<kind: %s><sequence: %i>] from Physical Layer...", show_kind(f.kind).c_str(), f.seq);
     printf("\nVerifying Sequence Number...");
-    if(seqReceived == f.seq)
+    if(seqReceived != f.seq)
         printf("\nDecapsulating DataFrame...");
     else
     {
@@ -108,7 +108,7 @@ void protocol::from_physical_layer(frame &f)
 
 void protocol::to_network_layer(packet &p)
 {
-    printf("\nSending Packect [<Data: %s>] to Network Layer...", p.data);
+    printf("\nSending Packect [<Data: '%s'>] to Network Layer...", p.data);
     seqReceived = senderFrame.seq;
     receiverFrame.seq = 0;
     receiverFrame.kind = ack;
