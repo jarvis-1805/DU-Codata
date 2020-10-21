@@ -54,7 +54,7 @@ class protocol
         void to_network_layer(packet &);
 };
 
-int wait_for_event(eventType e)
+int protocol::wait_for_event(eventType e)
 {
     return e == frameArrival;
 }
@@ -88,14 +88,14 @@ void protocol::from_network_layer(packet &p)
 void protocol::to_physical_layer(frame &f)
 {
     if(f.kind == dat)
-        printf("\nSending DataFrame [<kind: %s><sequence: %i>]...", f.kind, f.seq);
+        printf("\nSending DataFrame [<kind: %s><sequence: %i>]...", show_kind(f.kind).c_str(), f.seq);
     else
-        printf("\nSending ControlFrame [<kind: %s><ack: %i>] to Physical Layer...", f.kind, f.ack);
+        printf("\nSending ControlFrame [<kind: %s><ack: %i>] to Physical Layer...", show_kind(f.kind).c_str(), f.ack);
 }
 
 void protocol::from_physical_layer(frame &f)
 {
-    printf("\nReceived DataFrame [<kind: %s><sequence: %i>] from Physical Layer...", f.kind, f.seq);
+    printf("\nReceived DataFrame [<kind: %s><sequence: %i>] from Physical Layer...", show_kind(f.kind).c_str(), f.seq);
     printf("\nVerifying Sequence Number...");
     if(seqReceived == f.seq)
         printf("\nDecapsulating DataFrame...");
