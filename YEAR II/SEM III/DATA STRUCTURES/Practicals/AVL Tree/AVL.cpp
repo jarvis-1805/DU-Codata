@@ -35,7 +35,7 @@ class AVL
 
 AVL::AVL()
 {
-    root = nullptr;
+    temp = root = nullptr;
 }
 
 void AVL::options()
@@ -44,7 +44,7 @@ void AVL::options()
     cout << "\n1. INSERT A NODE"
 		<< "\n2. DELETE A NODE"
 		<< "\n3. DISPLAY"
-		<<	"\n0. EXIT";
+		<< "\n0. EXIT";
 }
 
 int AVL::choice()
@@ -64,6 +64,7 @@ void AVL::choiceCalling(int ch)
             cin >> key;
             temp = root;
             insertion(temp, key);
+            //
 			break;
 		case 2:
 			break;
@@ -79,71 +80,78 @@ void AVL::choiceCalling(int ch)
 
 void AVL::insertion(node *temp, int key)
 {
-    if(root == nullptr)
+    do     //remove for recursive
     {
-        newNode = (struct node *)new struct node;
-        newNode -> left = newNode -> parent = newNode -> right = nullptr;
-        newNode -> height = 1;
-        newNode -> balanceFactor = 0;
-        newNode -> data = key;
-        root = newNode;
-    }
-    else if(key == temp -> data)
-        cout << "\n" << key << " is already present in tree!\n";
-    else if(key < temp -> data)
-    {
-        if(temp -> left == nullptr)
+        if(root == nullptr)
         {
             newNode = (struct node *)new struct node;
-            newNode -> left = newNode -> right = nullptr;
-            newNode -> parent = temp;
+            newNode -> left = newNode -> parent = newNode -> right = nullptr;
             newNode -> height = 1;
             newNode -> balanceFactor = 0;
             newNode -> data = key;
-            temp -> left = newNode;
-            temp = newNode;
-            node* temp1 = temp -> parent;
-            while(temp1 != nullptr)
+            root = newNode;
+        }
+        else if(key == temp -> data)
+            cout << "\n" << key << " is already present in tree!\n";
+        else if(key < temp -> data)
+        {
+            if(temp -> left == nullptr)
             {
-                if(temp -> parent -> right == nullptr)
+                newNode = (struct node *)new struct node;
+                newNode -> left = newNode -> right = nullptr;
+                newNode -> parent = temp;
+                newNode -> height = 1;
+                newNode -> balanceFactor = 0;
+                newNode -> data = key;
+                temp -> left = newNode;
+                temp = newNode;
+                node* temp1 = temp -> parent;
+                while(temp1 != nullptr)
+                {
+                    if(temp -> parent -> right == nullptr)
+                        temp1 -> height += 1;
+                    if(temp1 -> right == nullptr)
+                        temp1 -> balanceFactor = 0 - temp1 -> left -> height;
+                    else
+                        temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+                    temp1 = temp1 -> parent;
+                }
+                temp = nullptr;     //remove for recursive
+            }
+            else
+                temp = temp -> left;     //remove for recursive
+                //insertion(temp -> left, key);
+        }
+        else if(key > temp -> data)
+        {
+            if(temp -> right == nullptr)
+            {
+                newNode = (struct node *)new struct node;
+                newNode -> left = newNode -> right = nullptr;
+                newNode -> parent = temp;
+                newNode -> height = 1;
+                newNode -> balanceFactor = 0;
+                newNode -> data = key;
+                temp -> right = newNode;
+                temp = newNode;
+                node* temp1 = temp -> parent;
+                while(temp1 != nullptr)
+                {
+                    if(temp -> parent -> left == nullptr)
                     temp1 -> height += 1;
-                if(temp1 -> right == nullptr)
-                    temp1 -> balanceFactor = 0 - temp1 -> left -> height;
-                else
-                    temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
-                temp1 = temp1 -> parent;
+                    if(temp1 -> left == nullptr)
+                        temp1 -> balanceFactor = temp1 -> right -> height - 0;
+                    else
+                        temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+                    temp1 = temp1 -> parent;
+                }
+                temp = nullptr;     //remove for recursive
             }
+            else
+                temp = temp -> right;     //remove for recursive
+                //insertion(temp -> right, key);
         }
-        else
-            insertion(temp -> left, key);
-    }
-    else if(key > temp -> data)
-    {
-        if(temp -> right == nullptr)
-        {
-            newNode = (struct node *)new struct node;
-            newNode -> left = newNode -> right = nullptr;
-            newNode -> parent = temp;
-            newNode -> height = 1;
-            newNode -> balanceFactor = 0;
-            newNode -> data = key;
-            temp -> right = newNode;
-            temp = newNode;
-            node* temp1 = temp -> parent;
-            while(temp1 != nullptr)
-            {
-                if(temp -> parent -> left == nullptr)
-                   temp1 -> height += 1;
-                if(temp1 -> left == nullptr)
-                    temp1 -> balanceFactor = temp1 -> right -> height - 0;
-                else
-                    temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
-                temp1 = temp1 -> parent;
-            }
-        }
-        else
-            insertion(temp -> right, key);
-    }
+    }while(temp != nullptr);     //remove for recursive
 }
 
 void AVL::display()
