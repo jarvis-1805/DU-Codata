@@ -12,7 +12,7 @@ struct node
     int data;
     node *right;
 };
-struct node *root, *newNode, *temp;
+struct node *root, *newNode, *criticalNode, *criticalNext, *temp;
 
 class AVL
 {
@@ -35,7 +35,7 @@ class AVL
 
 AVL::AVL()
 {
-    temp = root = nullptr;
+    temp = criticalNode = root = nullptr;
 }
 
 void AVL::options()
@@ -138,7 +138,7 @@ void AVL::insertion(node *temp, int key)
                 while(temp1 != nullptr)
                 {
                     if(temp -> parent -> left == nullptr)
-                    temp1 -> height += 1;
+                        temp1 -> height += 1;
                     if(temp1 -> left == nullptr)
                         temp1 -> balanceFactor = temp1 -> right -> height - 0;
                     else
@@ -152,6 +152,98 @@ void AVL::insertion(node *temp, int key)
                 //insertion(temp -> right, key);
         }
     }while(temp != nullptr);     //remove for recursive
+
+    //to find critical node
+    temp = newNode;
+    node *temp1 = temp;
+    bool flag = false;
+    while(temp1 -> parent != nullptr)
+    {
+        if(temp1 -> parent -> balanceFactor != -1 &&
+            temp1 -> parent -> balanceFactor != 0 &&
+            temp1 -> parent -> balanceFactor != 1)
+        {
+            criticalNode = temp1 -> parent;
+            criticalNext = temp1;
+            break;
+        }
+        temp1 = temp1 -> parent;
+    }
+
+    //to check for right child of critical node
+    if(criticalNode -> right == criticalNext)
+    {
+        temp1 = criticalNext;
+        //to check for inserted node in right subtree
+        if(temp1 -> right != nullptr)
+        {
+            while(temp1 != nullptr)
+                if(temp1 == temp)
+                {
+                    flag = true;
+                    break;
+                }
+                else
+                    temp1 = temp1 -> right;
+            if(flag)
+            {
+                //case 1 right subtree of right child
+            }
+        }
+        //to check for inserted node in left subtree
+        if(temp1 -> left != nullptr && !flag)
+        {
+            while(temp1 != nullptr)
+                if(temp1 == temp)
+                {
+                    flag = true;
+                    break;
+                }
+                else
+                    temp1 = temp1 -> left;
+            if(flag)
+            {
+                //case 2 left subtree of right child
+            }
+        }
+    }
+    //to check for left child of critical node
+    else if(criticalNode -> left == criticalNext)
+    {
+        temp1 = criticalNext;
+        //to check for inserted node in left subtree
+        if(temp1 -> left != nullptr)
+        {
+            while(temp1 != nullptr)
+                if(temp1 == temp)
+                {
+                    flag = true;
+                    break;
+                }
+                else
+                    temp1 = temp1 -> left;
+            if(flag)
+            {
+                //case 3 left subtree of left child
+            }
+        }
+        //to check for inserted node in right subtree
+        if(temp1 -> right != nullptr && !flag)
+        {
+            while(temp1 != nullptr)
+                if(temp1 == temp)
+                {
+                    flag = true;
+                    break;
+                }
+                else
+                    temp1 = temp1 -> right;
+            if(flag)
+            {
+                //case 4 right subtree of left child
+            }
+        }
+    }
 }
 
 void AVL::display()
