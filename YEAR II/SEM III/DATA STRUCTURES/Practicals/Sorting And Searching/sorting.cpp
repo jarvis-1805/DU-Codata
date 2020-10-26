@@ -96,7 +96,10 @@ void sorting<T>::choice_calling(int ch)
             cout << "\nEnter the value: ";
             cin >> key;
             pos = linear_search(arr, size, key);
-            cout << "\nLinearly Searched element " << key << " is present at: " << pos + 1 << endl;
+            if(pos != -1)
+                cout << "\nLinearly Searched element " << key << " is present at: " << pos + 1 << endl;
+            else
+                cout << "\nLinearly Searched element " << key << " is absent in array!" << endl;
 			break;
 		case 5:
 			break;
