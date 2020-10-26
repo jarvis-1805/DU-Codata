@@ -98,7 +98,10 @@ void AVL::insertion(node *temp, int key)
             criticalNode = criticalNext = newNode;
         }
         else if(key == temp -> data)
+        {
             cout << "\n" << key << " is already present in tree!\n";
+            break;
+        }
         else if(key < temp -> data)
         {
             if(temp -> left == nullptr)
@@ -234,6 +237,9 @@ void AVL::insertion(node *temp, int key)
             if(flag)
             {
                 //case 3 left subtree of left child
+                cout << criticalNode -> data << "*&" << criticalNext -> data;
+                traverse_path(temp);
+                right_rotate(criticalNode, criticalNext);
             }
         }
         //to check for inserted node in right subtree
@@ -282,6 +288,41 @@ void AVL::left_rotate(node *P, node *Q)
             temp1 -> balanceFactor = 0;
         else if(temp1 -> left == nullptr)
             temp1 -> balanceFactor = temp1 -> right -> height - 0;
+        else
+            temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+        
+        q1.dequeue();
+    }
+    Q -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+}
+
+void AVL::right_rotate(node *P, node *Q)
+{
+    Q -> parent = P -> parent;
+    if(root == P)
+    {
+        root = Q;
+    }
+    if(P -> parent != nullptr)
+    {
+        P -> parent -> left = P -> left;
+    }
+    P -> left = Q -> right;
+    Q -> right = P;
+
+    //updating height and balance factor
+    int height;
+    node *temp1;
+    while(!q1.isEmpty())
+    {
+        temp1 = q1.frontEle();
+        height = height_counter(temp1);
+        temp1 -> height = height;
+
+        if(temp1 -> left == nullptr && temp1 -> right == nullptr)
+            temp1 -> balanceFactor = 0;
+        else if(temp1 -> right == nullptr)
+            temp1 -> balanceFactor = 0 - temp1 -> left -> height;
         else
             temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
         
