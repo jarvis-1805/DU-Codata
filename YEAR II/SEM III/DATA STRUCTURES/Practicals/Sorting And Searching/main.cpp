@@ -30,7 +30,7 @@ class sorting
 template<class T>
 sorting<T>::sorting()
 {
-    cout << "\n============ SORTING TECHNIQUES ============\n";
+    cout << "\n============ SORTING AND SEARCHING ============\n";
 
     label:
         cout << "\nEnter the size: ";
