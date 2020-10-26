@@ -16,7 +16,7 @@ struct node *root, *newNode, *criticalNode, *criticalNext, *temp;
 
 class AVL
 {
-	queueLinkedList<node *> q;
+	queueLinkedList<node *> q, q1;
 
     public:
         int ch;
@@ -29,6 +29,10 @@ class AVL
 
         void insertion(node *, int);
         void deletion();
+        void left_rotate(node *, node *);
+        void right_rotate(node *, node *);
+        int height_counter(node *);
+        void traverse_path(node *);
         void display();
         bool isEmpty();
 };
@@ -64,9 +68,10 @@ void AVL::choiceCalling(int ch)
             cin >> key;
             temp = root;
             insertion(temp, key);
-            //
 			break;
 		case 2:
+            key = height_counter(root);
+            cout << key;
 			break;
 		case 3:
             display();
@@ -90,6 +95,7 @@ void AVL::insertion(node *temp, int key)
             newNode -> balanceFactor = 0;
             newNode -> data = key;
             root = newNode;
+            criticalNode = criticalNext = newNode;
         }
         else if(key == temp -> data)
             cout << "\n" << key << " is already present in tree!\n";
@@ -188,6 +194,9 @@ void AVL::insertion(node *temp, int key)
             if(flag)
             {
                 //case 1 right subtree of right child
+                cout << criticalNode -> data << "*&" << criticalNext -> data;
+                traverse_path(temp);
+                left_rotate(criticalNode, criticalNext);
             }
         }
         //to check for inserted node in left subtree
@@ -243,6 +252,73 @@ void AVL::insertion(node *temp, int key)
                 //case 4 right subtree of left child
             }
         }
+    }
+}
+
+void AVL::left_rotate(node *P, node *Q)
+{
+    Q -> parent = P -> parent;
+    if(root == P)
+    {
+        root = Q;
+    }
+    if(P -> parent != nullptr)
+    {
+        P -> parent -> right = P -> right;
+    }
+    P -> right = Q -> left;
+    Q -> left = P;
+
+    //updating height and balance factor
+    int height;
+    node *temp1;
+    while(!q1.isEmpty())
+    {
+        temp1 = q1.frontEle();
+        height = height_counter(temp1);
+        temp1 -> height = height;
+
+        if(temp1 -> left == nullptr && temp1 -> right == nullptr)
+            temp1 -> balanceFactor = 0;
+        else if(temp1 -> left == nullptr)
+            temp1 -> balanceFactor = temp1 -> right -> height - 0;
+        else
+            temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+        
+        q1.dequeue();
+    }
+    Q -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+}
+
+int AVL::height_counter(node *temp1)
+{
+	if(temp1 == nullptr)
+        return 0;
+    else
+    {
+        int leftH, rightH;
+		
+		//find the height of left subtree
+		leftH = height_counter(temp1 -> left); 
+		
+		//find the height of right subtree
+		rightH = height_counter(temp1 -> right); 
+	
+		//return the maximum height
+		if (leftH > rightH) 
+		    return(leftH + 1); 
+		
+		else 
+		    return(rightH + 1); 
+    }
+}
+
+void AVL::traverse_path(node *temp1)
+{
+    while(temp1 != nullptr)
+    {
+        q1.enqueue(temp1);
+        temp1 = temp1 -> parent;
     }
 }
 
