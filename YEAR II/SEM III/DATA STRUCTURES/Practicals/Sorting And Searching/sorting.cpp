@@ -24,7 +24,7 @@ class sorting
         void insertion_sort(T *, int);
         void selection_sort(T *, int, int);
         int linear_search(T *, int, int);
-        void binary_search(T *, int);
+        int binary_search(T *, int, int, int);
 };
 
 template<class T>
@@ -96,12 +96,16 @@ void sorting<T>::choice_calling(int ch)
             cout << "\nEnter the value: ";
             cin >> key;
             pos = linear_search(arr, size, key);
-            if(pos != -1)
-                cout << "\nLinearly Searched element " << key << " is present at: " << pos + 1 << endl;
-            else
-                cout << "\nLinearly Searched element " << key << " is absent in array!" << endl;
+            (pos != -1) ? cout << "\nLinearly Searched element " << key << " is present at: " << pos + 1 << endl;
+                        : cout << "\nLinearly Searched element " << key << " is absent in array!" << endl;
 			break;
 		case 5:
+            cout << "\nEnter the value: ";
+            cin >> key;
+            bubble_sort(arr, size);
+            pos = binary_search(arr, 0, size-1, key);
+            (pos != -1) ? cout << "\nBinary Searched element " << key << " is present at: " << pos + 1 << endl;
+                        : cout << "\nBinary Searched element " << key << " is absent in array!" << endl;
 			break;
 		case 6:
             cout << "\nArray: ";
@@ -186,6 +190,21 @@ int sorting<T>::linear_search(T *arr, int size, int key)
         return size;
     else
         return linear_search(arr, size - 1, key);
+}
+
+template<class T>
+int sorting<T>::binary_search(T *arr, int first, int last, int key)
+{
+    if(last > first)
+    {
+        int mid = first + (last - first) / 2;
+        if(arr[mid] == key)
+            return mid;
+        if(arr[mid] > key)
+            return binary_search(arr, first, mid - 1, key);
+        return binary_search(arr, mid + 1, last, key);
+    }
+    return -1;
 }
 
 int main()
