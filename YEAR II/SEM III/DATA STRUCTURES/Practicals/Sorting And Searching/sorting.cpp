@@ -23,6 +23,8 @@ class sorting
         void bubble_sort(T *, int);
         void insertion_sort(T *, int);
         void selection_sort(T *, int, int);
+        int linear_search(T *, int, int);
+        void binary_search(T *, int);
 };
 
 template<class T>
@@ -51,7 +53,9 @@ void sorting<T>::options()
     cout << "\n1. BUBBLE SORT"
 		<< "\n2. INSERTION SORT"
 		<< "\n3. SELECTION SORT"
-		<< "\n4. DISPLAY"
+		<< "\n4. LINEAR SEARCH"
+		<< "\n5. BINARY SEARCH"
+		<< "\n6. DISPLAY"
 		<< "\n0. EXIT";
 }
 
@@ -66,6 +70,7 @@ int sorting<T>::choice()
 template<class T>
 void sorting<T>::choice_calling(int ch)
 {
+    int key, pos;
     T arr[size];
     for(int i=0; i<size; i++)
         arr[i] = array[i];
@@ -88,6 +93,14 @@ void sorting<T>::choice_calling(int ch)
             display(arr);
 			break;
 		case 4:
+            cout << "\nEnter the value: ";
+            cin >> key;
+            pos = linear_search(arr, size, key);
+            cout << "\nLinearly Searched element " << key << " is present at: " << pos + 1 << endl;
+			break;
+		case 5:
+			break;
+		case 6:
             cout << "\nArray: ";
             display(array);
 			break;
@@ -161,6 +174,17 @@ void sorting<T>::selection_sort(T *arr, int size, int ind)
     selection_sort(arr, size, ind+1);
 }
 
+template<class T>
+int sorting<T>::linear_search(T *arr, int size, int key)
+{
+    if(size < 0)
+        return -1;
+    if(arr[size] == key)
+        return size;
+    else
+        return linear_search(arr, size - 1, key);
+}
+
 int main()
 {
     int choice;
@@ -168,13 +192,13 @@ int main()
     sorting<int> ob;
     do
 	{
-		cout << "\n============ SORTING TECHNIQUES ============\n";
+		cout << "\n============ SORTING AND SEARCHING ============\n";
 		ob.options();
 		choice = ob.choice();
 		if(ob.ch == 0)
 			break;
 		system("clear");
-	    cout << "\n============ SORTING TECHNIQUES ============\n";
+	    cout << "\n============ SORTING AND SEARCHING ============\n";
 		ob.choice_calling(choice);
 		cout << "\nPress Enter to continue...";
 		cin.ignore();
