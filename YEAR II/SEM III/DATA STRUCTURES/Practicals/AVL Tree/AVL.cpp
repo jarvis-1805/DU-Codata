@@ -201,6 +201,7 @@ void AVL::insertion(node *temp, int key)
                 traverse_path(temp);
                 left_rotate(criticalNode, criticalNext);
             }
+            temp1 = criticalNext;
         }
         //to check for inserted node in left subtree
         if(temp1 -> left != nullptr && !flag)
@@ -216,6 +217,7 @@ void AVL::insertion(node *temp, int key)
             if(flag)
             {
                 //case 2 left subtree of right child
+                cout << criticalNode -> data << "*#" << criticalNext -> data;
             }
         }
     }
@@ -241,6 +243,7 @@ void AVL::insertion(node *temp, int key)
                 traverse_path(temp);
                 right_rotate(criticalNode, criticalNext);
             }
+            temp1 = criticalNext;
         }
         //to check for inserted node in right subtree
         if(temp1 -> right != nullptr && !flag)
