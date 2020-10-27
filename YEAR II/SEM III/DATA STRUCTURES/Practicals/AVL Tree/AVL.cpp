@@ -182,84 +182,42 @@ void AVL::insertion(node *temp, int key)
     //to check for right child of critical node
     if(criticalNode -> right == criticalNext)
     {
-        temp1 = criticalNext;
         //to check for inserted node in right subtree
-        if(temp1 -> right != nullptr)
+        if(key > criticalNext -> data)
         {
-            while(temp1 != nullptr)
-                if(temp1 == temp)
-                {
-                    flag = true;
-                    break;
-                }
-                else
-                    temp1 = temp1 -> right;
-            if(flag)
-            {
-                //case 1 right subtree of right child
-                cout << criticalNode -> data << "*&" << criticalNext -> data;
-                traverse_path(temp);
-                left_rotate(criticalNode, criticalNext);
-            }
-            temp1 = criticalNext;
+            //case 1 right subtree of right child
+            cout << criticalNode -> data << "*&" << criticalNext -> data;
+            traverse_path(temp);
+            left_rotate(criticalNode, criticalNext);
         }
         //to check for inserted node in left subtree
-        if(temp1 -> left != nullptr && !flag)
+        else if(key < criticalNext -> data)
         {
-            while(temp1 != nullptr)
-                if(temp1 == temp)
-                {
-                    flag = true;
-                    break;
-                }
-                else
-                    temp1 = temp1 -> left;
-            if(flag)
-            {
-                //case 2 left subtree of right child
-                cout << criticalNode -> data << "*#" << criticalNext -> data;
-            }
+            //case 2 left subtree of right child
+            node *R;
+            R = criticalNext -> left;
+            cout << criticalNode -> data << "*#" << criticalNext -> data;
+            traverse_path(temp);
+            right_rotate(criticalNext, R);
+            traverse_path(temp);
+            left_rotate(criticalNode, R);
         }
     }
     //to check for left child of critical node
     else if(criticalNode -> left == criticalNext)
     {
-        temp1 = criticalNext;
         //to check for inserted node in left subtree
-        if(temp1 -> left != nullptr)
+        if(key < criticalNext -> data)
         {
-            while(temp1 != nullptr)
-                if(temp1 == temp)
-                {
-                    flag = true;
-                    break;
-                }
-                else
-                    temp1 = temp1 -> left;
-            if(flag)
-            {
-                //case 3 left subtree of left child
-                cout << criticalNode -> data << "*&" << criticalNext -> data;
-                traverse_path(temp);
-                right_rotate(criticalNode, criticalNext);
-            }
-            temp1 = criticalNext;
+            //case 3 left subtree of left child
+            cout << criticalNode -> data << "*&" << criticalNext -> data;
+            traverse_path(temp);
+            right_rotate(criticalNode, criticalNext);
         }
         //to check for inserted node in right subtree
-        if(temp1 -> right != nullptr && !flag)
+        else if(key > criticalNext -> data)
         {
-            while(temp1 != nullptr)
-                if(temp1 == temp)
-                {
-                    flag = true;
-                    break;
-                }
-                else
-                    temp1 = temp1 -> right;
-            if(flag)
-            {
-                //case 4 right subtree of left child
-            }
+            //case 4 right subtree of left child
         }
     }
 }
@@ -287,16 +245,12 @@ void AVL::left_rotate(node *P, node *Q)
         height = height_counter(temp1);
         temp1 -> height = height;
 
-        if(temp1 -> left == nullptr && temp1 -> right == nullptr)
-            temp1 -> balanceFactor = 0;
-        else if(temp1 -> left == nullptr)
-            temp1 -> balanceFactor = temp1 -> right -> height - 0;
-        else
-            temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+        temp1 -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
         
         q1.dequeue();
     }
-    Q -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+    P -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
+    Q -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
 }
 
 void AVL::right_rotate(node *P, node *Q)
@@ -322,16 +276,12 @@ void AVL::right_rotate(node *P, node *Q)
         height = height_counter(temp1);
         temp1 -> height = height;
 
-        if(temp1 -> left == nullptr && temp1 -> right == nullptr)
-            temp1 -> balanceFactor = 0;
-        else if(temp1 -> right == nullptr)
-            temp1 -> balanceFactor = 0 - temp1 -> left -> height;
-        else
-            temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+        temp1 -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
         
         q1.dequeue();
     }
-    Q -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+    P -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
+    Q -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
 }
 
 int AVL::height_counter(node *temp1)
@@ -343,7 +293,7 @@ int AVL::height_counter(node *temp1)
         int leftH, rightH;
 		
 		//find the height of left subtree
-		leftH = height_counter(temp1 -> left); 
+		leftH = height_counter(temp1 -> left);
 		
 		//find the height of right subtree
 		rightH = height_counter(temp1 -> right); 
