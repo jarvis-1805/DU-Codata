@@ -71,7 +71,7 @@ void AVL::choiceCalling(int ch)
 			break;
 		case 2:
             key = height_counter(root);
-            cout << key;
+            cout << key << "***" << root -> data;
 			break;
 		case 3:
             display();
@@ -117,12 +117,8 @@ void AVL::insertion(node *temp, int key)
                 node* temp1 = temp -> parent;
                 while(temp1 != nullptr)
                 {
-                    if(temp -> parent -> right == nullptr)
-                        temp1 -> height += 1;
-                    if(temp1 -> right == nullptr)
-                        temp1 -> balanceFactor = 0 - temp1 -> left -> height;
-                    else
-                        temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+                    temp1 -> height = height_counter(temp1);
+                    temp1 -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
                     temp1 = temp1 -> parent;
                 }
                 temp = nullptr;     //remove for recursive
@@ -146,12 +142,8 @@ void AVL::insertion(node *temp, int key)
                 node* temp1 = temp -> parent;
                 while(temp1 != nullptr)
                 {
-                    if(temp -> parent -> left == nullptr)
-                        temp1 -> height += 1;
-                    if(temp1 -> left == nullptr)
-                        temp1 -> balanceFactor = temp1 -> right -> height - 0;
-                    else
-                        temp1 -> balanceFactor = temp1 -> right -> height - temp1 -> left -> height;
+                    temp1 -> height = height_counter(temp1);
+                    temp1 -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
                     temp1 = temp1 -> parent;
                 }
                 temp = nullptr;     //remove for recursive
@@ -186,7 +178,6 @@ void AVL::insertion(node *temp, int key)
         if(key > criticalNext -> data)
         {
             //case 1 right subtree of right child
-            cout << criticalNode -> data << "*&" << criticalNext -> data;
             traverse_path(temp);
             left_rotate(criticalNode, criticalNext);
         }
@@ -196,7 +187,6 @@ void AVL::insertion(node *temp, int key)
             //case 2 left subtree of right child
             node *R;
             R = criticalNext -> left;
-            cout << criticalNode -> data << "*#" << criticalNext -> data;
             traverse_path(temp);
             right_rotate(criticalNext, R);
             traverse_path(temp);
@@ -210,7 +200,6 @@ void AVL::insertion(node *temp, int key)
         if(key < criticalNext -> data)
         {
             //case 3 left subtree of left child
-            cout << criticalNode -> data << "*&" << criticalNext -> data;
             traverse_path(temp);
             right_rotate(criticalNode, criticalNext);
         }
@@ -218,6 +207,12 @@ void AVL::insertion(node *temp, int key)
         else if(key > criticalNext -> data)
         {
             //case 4 right subtree of left child
+            node *R;
+            R = criticalNext -> right;
+            traverse_path(temp);
+            left_rotate(criticalNext, R);
+            traverse_path(temp);
+            right_rotate(criticalNode, R);
         }
     }
 }
@@ -231,9 +226,15 @@ void AVL::left_rotate(node *P, node *Q)
     }
     if(P -> parent != nullptr)
     {
-        P -> parent -> right = P -> right;
+        if(P -> parent -> right == P)
+            P -> parent -> right = P -> right;
+        else if(P -> parent -> left == P)
+            P -> parent -> left = P -> right;
     }
+    P -> parent = Q;
     P -> right = Q -> left;
+    if(P -> right != nullptr)
+        P -> right -> parent = P;
     Q -> left = P;
 
     //updating height and balance factor
@@ -249,8 +250,8 @@ void AVL::left_rotate(node *P, node *Q)
         
         q1.dequeue();
     }
-    P -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
-    Q -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
+    P -> balanceFactor = height_counter(P -> right) - height_counter(P -> left);
+    Q -> balanceFactor = height_counter(Q -> right) - height_counter(Q -> left);
 }
 
 void AVL::right_rotate(node *P, node *Q)
@@ -262,9 +263,15 @@ void AVL::right_rotate(node *P, node *Q)
     }
     if(P -> parent != nullptr)
     {
-        P -> parent -> left = P -> left;
+        if(P -> parent -> left == P)
+            P -> parent -> left = P -> left;
+        else if(P -> parent -> right == P)
+            P -> parent -> right = P -> left;
     }
+    P -> parent = Q;
     P -> left = Q -> right;
+    if(P -> left != nullptr)
+        P -> left -> parent = P;
     Q -> right = P;
 
     //updating height and balance factor
@@ -280,8 +287,8 @@ void AVL::right_rotate(node *P, node *Q)
         
         q1.dequeue();
     }
-    P -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
-    Q -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
+    P -> balanceFactor = height_counter(P -> right) - height_counter(P -> left);
+    Q -> balanceFactor = height_counter(Q -> right) - height_counter(Q -> left);
 }
 
 int AVL::height_counter(node *temp1)
