@@ -28,9 +28,11 @@ class AVL
 		void choiceCalling(int);
 
         void insertion(node *, int);
-        void deletion();
+        void deletion(node *, int);
         void left_rotate(node *, node *);
         void right_rotate(node *, node *);
+		void delete_no_child(node *, node *);
+		void delete_one_child(node *, node *);
         int height_counter(node *);
         void traverse_path(node *);
         void display();
@@ -70,8 +72,10 @@ void AVL::choiceCalling(int ch)
             insertion(temp, key);
 			break;
 		case 2:
-            key = height_counter(root);
-            cout << key << "***" << root -> data;
+            cout << "\nEnter the Data: ";
+            cin >> key;
+            temp = root;
+            deletion(temp, key);
 			break;
 		case 3:
             display();
@@ -217,6 +221,104 @@ void AVL::insertion(node *temp, int key)
     }
 }
 
+void AVL::deletion(node *temp, int key)
+{
+    node *parent = temp;
+    bool flag = false;
+    while(temp != nullptr)
+    {
+        if(key == temp -> data)
+        {
+            flag = true;
+            break;
+        }
+        parent = temp;
+        if(key < temp -> data)
+            temp = temp -> left;
+        else if(key > temp -> data)
+            temp = temp -> right;
+    }
+
+    if(flag == false)
+    {
+        cout << "\nNode is absent in AVL Tree!";
+        return;
+    }
+
+    //1> applying deletion by copying and finding the actual node deleted
+    
+    //Case 1: If the node has no child, i.e., leaf node.
+    if((temp -> left == nullptr) && (temp -> right == nullptr))
+    {
+        cout << parent -> data << "***" << temp -> data << endl;
+        delete_no_child(parent, temp);
+        cout << "\nSuccessfully deleted the leaf node " << key;
+    }
+
+    //Case 2: If the node has one child.
+    else if((temp -> left != nullptr && temp -> right == nullptr) || (temp -> left == nullptr && temp -> right != nullptr))
+    {
+        cout << parent -> data << "***" << temp -> data << endl;
+        delete_one_child(parent, temp);
+        cout << "\nSuccessfully deleted the node " << key;
+    }
+
+    //Case 3: If the node has both left and right child.
+    else if((temp -> left != nullptr) && (temp -> right != nullptr))
+    {
+        node *temp1, *parent1;
+        temp1 = temp -> left;
+        parent1 = temp1;
+        while(temp1 -> right != nullptr)
+        {
+            parent1 = temp1;
+            temp1 = temp1 -> right;
+        }
+        
+        temp -> data = temp1 -> data;
+        if(temp1 == parent1)
+        {
+            if(temp1 -> left != nullptr)
+                temp -> left = temp1 -> left;
+            else if(temp1 -> left == nullptr)
+                temp -> left = nullptr;
+            parent = temp1 -> parent;
+            delete(temp1);
+        }
+        else if(temp1 -> left != nullptr && temp1 -> right == nullptr)
+        {
+            parent = temp1 -> parent;
+            delete_one_child(parent1, temp1);
+        }
+        else if(temp1 -> right == nullptr && temp1 -> left == nullptr)
+        {
+            parent = temp1 -> parent;
+            delete_no_child(parent1, temp1);
+        }
+    }
+
+    //2 & 3> updating balance factor and height from parent of deleted node to upto root and finding the critical node P
+    node *temp1 = parent;
+    while(temp1 != nullptr)
+    {
+        temp1 -> height = height_counter(temp1);
+        temp1 -> balanceFactor = height_counter(temp1 -> right) - height_counter(temp1 -> left);
+        
+        //to find the critical node P
+        if(temp1 -> balanceFactor != -1 &&
+            temp1 -> balanceFactor != 0 &&
+            temp1 -> balanceFactor != 1 &&
+            flag == true)
+        {
+            criticalNode = temp1;
+            flag = false;
+            //criticalNext = temp1;
+        }
+        temp1 = temp1 -> parent;
+    }
+    cout << endl << criticalNode -> data << "***" << endl;
+}
+
 void AVL::left_rotate(node *P, node *Q)
 {
     Q -> parent = P -> parent;
@@ -289,6 +391,57 @@ void AVL::right_rotate(node *P, node *Q)
     }
     P -> balanceFactor = height_counter(P -> right) - height_counter(P -> left);
     Q -> balanceFactor = height_counter(Q -> right) - height_counter(Q -> left);
+}
+
+void AVL::delete_no_child(node *parent, node *temp)
+{
+    //If root is to be deleted
+	if(parent == temp)
+		root = nullptr;
+	else if(parent -> left == temp)
+		parent -> left = nullptr;
+	else if(parent -> right == temp)
+		parent -> right = nullptr;
+	delete(temp);
+}
+
+void AVL::delete_one_child(node *parent, node *temp)
+{
+    //If root is to be deleted
+    if(parent == temp)
+    {
+        if(temp -> left != nullptr)
+            root = temp -> left;
+        else if(temp -> right != nullptr)
+            root = temp -> right;
+    }
+    else if(parent -> left == temp)
+    {
+        if(temp -> left != nullptr)
+        {
+            temp -> left -> parent = parent;
+            parent -> left = temp -> left;
+        }
+        else if(temp -> right != nullptr)
+        {
+            temp -> right -> parent = parent;
+            parent -> left = temp -> right;
+        }
+    }
+    else if(parent -> right == temp)
+    {
+        if(temp -> left != nullptr)
+        {
+            temp -> left -> parent = parent;
+            parent -> right = temp -> left;
+        }
+        else if(temp -> right != nullptr)
+        {
+            temp -> right -> parent = parent;
+            parent -> right = temp -> right;
+        }
+    }
+    delete(temp);
 }
 
 int AVL::height_counter(node *temp1)
