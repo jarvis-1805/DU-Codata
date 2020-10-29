@@ -12,7 +12,7 @@ struct node
     int data;
     node *right;
 };
-struct node *root, *newNode, *criticalNode, *criticalNext, *temp;
+struct node *root, *newNode, *criticalNode, *criticalNext, *sibling, *temp;
 
 class AVL
 {
@@ -33,6 +33,7 @@ class AVL
         void right_rotate(node *, node *);
 		void delete_no_child(node *, node *);
 		void delete_one_child(node *, node *);
+        void find_sibling(node *);
         int height_counter(node *);
         void traverse_path(node *);
         void display();
@@ -41,7 +42,7 @@ class AVL
 
 AVL::AVL()
 {
-    temp = criticalNode = root = nullptr;
+    sibling = temp = criticalNode = root = nullptr;
 }
 
 void AVL::options()
@@ -70,6 +71,7 @@ void AVL::choiceCalling(int ch)
             cin >> key;
             temp = root;
             insertion(temp, key);
+            cout << "\nSuccessfully inserted " << key << endl;
 			break;
 		case 2:
             cout << "\nEnter the Data: ";
@@ -78,7 +80,10 @@ void AVL::choiceCalling(int ch)
             deletion(temp, key);
 			break;
 		case 3:
-            display();
+            if(root != nullptr)
+                display();
+            else
+                cout << "\nAVL Tree is EMPTY!\n";
             break;
 		case 0:
 			break;
@@ -241,7 +246,7 @@ void AVL::deletion(node *temp, int key)
 
     if(flag == false)
     {
-        cout << "\nNode is absent in AVL Tree!";
+        cout << "\nNode is absent in AVL Tree!\n";
         return;
     }
 
@@ -250,17 +255,15 @@ void AVL::deletion(node *temp, int key)
     //Case 1: If the node has no child, i.e., leaf node.
     if((temp -> left == nullptr) && (temp -> right == nullptr))
     {
-        cout << parent -> data << "***" << temp -> data << endl;
+        find_sibling(temp);
         delete_no_child(parent, temp);
-        cout << "\nSuccessfully deleted the leaf node " << key;
     }
 
     //Case 2: If the node has one child.
     else if((temp -> left != nullptr && temp -> right == nullptr) || (temp -> left == nullptr && temp -> right != nullptr))
     {
-        cout << parent -> data << "***" << temp -> data << endl;
+        find_sibling(temp);
         delete_one_child(parent, temp);
-        cout << "\nSuccessfully deleted the node " << key;
     }
 
     //Case 3: If the node has both left and right child.
@@ -279,20 +282,26 @@ void AVL::deletion(node *temp, int key)
         if(temp1 == parent1)
         {
             if(temp1 -> left != nullptr)
+            {
                 temp -> left = temp1 -> left;
+                temp -> left -> parent = temp;
+            }
             else if(temp1 -> left == nullptr)
                 temp -> left = nullptr;
             parent = temp1 -> parent;
+            find_sibling(temp1);
             delete(temp1);
         }
         else if(temp1 -> left != nullptr && temp1 -> right == nullptr)
         {
             parent = temp1 -> parent;
+            find_sibling(temp1);
             delete_one_child(parent1, temp1);
         }
         else if(temp1 -> right == nullptr && temp1 -> left == nullptr)
         {
             parent = temp1 -> parent;
+            find_sibling(temp1);
             delete_no_child(parent1, temp1);
         }
     }
@@ -312,11 +321,80 @@ void AVL::deletion(node *temp, int key)
         {
             criticalNode = temp1;
             flag = false;
-            //criticalNext = temp1;
+            criticalNext = sibling;     //criticalNext will now be the sibling of the delted node
         }
         temp1 = temp1 -> parent;
     }
-    cout << endl << criticalNode -> data << "***" << endl;
+
+    //4> to check the type of deletion
+    if(criticalNext != nullptr &&
+        criticalNode -> balanceFactor != -1 &&
+        criticalNode -> balanceFactor != 0 &&
+        criticalNode -> balanceFactor != 1)
+
+        //to check for case R deletion (if criticalNext/sibling is left child of critical node)
+        if(criticalNext == criticalNode -> left)
+        {
+            //three subcases arise
+            
+            //case 1: R(0) -> right rotation
+            if(criticalNext -> balanceFactor == 0)
+            {
+                traverse_path(criticalNext);
+                right_rotate(criticalNode, criticalNext);
+            }
+            
+            //case 2: R(-1) -> right rotation
+            if(criticalNext -> balanceFactor == -1)
+            {
+                traverse_path(criticalNext);
+                right_rotate(criticalNode, criticalNext);
+            }
+            
+            //case 3: R(+1) -> left right rotation
+            if(criticalNext -> balanceFactor == 1)
+            {
+                node *R;
+                R = criticalNext -> right;
+                traverse_path(R);
+                left_rotate(criticalNext, R);
+                traverse_path(R);
+                right_rotate(criticalNode, R);
+            }
+        }
+        
+        //to check for case L deletion (if criticalNext/sibling is right child of critical node)
+        if(criticalNext == criticalNode -> right)
+        {
+            //three subcases arise
+            
+            //case 1: L(0) -> left rotation
+            if(criticalNext -> balanceFactor == 0)
+            {
+                traverse_path(criticalNext);
+                left_rotate(criticalNode, criticalNext);
+            }
+            
+            //case 2: L(+1) -> left rotation
+            if(criticalNext -> balanceFactor == 1)
+            {
+                traverse_path(criticalNext);
+                left_rotate(criticalNode, criticalNext);
+            }
+            
+            //case 3: L(-1) -> right left rotation
+            if(criticalNext -> balanceFactor == -1)
+            {
+                node *R;
+                R = criticalNext -> left;
+                traverse_path(R);
+                right_rotate(criticalNext, R);
+                traverse_path(R);
+                left_rotate(criticalNode, R);
+            }
+        }
+    
+    cout << "\nSuccessfully deleted " << key << endl;
 }
 
 void AVL::left_rotate(node *P, node *Q)
@@ -411,9 +489,15 @@ void AVL::delete_one_child(node *parent, node *temp)
     if(parent == temp)
     {
         if(temp -> left != nullptr)
+        {
+            temp -> left -> parent = nullptr;
             root = temp -> left;
+        }
         else if(temp -> right != nullptr)
+        {
+            temp -> right -> parent = nullptr;
             root = temp -> right;
+        }
     }
     else if(parent -> left == temp)
     {
@@ -442,6 +526,14 @@ void AVL::delete_one_child(node *parent, node *temp)
         }
     }
     delete(temp);
+}
+
+void AVL::find_sibling(node *temp)
+{
+    if(temp -> parent -> right == temp && temp -> parent -> left != nullptr)
+        sibling = temp -> parent -> left;
+    else if(temp -> parent -> left == temp && temp -> parent -> right != nullptr)
+        sibling = temp -> parent -> right;
 }
 
 int AVL::height_counter(node *temp1)
@@ -478,7 +570,8 @@ void AVL::traverse_path(node *temp1)
 
 void AVL::display()
 {
-    cout << "\nData\tHeight\tBF\n";
+    cout << "\nBFS Traversal\n==================";
+    cout << "\nData\tHeight\tBF\n==================\n";
     q.enqueue(root);
     while(!q.isEmpty())
     {
@@ -502,22 +595,21 @@ bool AVL::isEmpty()
 int main()
 {
     int choice;
-    cout << "\n=========== AVL TREE ===========\n";
 	AVL ob;
 	do
 	{
-		//cout << "\n=========== BINARY SEARCH TREE ===========\n";
+		cout << "\n=========== AVL TREE ===========\n";
 		ob.options();
 		choice = ob.choice();
 		if(ob.ch == 0)
 			break;
-		//system("clear");
-		//cout << "\n=========== BINARY SEARCH TREE ===========\n";
+		system("clear");
+		cout << "\n=========== AVL TREE ===========\n";
 		ob.choiceCalling(choice);
-		//cout << "\nPress Enter to continue...";
-		//cin.ignore();
-		//getchar();
-		//system("clear");
+		cout << "\nPress Enter to continue...";
+		cin.ignore();
+		getchar();
+		system("clear");
 	}while(1);
 	
 	return 0;
