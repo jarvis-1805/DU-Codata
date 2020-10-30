@@ -1,0 +1,16 @@
+1> Python is an interpreted, high-level and general-purpose programming language.
+2> Created by Guido van Rossum and first released in 1991.
+3> Python's design philosophy emphasizes code readability with its notable use of significant whitespace.
+4> Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.
+5> Python is dynamically typed and garbage-collected.
+6> It supports multiple programming paradigms, including structured (particularly, procedural), object-oriented, and functional programming.
+7> Python is often described as a "batteries included" language due to its comprehensive standard library.
+8> Python was created in the late 1980s as a successor to the ABC language.
+9> Python 2.0, released in 2000, introduced features like list comprehensions and a garbage collection system with reference counting.
+10> Python 3.0, released in 2008, was a major revision of the language that is not completely backward-compatible, and much Python 2 code does not run unmodified on Python 3.
+11> The Python 2 language was officially discontinued in 2020 (first planned for 2015), and "Python 2.7.18 is the last Python 2.7 release and therefore the last Python 2 release."
+12> No more security patches or other improvements will be released for it.
+13> With Python 2's end-of-life, only Python 3.6.x and later are supported
+14> Python interpreters are available for many operating systems.
+15> A global community of programmers develops and maintains CPython, a free and open-source reference implementation.
+16> A non-profit organization, the Python Software Foundation, manages and directs resources for Python and CPython development.

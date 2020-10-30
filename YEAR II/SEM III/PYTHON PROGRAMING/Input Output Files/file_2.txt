@@ -1,0 +1,8 @@
+1> Python is an interpreted, high-level and general-purpose programming language.
+3> Python's design philosophy emphasizes code readability with its notable use of significant whitespace.
+5> Python is dynamically typed and garbage-collected.
+7> Python is often described as a "batteries included" language due to its comprehensive standard library.
+9> Python 2.0, released in 2000, introduced features like list comprehensions and a garbage collection system with reference counting.
+11> The Python 2 language was officially discontinued in 2020 (first planned for 2015), and "Python 2.7.18 is the last Python 2.7 release and therefore the last Python 2 release."
+13> With Python 2's end-of-life, only Python 3.6.x and later are supported
+15> A global community of programmers develops and maintains CPython, a free and open-source reference implementation.
