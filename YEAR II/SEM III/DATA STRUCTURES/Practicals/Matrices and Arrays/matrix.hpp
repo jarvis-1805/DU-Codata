@@ -8,13 +8,13 @@ class diagonal
 	private:
 		int rows;
         int columns;
-        int *array = new int[MAX];
 
     public:
-        diagonal();
-        ~diagonal();
+        int *array;
 
-        void store(int, int, int);
+        diagonal();
+
+        bool store(int, int, int);
         int retrieve(int, int);
         void show();
 };
@@ -55,44 +55,59 @@ diagonal::diagonal()
     label:
         cout << "\nEnter the number of rows: ";
         cin >> rows;
-        cout << "\nEnter the number of columns: ";
+        cout << "Enter the number of columns: ";
         cin >> columns;
     if(rows != columns)
     {
         cout << "\nRows and Columns must be equal!\n";
         goto label;
     }
-    for(int i=0; i<rows; i++)
-    {
-        for(int j=0; j<columns; j++)
+
+    array = new int[rows];
+
+    label_1:
+        for(int i=0; i<rows; i++)
         {
-            cout << "\nRow " << i+1 << "\nColumn " <<  j+1;
-            cout << "\nEnter the data: ";
-            cin >> key;
-            store(key, i, j);
+            for(int j=0; j<columns; j++)
+            {
+                cout << "\nRow " << i+1 << "\nColumn " <<  j+1;
+                cout << "\nEnter the data: ";
+                cin >> key;
+                if(store(key, i, j))
+                    true;
+                else
+                    goto label_1;
+            }
         }
-    }
 }
 
-diagonal::~diagonal()
-{
-    delete []array;
-}
-
-void diagonal::store(int key, int i, int j)
+bool diagonal::store(int key, int i, int j)
 {
     if(i != j && key != 0)
-        cout << "\nData must be zero!\nTry again!";
+    {
+        cout << "\nData must be zero!\nTry again!\n";
+        return false;
+    }
     else if(i == j)
+    {
         array[i] = key;
+        return true;
+    }
+    return true;
 }
 
 int diagonal::retrieve(int row, int column)
 {
-    if(row < 0 || column < 0 || row > rows || column > columns)
-        cout << "\nInvalid Entry!/nTry againg!";
+    if(row < 0 || column < 0 || row > rows-1 || column > columns-1)
+    {
+        cout << "\nInvalid Entry!\nTry again!\n";
+        return -99999;
+    }
     else if(row == column)
-        return array[row];
+    {
+        int key = array[row];
+        return key;
+    }
     else
         return 0;
 }

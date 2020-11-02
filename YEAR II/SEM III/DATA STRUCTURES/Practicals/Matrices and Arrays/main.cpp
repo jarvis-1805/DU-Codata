@@ -46,9 +46,14 @@ void matrixNarray::choiceCalling(int ch)
 			diagonal d;
 			while(true)
 			{
+				sub_options();
+				c = choice();
 	            diagonal_matrix(d, c);
 				if(c == 0)
+				{
+					delete[] d.array;
 					break;
+				}
 			}
 		}
 			break;
@@ -78,25 +83,24 @@ void matrixNarray::sub_options()
 
 void matrixNarray::diagonal_matrix(diagonal d, int c)
 {
-	sub_options();
-	c = choice();
 	if(c == 1)
 	{
 		int row, column, key;
 		cout << "\nEnter the retrieval Row: ";
 		cin >> row;
-		cout << "\nEnter the retrieval comlumn: ";
+		cout << "Enter the retrieval comlumn: ";
 		cin >> column;
 		key = d.retrieve(row-1, column-1);
-		cout << "\nRetrieved key at row " << row << "and column " << column << ": " << key;
+		if(key != -99999)
+			cout << "\nRetrieved key at row " << row << " and column " << column << ": " << key << endl;
 	}
 	else if(c == 2)
 	{
-		cout << "\nDiagonal matrix\n==============\n";
+		cout << "\nDiagonal matrix\n===============\n";
 		d.show();
 	}
 	else if(c == 0)
-		d.~diagonal();
+		return;
 	else
 		cout << "\n########### WRONG CHOICE... ###########\n";
 }
