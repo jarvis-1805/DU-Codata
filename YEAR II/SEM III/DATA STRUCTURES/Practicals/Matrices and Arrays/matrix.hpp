@@ -5,8 +5,8 @@ using namespace std;
 
 class diagonal
 {
-	private:
-		int rows;
+    private:
+        int rows;
         int columns;
 
     public:
@@ -21,8 +21,8 @@ class diagonal
 
 class lowerTriangular
 {
-	private:
-		int rows;
+    private:
+        int rows;
         int columns;
         int array[MAX];
         
@@ -31,8 +31,8 @@ class lowerTriangular
 
 class upperTriangular
 {
-	private:
-		int rows;
+    private:
+        int rows;
         int columns;
         int array[MAX];
         
@@ -41,8 +41,8 @@ class upperTriangular
 
 class symmetric
 {
-	private:
-		int rows;
+    private:
+        int rows;
         int columns;
         int array[MAX];
         
