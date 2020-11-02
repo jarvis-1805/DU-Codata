@@ -16,7 +16,8 @@ struct node *root, *newNode, *criticalNode, *criticalNext, *sibling, *temp;
 
 class AVL
 {
-	queueLinkedList<node *> q, q1;
+    private:
+        queueLinkedList<node *> q, q1;
 
     public:
         int ch;
@@ -24,15 +25,15 @@ class AVL
         AVL();
 
         void options();
-		int choice();
-		void choiceCalling(int);
+        int choice();
+        void choiceCalling(int);
 
         void insertion(node *, int);
         void deletion(node *, int);
         void left_rotate(node *, node *);
         void right_rotate(node *, node *);
-		void delete_no_child(node *, node *);
-		void delete_one_child(node *, node *);
+        void delete_no_child(node *, node *);
+        void delete_one_child(node *, node *);
         void find_sibling(node *);
         int height_counter(node *);
         void traverse_path(node *);
@@ -47,49 +48,49 @@ AVL::AVL()
 
 void AVL::options()
 {
-	cout << "\n------- MENU -------";
+    cout << "\n------- MENU -------";
     cout << "\n1. INSERT A NODE"
-		<< "\n2. DELETE A NODE"
-		<< "\n3. DISPLAY"
-		<< "\n0. EXIT";
+        << "\n2. DELETE A NODE"
+        << "\n3. DISPLAY"
+        << "\n0. EXIT";
 }
 
 int AVL::choice()
 {
     cout << "\n\nEnter the number of your choice: ";
-	cin >> ch;
-	return ch;
+    cin >> ch;
+    return ch;
 }
 
 void AVL::choiceCalling(int ch)
 {
-	int key;
+    int key;
     switch(ch)
-	{
-		case 1:
+    {
+        case 1:
             cout << "\nEnter the Data: ";
             cin >> key;
             temp = root;
             insertion(temp, key);
             cout << "\nSuccessfully inserted " << key << endl;
-			break;
-		case 2:
+            break;
+        case 2:
             cout << "\nEnter the Data: ";
             cin >> key;
             temp = root;
             deletion(temp, key);
-			break;
-		case 3:
+            break;
+        case 3:
             if(root != nullptr)
                 display();
             else
                 cout << "\nAVL Tree is EMPTY!\n";
             break;
-		case 0:
-			break;
-		default:
-			cout << "\n########### WRONG CHOICE... ###########\n";
-	}
+        case 0:
+            break;
+        default:
+            cout << "\n########### WRONG CHOICE... ###########\n";
+    }
 }
 
 void AVL::insertion(node *temp, int key)
@@ -474,13 +475,13 @@ void AVL::right_rotate(node *P, node *Q)
 void AVL::delete_no_child(node *parent, node *temp)
 {
     //If root is to be deleted
-	if(parent == temp)
-		root = nullptr;
-	else if(parent -> left == temp)
-		parent -> left = nullptr;
-	else if(parent -> right == temp)
-		parent -> right = nullptr;
-	delete(temp);
+    if(parent == temp)
+        root = nullptr;
+    else if(parent -> left == temp)
+        parent -> left = nullptr;
+    else if(parent -> right == temp)
+        parent -> right = nullptr;
+    delete(temp);
 }
 
 void AVL::delete_one_child(node *parent, node *temp)
@@ -538,24 +539,24 @@ void AVL::find_sibling(node *temp)
 
 int AVL::height_counter(node *temp1)
 {
-	if(temp1 == nullptr)
+    if(temp1 == nullptr)
         return 0;
     else
     {
         int leftH, rightH;
-		
-		//find the height of left subtree
-		leftH = height_counter(temp1 -> left);
-		
-		//find the height of right subtree
-		rightH = height_counter(temp1 -> right); 
-	
-		//return the maximum height
-		if (leftH > rightH) 
-		    return(leftH + 1); 
-		
-		else 
-		    return(rightH + 1); 
+
+        //find the height of left subtree
+        leftH = height_counter(temp1 -> left);
+
+        //find the height of right subtree
+        rightH = height_counter(temp1 -> right); 
+
+        //return the maximum height
+        if (leftH > rightH) 
+            return(leftH + 1); 
+
+        else 
+            return(rightH + 1); 
     }
 }
 
@@ -595,22 +596,22 @@ bool AVL::isEmpty()
 int main()
 {
     int choice;
-	AVL ob;
-	do
-	{
-		cout << "\n=========== AVL TREE ===========\n";
-		ob.options();
-		choice = ob.choice();
-		if(ob.ch == 0)
-			break;
-		system("clear");
-		cout << "\n=========== AVL TREE ===========\n";
-		ob.choiceCalling(choice);
-		cout << "\nPress Enter to continue...";
-		cin.ignore();
-		getchar();
-		system("clear");
-	}while(1);
-	
-	return 0;
+    AVL ob;
+    do
+    {
+        cout << "\n=========== AVL TREE ===========\n";
+        ob.options();
+        choice = ob.choice();
+        if(ob.ch == 0)
+            break;
+        system("clear");
+        cout << "\n=========== AVL TREE ===========\n";
+        ob.choiceCalling(choice);
+        cout << "\nPress Enter to continue...";
+        cin.ignore();
+        getchar();
+        system("clear");
+    }while(1);
+
+    return 0;
 }
