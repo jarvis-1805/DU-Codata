@@ -14,7 +14,7 @@ class matrixNarray
         void sub_options();
 
         void diagonal_matrix(diagonal, int);
-        void lower_triangular_matrix();
+        void lower_triangular_matrix(lowerTriangular, int);
         void upper_triangular_matrix();
         void symmetric_matrix();
 };
@@ -58,7 +58,21 @@ void matrixNarray::choiceCalling(int ch)
         }
             break;
         case 2:
-            lower_triangular_matrix();
+        {
+            int c;
+            lowerTriangular l;
+            while(true)
+            {
+                sub_options();
+                c = choice();
+                lower_triangular_matrix(l, c);
+                if(c == 0)
+                {
+                    delete[] l.array;
+                    break;
+                }
+            }
+        }
             break;
         case 3:
             upper_triangular_matrix();
@@ -92,11 +106,11 @@ void matrixNarray::diagonal_matrix(diagonal d, int c)
         cin >> column;
         key = d.retrieve(row-1, column-1);
         if(key != -99999)
-        cout << "\nRetrieved key at row " << row << " and column " << column << ": " << key << endl;
+            cout << "\nRetrieved key at row " << row << " and column " << column << ": " << key << endl;
     }
     else if(c == 2)
     {
-        cout << "\nDiagonal matrix\n===============\n";
+        cout << "\nDiagonal Matrix\n===============\n";
         d.show();
     }
     else if(c == 0)
@@ -105,9 +119,28 @@ void matrixNarray::diagonal_matrix(diagonal d, int c)
         cout << "\n########### WRONG CHOICE... ###########\n";
 }
 
-void matrixNarray::lower_triangular_matrix()
+void matrixNarray::lower_triangular_matrix(lowerTriangular l, int c)
 {
-
+    if(c == 1)
+    {
+        int row, column, key;
+        cout << "\nEnter the retrieval Row: ";
+        cin >> row;
+        cout << "Enter the retrieval comlumn: ";
+        cin >> column;
+        key = l.retrieve(row, column);
+        if(key != -99999)
+            cout << "\nRetrieved key at row " << row << " and column " << column << ": " << key << endl;
+    }
+    else if(c == 2)
+    {
+        cout << "\nLower Triangular Matrix\n=======================\n";
+        l.show();
+    }
+    else if(c == 0)
+        return;
+    else
+        cout << "\n########### WRONG CHOICE... ###########\n";
 }
 
 void matrixNarray::upper_triangular_matrix()
