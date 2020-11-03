@@ -15,7 +15,7 @@ class matrixNarray
 
         void diagonal_matrix(diagonal, int);
         void lower_triangular_matrix(lowerTriangular, int);
-        void upper_triangular_matrix();
+        void upper_triangular_matrix(upperTriangular, int);
         void symmetric_matrix();
 };
 
@@ -75,7 +75,21 @@ void matrixNarray::choiceCalling(int ch)
         }
             break;
         case 3:
-            upper_triangular_matrix();
+        {
+            int c;
+            upperTriangular u;
+            while(true)
+            {
+                sub_options();
+                c = choice();
+                upper_triangular_matrix(u, c);
+                if(c == 0)
+                {
+                    delete[] u.array;
+                    break;
+                }
+            }
+        }
             break;
         case 4:
             symmetric_matrix();
@@ -143,9 +157,28 @@ void matrixNarray::lower_triangular_matrix(lowerTriangular l, int c)
         cout << "\n########### WRONG CHOICE... ###########\n";
 }
 
-void matrixNarray::upper_triangular_matrix()
+void matrixNarray::upper_triangular_matrix(upperTriangular u, int c)
 {
-    
+     if(c == 1)
+    {
+        int row, column, key;
+        cout << "\nEnter the retrieval Row: ";
+        cin >> row;
+        cout << "Enter the retrieval comlumn: ";
+        cin >> column;
+        key = u.retrieve(row, column);
+        if(key != -99999)
+            cout << "\nRetrieved key at row " << row << " and column " << column << ": " << key << endl;
+    }
+    else if(c == 2)
+    {
+        cout << "\nUpper Triangular Matrix\n=======================\n";
+        u.show();
+    }
+    else if(c == 0)
+        return;
+    else
+        cout << "\n########### WRONG CHOICE... ###########\n";
 }
 
 void matrixNarray::symmetric_matrix()
