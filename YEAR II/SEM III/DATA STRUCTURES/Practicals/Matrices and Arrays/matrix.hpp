@@ -56,9 +56,15 @@ class symmetric
     private:
         int rows;
         int columns;
-        int array[MAX];
-        
-    symmetric();
+    
+    public:
+        int *array;
+
+        symmetric();
+
+        void store(int, int, int);
+        int retrieve(int, int);
+        void show();
 };
 
 diagonal::diagonal()
@@ -298,6 +304,73 @@ void upperTriangular::show()
                 int k = (i * (i - 1) / 2 + j - 1);
                 cout << array[k] << "\t";
             }
+        }
+        cout << endl;
+    }
+}
+
+symmetric::symmetric()
+{
+    int key;
+    label:
+        cout << "\nEnter the number of rows: ";
+        cin >> rows;
+        cout << "Enter the number of columns: ";
+        cin >> columns;
+    if(rows != columns)
+    {
+        cout << "\nRows and Columns must be equal!\n";
+        goto label;
+    }
+
+    array = new int[rows*(rows+1)/2];
+
+    cout << "\nEnter the Lower Triangular Elements:\n";
+    for(int i=1; i<=rows; i++)
+    {
+        for(int j=1; j<=i; j++)
+        {
+            cout << "\nRow " << i << "\nColumn " <<  j;
+            cout << "\nEnter the data: ";
+            cin >> key;
+            store(key, i, j);
+        }
+    }
+}
+
+void symmetric::store(int key, int i, int j)
+{
+    int k = (i * (i - 1) / 2 + j - 1);
+    array[k] = key;
+}
+
+int symmetric::retrieve(int row, int column)
+{
+    if(row <= 0 || column <= 0 || row > rows || column > columns)
+    {
+        cout << "\nInvalid Entry!\nTry again!\n";
+        return -99999;
+    }
+    else if(row < column)
+    {
+        int temp = row;
+        row = column;
+        column = temp;
+    }
+    int key = array[row * (row - 1) / 2 + column - 1];
+    return key;
+}
+
+void symmetric::show()
+{
+    for(int i=1; i<=rows; i++)
+    {
+        for(int j=1; j<=columns; j++)
+        {
+            if(i < j)
+                cout << array[(j * (j - 1) / 2 + i - 1)] << "\t";
+            else
+                cout << array[(i * (i - 1) / 2 + j - 1)] << "\t";
         }
         cout << endl;
     }

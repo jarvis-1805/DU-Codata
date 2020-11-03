@@ -16,12 +16,12 @@ class matrixNarray
         void diagonal_matrix(diagonal, int);
         void lower_triangular_matrix(lowerTriangular, int);
         void upper_triangular_matrix(upperTriangular, int);
-        void symmetric_matrix();
+        void symmetric_matrix(symmetric, int);
 };
 
 void matrixNarray::options()
 {
-    cout << "\n------- MENU -------";
+    cout << "\n----------- MENU -----------";
     cout << "\n1. DIAGONAL MATRIX"
         << "\n2. LOWER TRIANGULAR MATRIX"
         << "\n3. UPPER TRIANGULAR MATRIX"
@@ -42,57 +42,115 @@ void matrixNarray::choiceCalling(int ch)
     {
         case 1:
         {
+            cout << "\n======= DIAGONAL MATRIX ======\n";
             int c;
             diagonal d;
+            system("clear");
             while(true)
             {
+                cout << "\n=========== MATRIX 1D ===========\n";
+                cout << "\n======= DIAGONAL MATRIX ======\n";
                 sub_options();
                 c = choice();
-                diagonal_matrix(d, c);
                 if(c == 0)
                 {
                     delete[] d.array;
                     break;
                 }
+                system("clear");
+                cout << "\n=========== MATRIX 1D ===========\n";
+                cout << "\n======= DIAGONAL MATRIX ======\n";
+                diagonal_matrix(d, c);
+                cout << "\nPress Enter to continue...";
+                cin.ignore();
+                getchar();
+                system("clear");
             }
         }
             break;
         case 2:
         {
+            cout << "\n=== LOWER TRIANGULAR MATRIX ===\n";
             int c;
             lowerTriangular l;
+            system("clear");
             while(true)
             {
+                cout << "\n=========== MATRIX 1D ===========\n";
+                cout << "\n=== LOWER TRIANGULAR MATRIX ===\n";
                 sub_options();
                 c = choice();
-                lower_triangular_matrix(l, c);
                 if(c == 0)
                 {
                     delete[] l.array;
                     break;
                 }
+                system("clear");
+                cout << "\n=========== MATRIX 1D ===========\n";
+                cout << "\n=== LOWER TRIANGULAR MATRIX ===\n";
+                lower_triangular_matrix(l, c);
+                cout << "\nPress Enter to continue...";
+                cin.ignore();
+                getchar();
+                system("clear");
             }
         }
             break;
         case 3:
         {
+            cout << "\n=== UPPER TRIANGULAR MATRIX ===\n";
             int c;
             upperTriangular u;
+            system("clear");
             while(true)
             {
+                cout << "\n=========== MATRIX 1D ===========\n";
+                cout << "\n=== UPPER TRIANGULAR MATRIX ===\n";
                 sub_options();
                 c = choice();
-                upper_triangular_matrix(u, c);
                 if(c == 0)
                 {
                     delete[] u.array;
                     break;
                 }
+                system("clear");
+                cout << "\n=========== MATRIX 1D ===========\n";
+                cout << "\n=== UPPER TRIANGULAR MATRIX ===\n";
+                upper_triangular_matrix(u, c);
+                cout << "\nPress Enter to continue...";
+                cin.ignore();
+                getchar();
+                system("clear");
             }
         }
             break;
         case 4:
-            symmetric_matrix();
+        {
+            cout << "\n====== SYMMETRIC MATRIX =====\n";
+            int c;
+            symmetric s;
+            system("clear");
+            while(true)
+            {
+                cout << "\n=========== MATRIX 1D ===========\n";
+                cout << "\n====== SYMMETRIC MATRIX =====\n";
+                sub_options();
+                c = choice();
+                if(c == 0)
+                {
+                    delete[] s.array;
+                    break;
+                }
+                system("clear");
+                cout << "\n=========== MATRIX 1D ===========\n";
+                cout << "\n====== SYMMETRIC MATRIX =====\n";
+                symmetric_matrix(s, c);
+                cout << "\nPress Enter to continue...";
+                cin.ignore();
+                getchar();
+                system("clear");
+            }
+        }
             break;
         case 0:
             break;
@@ -159,7 +217,7 @@ void matrixNarray::lower_triangular_matrix(lowerTriangular l, int c)
 
 void matrixNarray::upper_triangular_matrix(upperTriangular u, int c)
 {
-     if(c == 1)
+    if(c == 1)
     {
         int row, column, key;
         cout << "\nEnter the retrieval Row: ";
@@ -181,9 +239,28 @@ void matrixNarray::upper_triangular_matrix(upperTriangular u, int c)
         cout << "\n########### WRONG CHOICE... ###########\n";
 }
 
-void matrixNarray::symmetric_matrix()
+void matrixNarray::symmetric_matrix(symmetric s, int c)
 {
-    
+    if(c == 1)
+    {
+        int row, column, key;
+        cout << "\nEnter the retrieval Row: ";
+        cin >> row;
+        cout << "Enter the retrieval comlumn: ";
+        cin >> column;
+        key = s.retrieve(row, column);
+        if(key != -99999)
+            cout << "\nRetrieved key at row " << row << " and column " << column << ": " << key << endl;
+    }
+    else if(c == 2)
+    {
+        cout << "\nSymmetric Matrix\n================\n";
+        s.show();
+    }
+    else if(c == 0)
+        return;
+    else
+        cout << "\n########### WRONG CHOICE... ###########\n";
 }
 int main()
 {
@@ -191,18 +268,18 @@ int main()
     matrixNarray ob;
     do
     {
-        //cout << "\n=========== MATRIX 1D ===========\n";
+        cout << "\n=========== MATRIX 1D ===========\n";
         ob.options();
         choice = ob.choice();
         if(ob.ch == 0)
             break;
-        //system("clear");
-        //cout << "\n=========== MATRIX 1D ===========\n";
+        system("clear");
+        cout << "\n=========== MATRIX 1D ===========\n";
         ob.choiceCalling(choice);
-        //cout << "\nPress Enter to continue...";
-        //cin.ignore();
-        //getchar();
-        //system("clear");
+        cout << "\nPress Enter to continue...";
+        cin.ignore();
+        getchar();
+        system("clear");
     }while(1);
     
     return 0;
