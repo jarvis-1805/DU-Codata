@@ -4,6 +4,7 @@ Use a class variable to store the maximum average marks of the class.
 Use constructor and destructor to initialize and destroy the objects.
 '''
 class Student:
+    maxim = 0.0
 
     def __init__(self):
         self.dic = {}
@@ -40,12 +41,11 @@ class Student:
             dic passed as parameter
             and returns name and maximum percentage.
         '''
-        maxim = 0.0
         
         for i in self.dic:
-            if self.dic[i]['Average'] > maxim:
-                maxim, self.name = self.dic[i]['Average'], i
-        self.maxim_avg[self.name] = maxim
+            if self.dic[i]['Average'] > self.maxim:
+                self.maxim, self.name = self.dic[i]['Average'], i
+        self.maxim_avg[self.name] = self.maxim
 
     def display(self):
         import json as js
