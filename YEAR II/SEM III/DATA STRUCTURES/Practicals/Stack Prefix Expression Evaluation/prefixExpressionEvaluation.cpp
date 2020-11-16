@@ -62,7 +62,6 @@ void prefixExpressionEvaluation::stackEvaluation()
 			str += exp.at(i);
 			i--;
 		}
-		cout << str << " ";
 		c = str.at(0);
 		if(c == '+')
 		{
@@ -103,7 +102,6 @@ void prefixExpressionEvaluation::stackEvaluation()
 				n = n*10 + x;
 			}
 		}
-		//cout << n << " ";
 		push(n);
 	}
 	cout << "\nRESULT : " << peek();
