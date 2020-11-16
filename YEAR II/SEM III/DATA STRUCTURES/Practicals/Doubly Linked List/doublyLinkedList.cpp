@@ -373,6 +373,7 @@ typename doublyLinkedList<T>::node *doublyLinkedList<T>::search_in_list()
 {
 	bool flag=false;
 	T ele, count=0;
+	temp = head;
 	cout << "\n------------ SEARCHING IN LIST ------------\n";
 	emp = emptyListChecker();
 	if(emp != true)
@@ -381,7 +382,6 @@ typename doublyLinkedList<T>::node *doublyLinkedList<T>::search_in_list()
 	{
 		cout << "Enter the element to be searched: ";
 		cin >> ele;
-		temp = head;
 		do
 		{
 			if(temp -> data == ele)
