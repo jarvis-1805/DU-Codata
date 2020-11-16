@@ -1,4 +1,5 @@
-#include<iostream>
+#include <iostream>
+#include <math.h>
 #define size 1000
 
 using namespace std;
@@ -61,7 +62,7 @@ void prefixExpressionEvaluation::stackEvaluation()
 			str += exp.at(i);
 			i--;
 		}
-		cout << str;
+		cout << str << " ";
 		c = str.at(0);
 		if(c == '+')
 		{
@@ -73,7 +74,7 @@ void prefixExpressionEvaluation::stackEvaluation()
 		{
 			n1 = pop();
 			n2 = pop();
-			n = n2-n1;
+			n = n1-n2;
 		}
 		else if(c == '*')
 		{
@@ -85,17 +86,24 @@ void prefixExpressionEvaluation::stackEvaluation()
 		{
 			n1 = pop();
 			n2 = pop();
-			n = n2/n1;
+			n = n1/n2;
+		}
+		else if(c == '^')
+		{
+			n1 = pop();
+			n2 = pop();
+			n = (int)(pow(n1, n2) + 0.5);
 		}
 		else
 		{
 			n = 0;
-			for(int j=0; j<str.length(); j++)
+			for(int j=str.length()-1; j>=0; j--)
 			{
 				x = ((int)str.at(j)) - 48;
 				n = n*10 + x;
 			}
 		}
+		//cout << n << " ";
 		push(n);
 	}
 	cout << "\nRESULT : " << peek();
