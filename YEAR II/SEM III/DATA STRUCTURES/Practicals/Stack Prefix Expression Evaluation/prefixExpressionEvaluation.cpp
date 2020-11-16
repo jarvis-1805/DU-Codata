@@ -1,0 +1,111 @@
+#include<iostream>
+#define size 1000
+
+using namespace std;
+
+class prefixExpressionEvaluation
+{
+	public:
+		
+		int top;
+		string exp;
+		int stack[size];
+		
+		prefixExpressionEvaluation();
+		
+		void push(int);
+		int pop();
+		int peek();
+		
+		void takeExp();
+		void stackEvaluation();
+};
+
+prefixExpressionEvaluation::prefixExpressionEvaluation()
+{
+	this -> top = -1;
+}
+
+void prefixExpressionEvaluation::push(int data)
+{
+	stack[++top] = data;
+}
+
+int prefixExpressionEvaluation::pop()
+{
+	int ele = stack[top--];
+	return ele;
+}
+
+int prefixExpressionEvaluation::peek()
+{
+	return stack[top];
+}
+
+void prefixExpressionEvaluation::takeExp()
+{
+	getline(cin, exp);
+}
+
+void prefixExpressionEvaluation::stackEvaluation()
+{
+	string str;
+	char c;
+	int n, n1, n2, x;
+	exp = ' ' + exp;
+	for(int i=exp.length()-1; i>=0; i--)
+	{
+		str = "";
+		while(exp.at(i) != ' ')
+		{
+			str += exp.at(i);
+			i--;
+		}
+		cout << str;
+		c = str.at(0);
+		if(c == '+')
+		{
+			n1 = pop();
+			n2 = pop();
+			n = n1+n2;
+		}
+		else if(c == '-')
+		{
+			n1 = pop();
+			n2 = pop();
+			n = n2-n1;
+		}
+		else if(c == '*')
+		{
+			n1 = pop();
+			n2 = pop();
+			n = n1*n2;
+		}
+		else if(c == '/')
+		{
+			n1 = pop();
+			n2 = pop();
+			n = n2/n1;
+		}
+		else
+		{
+			n = 0;
+			for(int j=0; j<str.length(); j++)
+			{
+				x = ((int)str.at(j)) - 48;
+				n = n*10 + x;
+			}
+		}
+		push(n);
+	}
+	cout << "\nRESULT : " << peek();
+}
+
+int main()
+{
+	cout << "\n=========== STACK PREFIX EXPRESSION EVALUATION ===========\n";
+	prefixExpressionEvaluation ob1;
+	cout << "\nENTER THE EXPRESSION (with space in b/w only): ";
+	ob1.takeExp();
+	ob1.stackEvaluation();
+}
