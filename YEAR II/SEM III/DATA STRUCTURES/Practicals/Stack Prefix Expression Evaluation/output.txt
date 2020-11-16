@@ -1,16 +1,16 @@
 OUTPUT 1:-
 
-=========== STACK POSTFIX EXPRESSION EVALUATION ===========
+=========== STACK PREFIX EXPRESSION EVALUATION ===========
 
-ENTER THE EXPRESSION (with space in b/w only): 5 6 2 + * 12 4 / -
+ENTER THE EXPRESSION (with space in b/w only): + 9 * 2 6
 
-RESULT : 37
+RESULT : 21
 
 
 OUTPUT 2:-
 
-=========== STACK POSTFIX EXPRESSION EVALUATION ===========
+=========== STACK PREFIX EXPRESSION EVALUATION ===========
 
-ENTER THE EXPRESSION (with space in b/w only): 2 136 12 + *
+ENTER THE EXPRESSION (with space in b/w only): - + 2 * 3 4 / 16 ^ 2 3
 
-RESULT : 296
+RESULT : 12
