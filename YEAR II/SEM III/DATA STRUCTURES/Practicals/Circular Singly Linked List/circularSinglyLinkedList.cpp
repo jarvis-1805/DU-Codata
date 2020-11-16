@@ -24,13 +24,14 @@ class circularSinglyLinkedList
 		void create();
 		void traverse();
 		void insert_at_beginning();
-		void insert_at_location();
+		void insert_after_data();
 		void insert_at_end();
 		void delete_at_beginning();
-		void delete_at_location();
+		void delete_data();
 		void delete_at_end();
-		void search_in_list();
+		struct node *search_in_list();
 		void reverse_the_list();
+		void operator +(circularSinglyLinkedList);
 		
 		int countList();
 		int countDoubleDigit();
@@ -50,7 +51,6 @@ circularSinglyLinkedList<T>::~circularSinglyLinkedList()
 		delete(temp);
 		temp = temp1;
 	}while(temp != tail -> next);
-	cout << "\n########### MEMORY IS FREED ###########\n";
 }
 
 template <typename T>
@@ -59,13 +59,14 @@ void circularSinglyLinkedList<T>::options()
 	cout << "\n1. CREATE"
 		<<	"\n2. TRAVERSE"
 		<<	"\n3. INSERT AT BEGINNING"
-		<<	"\n4. INSERT AT LOCATION"
+		<<	"\n4. INSERT AFTER ANY DATA"
 		<<	"\n5. INSERT AT END"
 		<<	"\n6. DELETE AT BEGINNING"
-		<<	"\n7. DELETE AT LOCATION"
+		<<	"\n7. DELETE A DATA"
 		<<	"\n8. DELETE AT END"
 		<<	"\n9. SEARCH IN LIST"
 		<<	"\n10. REVERSE THE LIST"
+		<<	"\n11. CONCATENATE ANOTHER LIST"
 		<<	"\n0. EXIT";
 }
 
@@ -93,7 +94,7 @@ void circularSinglyLinkedList<T>::choiceCalling(int ch)
 			insert_at_beginning();
 			break;
 		case 4:
-			insert_at_location();
+			insert_after_data();
 			break;
 		case 5:
 			insert_at_end();
@@ -102,16 +103,22 @@ void circularSinglyLinkedList<T>::choiceCalling(int ch)
 			delete_at_beginning();
 			break;
 		case 7:
-			delete_at_location();
+			delete_data();
 			break;
 		case 8:
 			delete_at_end();
 			break;
 		case 9:
-			search_in_list();
+		{
+			node *temp1 = search_in_list();
+			if(temp1 != NULL)
+				cout << "\nPointer: " << temp1 << endl;
 			break;
+		}
 		case 10:
 			reverse_the_list();
+			break;
+		case 11:
 			break;
 		case 0:
 			break;
@@ -198,48 +205,35 @@ void circularSinglyLinkedList<T>::insert_at_beginning()
 }
 
 template <typename T>
-void circularSinglyLinkedList<T>::insert_at_location()
+void circularSinglyLinkedList<T>::insert_after_data()
 {
-	cout << "\n------------ INSERTING AT LOCATION ------------\n";
+	cout << "\n------------ INSERTING AFTER ANY DATA ------------\n";
 	emp = emptyListChecker();
 	if(emp != true)
 		return;
 	else
 	{
-		int loc, i=1, count;
-		count = countList();
-		while(1)
+		int i=1;
+		T dat;
+		cout << "Enter the new node's previous data: ";
+		cin >> dat;
+		newNode = (struct node *)new struct node;
+		cout << "Enter the new node's data : ";
+		cin >> newNode -> data;
+		temp = tail -> next;
+		do
 		{
-			cout << "Enter the new node's location: ";
-			cin >> loc;
-			if(loc > count || loc == 0)
-			{
-				cout << "\n########### WRONG LOCATION... ###########\n";
+			if(dat == tail -> next -> data)
 				break;
-			}
-			if(loc == 1)
-			{
-				insert_at_beginning();
-				break;
-			}
-			else
-			{
-				newNode = (struct node *)new struct node;
-				cout << "Enter the new node's data : ";
-				cin >> newNode -> data;
-				temp = tail -> next;
-				while(i < loc-1)
-				{
-					temp = temp -> next;
-					++i;
-				}
-				newNode -> next = temp -> next;
-				temp -> next = newNode;
-				cout << "\nSuccessfully inserted the node at " << loc << endl;
-				traverse();
-				break;
-			}
-		}
+			temp = temp -> next;
+			++i;
+		}while(temp -> data != dat && temp != tail -> next);
+		if(temp == tail)
+			tail = newNode;
+		newNode -> next = temp -> next;
+		temp -> next = newNode;
+		cout << "\nSuccessfully inserted the node after " << dat << " at position " << i+1 << endl;
+		traverse();
 	}
 }
 
@@ -291,50 +285,46 @@ void circularSinglyLinkedList<T>::delete_at_beginning()
 }
 
 template <typename T>
-void circularSinglyLinkedList<T>::delete_at_location()
+void circularSinglyLinkedList<T>::delete_data()
 {
-	cout << "\n------------ DELETING AT LOACTION ------------\n";
+	cout << "\n------------ DELETING A DATA ------------\n";
 	emp = emptyListChecker();
 	if(emp != true)
 		return;
 	else
 	{
 		struct node *temp1;
-		int loc, i=1, count;
-		count = countList();
-		while(1)
+		int i=1;
+		T dat;
+		cout << "Enter the to be deleted node's data: ";
+		cin >> dat;
+		if(dat == tail -> next -> data)
 		{
-			cout << "Enter the to be deleted node's location: ";
-			cin >> loc;
-			if(loc > count || loc == 0)
+			delete_at_beginning();
+		}
+		else if(dat == tail -> data)
+		{
+			delete_at_end();
+		}
+		else
+		{
+			temp = tail -> next;
+			while(temp->next->data != dat && temp->next!=tail)
 			{
-				cout << "\n########### WRONG LOCATION... ###########\n";
-				break;
+				temp = temp -> next;
+				++i;
 			}
-			if(loc == 1)
+			if(temp -> next != tail)
 			{
-				delete_at_beginning();
-				break;
-			}
-			if(loc == count)
-			{
-				delete_at_end();
-				break;
-			}
-			else
-			{
-				temp = tail -> next;
-				while(i < loc-1)
-				{
-					temp = temp -> next;
-					++i;
-				}
 				temp1 = temp -> next;
 				temp -> next = temp1 -> next;
 				delete(temp1);
-				cout << "\nSuccessfully deleted node at " << loc << endl;
+				cout << "\nSuccessfully deleted node " << dat << " at " << i+1 << endl;
 				traverse();
-				break;
+			}
+			else
+			{
+				cout << endl << dat << " not present in list!" << endl;
 			}
 		}
 	}
@@ -372,14 +362,15 @@ void circularSinglyLinkedList<T>::delete_at_end()
 }
 
 template <typename T>
-void circularSinglyLinkedList<T>::search_in_list()
+typename circularSinglyLinkedList<T>::node *circularSinglyLinkedList<T>::search_in_list()
 {
 	bool flag=false;
 	T ele, count=0;
+	temp = NULL;
 	cout << "\n------------ SEARCHING IN LIST ------------\n";
 	emp = emptyListChecker();
 	if(emp != true)
-		return;
+		return temp;
 	else
 	{
 		cout << "Enter the element to be searched: ";
@@ -396,9 +387,16 @@ void circularSinglyLinkedList<T>::search_in_list()
 			count++;
 		}while(temp != tail -> next);
 		if(flag == true)
-			cout << endl << ele << " found at position " << count+1 << " in the list\n";
+		{
+			cout << endl << ele << " found at position " << count+1 << " in the list";
+			return temp;
+		}
 		else
+		{
+			temp = NULL;
 			cout << endl << ele << " not found in the list\n";
+			return temp;
+		}
 	}
 }
 
@@ -423,6 +421,34 @@ void circularSinglyLinkedList<T>::reverse_the_list()
 		}
 		nextNode -> next = tail;
 		tail = nextNode;
+		traverse();
+	}
+}
+
+template <class T>
+void circularSinglyLinkedList<T>::operator + (circularSinglyLinkedList ob1)				//operator overloading
+{
+	cout << "\n------------ CONCATINATING ANOTHER LIST ------------\n";
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
+	{
+		struct node *node,
+					*head = tail->next,
+					*head1 = ob1.tail->next,
+					*temp = tail,
+					*temp1 = ob1.tail->next;
+		do
+		{
+			node = new struct node();
+			node->data = temp1->data;
+			node->next = head;
+			temp->next = node;
+			temp = temp->next;
+			temp1 = temp1->next;
+		}while (temp1 != head1);
+		tail = temp;
 		traverse();
 	}
 }
@@ -468,7 +494,7 @@ bool circularSinglyLinkedList<T>::emptyListChecker()
 int main()
 {
 	int choice;
-	circularSinglyLinkedList<int> ob;
+	circularSinglyLinkedList<int> ob, ob1;
 	cout << "\n=========== CIRCULAR SINGLY LINKED LIST ===========\n";
 	do
 	{
@@ -478,9 +504,15 @@ int main()
 			break;
 		if(choice == 1)
 			ob.~circularSinglyLinkedList();
+		if(choice == 11)
+		{
+			ob1.create();
+			ob + ob1;
+		}
 		ob.choiceCalling(choice);
 	}while(1);
 	
 	cout << "\n########### EXITING... ###########\n";
+	cout << "\n########### MEMORY IS FREED ###########\n";
 	return 0;
 }
