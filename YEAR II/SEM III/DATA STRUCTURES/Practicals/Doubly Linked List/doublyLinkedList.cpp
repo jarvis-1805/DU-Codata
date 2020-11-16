@@ -2,7 +2,7 @@
 
 using namespace std;
 
-template <typename T>
+template <class T>
 class doublyLinkedList
 {
 	public:
@@ -30,14 +30,15 @@ class doublyLinkedList
 		void delete_at_beginning();
 		void delete_at_location();
 		void delete_at_end();
-		void search_in_list();
+		struct node *search_in_list();
 		void reverse_the_list();
+		void operator +(doublyLinkedList);
 		
 		int countList();
 		bool emptyListChecker();
 };
 
-template <typename T>
+template <class T>
 doublyLinkedList<T>::~doublyLinkedList()
 {
 	struct node *temp1;
@@ -48,10 +49,9 @@ doublyLinkedList<T>::~doublyLinkedList()
 		delete(temp);
 		temp = temp1;
 	}
-	cout << "\n########### MEMORY IS FREED ###########\n";
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::options()
 {
 	cout << "\n1. CREATE"
@@ -64,10 +64,11 @@ void doublyLinkedList<T>::options()
 		<<	"\n8. DELETE AT END"
 		<<	"\n9. SEARCH IN LIST"
 		<<	"\n10. REVERSE THE LIST"
+		<<	"\n11. CONCATENATE ANOTHER LIST"
 		<<	"\n0. EXIT";
 }
 
-template <typename T>
+template <class T>
 int doublyLinkedList<T>::choice()
 {
 	cout << "\n\nEnter the number of your choice: ";
@@ -75,7 +76,7 @@ int doublyLinkedList<T>::choice()
 	return ch;
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::choiceCalling(int ch)
 {
 	switch(ch)
@@ -106,10 +107,16 @@ void doublyLinkedList<T>::choiceCalling(int ch)
 			delete_at_end();
 			break;
 		case 9:
-			search_in_list();
+		{
+			node *temp1 = search_in_list();
+			if(temp1 != NULL)
+				cout << "\nPointer: " << temp1 << endl;
 			break;
+		}
 		case 10:
 			reverse_the_list();
+			break;
+		case 11:
 			break;
 		case 0:
 			break;
@@ -118,7 +125,7 @@ void doublyLinkedList<T>::choiceCalling(int ch)
 	}
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::create()
 {
 	cout << "\n------------ CREATING NEW LIST ------------\n";
@@ -147,7 +154,7 @@ void doublyLinkedList<T>::create()
 	traverse();
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::traverse()
 {
 	emp = emptyListChecker();
@@ -168,7 +175,7 @@ void doublyLinkedList<T>::traverse()
 	}
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::insert_at_beginning()
 {
 	cout << "\n------------ INSERTING AT BEGINNING ------------\n";
@@ -189,7 +196,7 @@ void doublyLinkedList<T>::insert_at_beginning()
 	}
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::insert_at_location()
 {
 	cout << "\n------------ INSERTING AT LOCATION ------------\n";
@@ -237,7 +244,7 @@ void doublyLinkedList<T>::insert_at_location()
 	}
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::insert_at_end()
 {
 	cout << "\n------------ INSERTING AT END ------------\n";
@@ -258,7 +265,7 @@ void doublyLinkedList<T>::insert_at_end()
 	}
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::delete_at_beginning()
 {
 	cout << "\n------------ DELETING AT BEGINNING ------------\n";
@@ -285,7 +292,7 @@ void doublyLinkedList<T>::delete_at_beginning()
 	}
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::delete_at_location()
 {
 	cout << "\n------------ DELETING AT LOACTION ------------\n";
@@ -334,7 +341,7 @@ void doublyLinkedList<T>::delete_at_location()
 	}
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::delete_at_end()
 {
 	cout << "\n------------ DELETING AT END ------------\n";
@@ -361,15 +368,15 @@ void doublyLinkedList<T>::delete_at_end()
 	}
 }
 
-template <typename T>
-void doublyLinkedList<T>::search_in_list()
+template <class T>
+typename doublyLinkedList<T>::node *doublyLinkedList<T>::search_in_list()
 {
 	bool flag=false;
 	T ele, count=0;
 	cout << "\n------------ SEARCHING IN LIST ------------\n";
 	emp = emptyListChecker();
 	if(emp != true)
-		return;
+		return temp;
 	else
 	{
 		cout << "Enter the element to be searched: ";
@@ -386,13 +393,14 @@ void doublyLinkedList<T>::search_in_list()
 			count++;
 		}while(temp != NULL);
 		if(flag == true)
-			cout << endl << ele << " found at position " << count+1 << " in the list\n";
+			cout << endl << ele << " found at position " << count+1 << " in the list";
 		else
 			cout << endl << ele << " not found in the list\n";
 	}
+	return temp;
 }
 
-template <typename T>
+template <class T>
 void doublyLinkedList<T>::reverse_the_list()
 {
 	cout << "\n------------ REVERSING THE LIST ------------\n";
@@ -417,7 +425,35 @@ void doublyLinkedList<T>::reverse_the_list()
 	}
 }
 
-template <typename T>
+template <class T>
+void doublyLinkedList<T>::operator + (doublyLinkedList ob1)				//operator overloading
+{
+	cout << "\n------------ CONCATINATING ANOTHER LIST ------------\n";
+	emp = emptyListChecker();
+	if(emp != true)
+		return;
+	else
+	{
+    	struct node *node,
+                *temp = head,
+                *temp1 = ob1.head;
+      	while(temp->next != NULL)
+        	temp = temp->next;
+		while (temp1 != NULL)
+		{
+			node = new struct node();
+			node->data = temp1->data;
+			node->next = NULL;
+			temp->next = node;
+			node->prev = temp;
+			temp = temp->next;
+			temp1 = temp1->next;
+		}
+		traverse();
+	}
+}
+
+template <class T>
 int doublyLinkedList<T>::countList()
 {
 	int count=0;
@@ -430,7 +466,7 @@ int doublyLinkedList<T>::countList()
 	return count;
 }
 
-template <typename T>
+template <class T>
 bool doublyLinkedList<T>::emptyListChecker()
 {
 	if(head == NULL)
@@ -444,7 +480,7 @@ bool doublyLinkedList<T>::emptyListChecker()
 int main()
 {
 	int choice;
-	doublyLinkedList<int> ob;
+	doublyLinkedList<int> ob, ob1;
 	cout << "\n=========== DOUBLY LINKED LIST ===========\n";
 	do
 	{
@@ -454,9 +490,15 @@ int main()
 			break;
 		if(choice == 1)
 			ob.~doublyLinkedList();
+		if(choice == 11)
+		{
+			ob1.create();
+			ob + ob1;
+		}
 		ob.choiceCalling(choice);
 	}while(1);
 	
 	cout << "\n########### EXITING... ###########\n";
+	cout << "\n########### MEMORY IS FREED ###########\n";
 	return 0;
 }
