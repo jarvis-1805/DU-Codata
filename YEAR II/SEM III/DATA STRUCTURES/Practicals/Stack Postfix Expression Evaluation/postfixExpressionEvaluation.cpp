@@ -97,7 +97,7 @@ void postfixExpressionEvaluation::stackEvaluation()
 		}
 		push(n);
 	}
-	cout << "\nRESULT : " << peek();
+	cout << "\nRESULT : " << peek() << endl;
 }
 
 int main()
