@@ -1,4 +1,5 @@
 #include<iostream>
+#include <math.h>
 #define size 1000
 
 using namespace std;
@@ -85,6 +86,12 @@ void postfixExpressionEvaluation::stackEvaluation()
 			n1 = pop();
 			n2 = pop();
 			n = n2/n1;
+		}
+		else if(c == '^')
+		{
+			n1 = pop();
+			n2 = pop();
+			n = (int)(pow(n2, n1) + 0.5);
 		}
 		else
 		{
