@@ -1,41 +1,64 @@
 #include <iostream>
-#include <cstdlib>
+#include <fstream>
 
 using namespace std;
 
 int i, j, k;
-void insertion_sort(int*, int);
+int insertion_sort(int *, int);
 
 int main()
 {
-    int n;
-    cout << "\nEnter the size: ";
-    cin >> n;
-    int array[n];
     
-    //Best Case
-    for(int i=0; i<n; i++)
-        array[i] = i;
-    cout << "\nBEST CASE:\n=========";
-    insertion_sort(array, n);
+    ofstream fout;
+
+    int n, comparisions;
+    cout << "\n=========== INSERTION SORT ===========";
     
-    //Average Case
-    //Generating randomm numbers in the array
-    for(int i=0; i<n; i++)
-        array[i] = rand() % 1000;
-    cout << "\nAVERAGE CASE:\n=========";
-    insertion_sort(array, n);
+    fout.open("comp.csv", ios::app);
+    fout << "Best, " << "Average, " << "Worst\n";
+    fout.close();
+
+    for(n=10; n<=1000; n=n+10)
+    {
+        cout << "\nSize: " << n;
+        int array[n];
         
-    //Worst Case
-    for(i=0; i<n; i++)
-		array[i] = n - i;
-    cout << "\nWORST CASE:\n=========";
-    insertion_sort(array, n);
+        //Best Case
+        for(i=0; i<n; i++)
+            array[i] = i;
+        cout << "\nBEST CASE:\n=========";
+        comparisions = insertion_sort(array, n);
+
+        fout.open("comp.csv", ios::app);
+        fout << comparisions << ", ";
+        fout.close();
+        
+        //Average Case
+        //Generating randomm numbers in the array
+        for(i=0; i<n; i++)
+            array[i] = rand() % 1000;
+        cout << "\nAVERAGE CASE:\n=========";
+        comparisions = insertion_sort(array, n);
+
+        fout.open("comp.csv", ios::app);
+        fout << comparisions << ", ";
+        fout.close();
+            
+        //Worst Case
+        for(i=0; i<n; i++)
+            array[i] = n - i;
+        cout << "\nWORST CASE:\n=========";
+        comparisions = insertion_sort(array, n);
+
+        fout.open("comp.csv", ios::app);
+        fout << comparisions << "\n";
+        fout.close();
+    }
 
     return 0;
 }
 
-void insertion_sort(int *array, int n)
+int insertion_sort(int *array, int n)
 {
     int totalComp = 0;
     for(i=1; i<n; i++)
@@ -56,4 +79,6 @@ void insertion_sort(int *array, int n)
         array[j+1] = key;
     }
     cout << "\nTotal comparisions: "  << totalComp << endl;
+
+    return totalComp;
 }
