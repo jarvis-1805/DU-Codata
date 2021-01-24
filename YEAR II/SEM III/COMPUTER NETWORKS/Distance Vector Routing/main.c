@@ -11,7 +11,7 @@ struct router rt[10];
 
 int main()
 {
-    printf("\n======== DISTANcE VECTOR ROUTING ========\n");
+    printf("\n======== DISTANCE VECTOR ROUTING ========\n");
     int costmat[MAX][MAX];
     int nodes, i, j, k, count=0;
 
