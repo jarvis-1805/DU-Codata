@@ -1,0 +1,1 @@
+Given a full m-ary tree with i internal vertices, write a Program to find the number of leaf nodes.

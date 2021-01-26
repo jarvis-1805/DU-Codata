@@ -1,0 +1,3 @@
+OUTPUT:
+
+Copied contents of text1.txt file to text2.txt file.

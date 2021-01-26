@@ -1,0 +1,9 @@
+OUTPUT:
+
+Enter the size of an array (Max 100): 5
+
+Enter the sorted values: 1 2 3 4 5
+
+Enter a value to be search: 4
+
+Number is found at 4 position.

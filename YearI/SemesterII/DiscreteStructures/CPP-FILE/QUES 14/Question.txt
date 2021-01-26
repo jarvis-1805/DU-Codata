@@ -1,0 +1,1 @@
+Write a program to accept an input n from the user and graphically represent the values of T(n) where n varies from 0 to n for the recurrence relations. For e.g. T(n) = T(n - 1) + n where T(0) = 1, T(n) = T(n-1) + n^2 where T(0) = 1, T(n) = 2 * T(n / 2) + n where T(1) = 1.

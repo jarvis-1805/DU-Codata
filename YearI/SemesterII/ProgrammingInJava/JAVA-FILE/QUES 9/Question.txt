@@ -1,0 +1,2 @@
+Using AWT, write a program to display a string in frame window with pink color as 
+background.

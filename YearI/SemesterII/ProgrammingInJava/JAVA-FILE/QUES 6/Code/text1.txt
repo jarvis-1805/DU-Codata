@@ -1,0 +1,3 @@
+Java (tm) Development Kit
+	Version 1.2
+    Binary Code License

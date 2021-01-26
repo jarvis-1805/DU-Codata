@@ -1,0 +1,37 @@
+OUTPUT:
+
+Enter the size of SET A : 5
+Enter the elements : 1 2 3 4 5
+A = {1 2 3 4 5 }
+Enter the no of relations (R on A) : 13
+Enter the relations in pair :
+1 1
+1 3
+1 4
+1 5
+2 2
+2 3
+2 4
+2 5
+3 3
+3 4
+3 5
+4 4
+5 5
+R = {(1 1 )(1 3 )(1 4 )(1 5 )(2 2 )(2 3 )(2 4 )(2 5 )(3 3 )(3 4 )(3 5 )(4 4 )(5 5 )}
+
+MATRIX NOTATION
+
+     1  2  3  4  5
+
+1  | 1  0  1  1  1  |
+2  | 0  1  1  1  1  |
+3  | 0  0  1  1  1  |
+4  | 0  0  0  1  0  |
+5  | 0  0  0  0  1  |
+
+Relation R is REFLEXIVE.
+Relation R is NOT SYMMETRIC.
+Relation R is ANTI-SYMMETRIC.
+Relation R is TRANSITIVE.
+Relation R is PARTIAL ORDER relation

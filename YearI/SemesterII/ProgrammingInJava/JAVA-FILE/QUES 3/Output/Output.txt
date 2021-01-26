@@ -1,0 +1,17 @@
+OUTPUT:
+
+Enter shape type- 1 for Rectangle and 2 for Circle and 3 for exit:
+1
+Enter the length:
+2.5
+Enter the breadth:
+4.1
+Area of Rectangle is: 10.25 sq. units
+Enter shape type- 1 for Rectangle and 2 for Circle and 3 for exit:
+2
+Enter the radius:
+2.3
+Area Circle is: 16.610599999999998 sq. units
+Enter shape type- 1 for Rectangle and 2 for Circle and 3 for exit:
+3
+EXITING...

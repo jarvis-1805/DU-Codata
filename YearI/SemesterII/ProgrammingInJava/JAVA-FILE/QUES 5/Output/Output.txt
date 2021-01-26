@@ -1,0 +1,49 @@
+OUTPUT:
+
+Stack created of size 10
+PUSHING elements in stack
+PUSHING 29
+Elements in stack 1
+PUSHING 27
+Elements in stack 2
+PUSHING 99
+Elements in stack 3
+PUSHING 91
+Elements in stack 4
+PUSHING 90
+Elements in stack 5
+PUSHING 66
+Elements in stack 6
+PUSHING 3
+Elements in stack 7
+PUSHING 74
+Elements in stack 8
+PUSHING 24
+Elements in stack 9
+PUSHING 60
+Elements in stack 10
+PUSHING 0
+@@@@@ Stack Overflow:Could not push 0 @@@@@
+POPPING elements from stack
+Elemnts in stack 10
+POPPED 60
+Elemnts in stack 9
+POPPED 24
+Elemnts in stack 8
+POPPED 74
+Elemnts in stack 7
+POPPED 3
+Elemnts in stack 6
+POPPED 66
+Elemnts in stack 5
+POPPED 90
+Elemnts in stack 4
+POPPED 91
+Elemnts in stack 3
+POPPED 99
+Elemnts in stack 2
+POPPED 27
+Elemnts in stack 1
+POPPED 29
+Elemnts in stack 0
+@@@@@ Stack Underflow:Could not pop @@@@@

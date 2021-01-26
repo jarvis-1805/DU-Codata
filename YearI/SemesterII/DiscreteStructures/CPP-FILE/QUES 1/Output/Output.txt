@@ -1,0 +1,41 @@
+OUTPUT:
+
+Enter the size of set: 3
+
+Enter the elements: 1 2 3
+
+Enter the element to be searched: 3
+
+        Value is present!!!
+
+The possible subset pairs
+
+        {}        {1 2 3 }
+        {3 }        {1 2 }
+        {2 }        {1 3 }
+        {2 3 }        {1 }
+
+Do you want to continue? (Y/N): Y
+
+Enter the size of set: 4
+
+Enter the elements: 2 4 6 8
+
+Enter the element to be searched: 5
+
+        Value is not present!!!
+
+The possible subset pairs
+
+        {}        {2 4 6 8 }
+        {8 }        {2 4 6 }
+        {6 }        {2 4 8 }
+        {6 8 }        {2 4 }
+        {4 }        {2 6 8 }
+        {4 8 }        {2 6 }
+        {4 6 }        {2 8 }
+        {4 6 8 }        {2 }
+
+Do you want to continue? (Y/N): N
+
+@@@@EXITING@@@

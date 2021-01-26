@@ -1,0 +1,3 @@
+Using AWT, write a program which responds to KEY_TYPED event and updates the 
+status window with message (“Typed character is: X”). Use adapter class for other two 
+events.

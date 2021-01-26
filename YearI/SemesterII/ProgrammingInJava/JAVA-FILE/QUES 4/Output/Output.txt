@@ -1,0 +1,14 @@
+OUTPUT:
+
+Case 1: Age is lesser than 18
+
+Enter the age:
+16
+Test unsuccessful
+UnderAge: 16 is less than 18
+
+Case 2: Age is not lesser than 18 
+
+Enter the age:
+21
+Test successful
