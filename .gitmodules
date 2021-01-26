@@ -4,6 +4,3 @@
 [submodule "YearI/SemesterII/ProgrammingInJava/JAVA-FILE"]
 	path = YearI/SemesterII/ProgrammingInJava/JAVA-FILE
 	url = https://github.com/jarvis-1805/JAVA-FILE.git
-[submodule "YearII/SemesterIII/OPERATING-SYSTEM"]
-	path = YearII/SemesterIII/OPERATING-SYSTEM
-	url = https://github.com/jarvis-1805/OPERATING-SYSTEM.git
