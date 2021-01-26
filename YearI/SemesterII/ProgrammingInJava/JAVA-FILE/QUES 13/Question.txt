@@ -1,1 +1,0 @@
-Rewrite all the above GUI programs using Swing.

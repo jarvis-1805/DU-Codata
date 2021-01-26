@@ -1,2 +1,0 @@
-Write a program to read a file and display only those lines that have the first two 
-characters as '//' (Use try with resources).  

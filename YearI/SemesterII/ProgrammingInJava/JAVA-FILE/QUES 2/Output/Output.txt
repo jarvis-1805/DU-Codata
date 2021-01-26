@@ -1,4 +1,0 @@
-OUTPUT:
-
-Coordinate: x = 3 y = 5
-Coordinate: x = 3 y = 5 z = 8
