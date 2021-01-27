@@ -40,17 +40,20 @@ INSERT INTO EMPLOYEE
 		   ('106', 'LIPSA PRAHARAJ', 'Accountant', '105', 'December 01, 2023', 3, 20000.00, 70000.00);
 
 INSERT INTO EMPLOYEE
-	VALUES ('107', 'DEVASHISH TYAGI', 'Accountant Intern', '106', 'June 28, 2025', 3, 00.00, 2500.00),
-		   ('108', 'RAHUL SAHAY', 'Security Intern', '102', 'July 19, 2025', 1, 00.00, 2800.00),
-		   ('109', 'TANIA CHAUHAN', 'Executive Intern', '104', 'May 22, 2025', 2, 00.00, 2000.00);
+	VALUES ('107', 'DEVASHISH TYAGI', 'Accountant Intern', '106', 'June 28, 2025', 3, 0.00, 2500.00),
+		   ('108', 'RAHUL SAHAY', 'Security Intern', '102', 'July 19, 2025', 1, 0.00, 2800.00),
+		   ('109', 'TANIA CHAUHAN', 'Executive Intern', '104', 'May 22, 2025', 2, 0.00, 2000.00);
+
+INSERT INTO EMPLOYEE
+	VALUES ('79', 'SANYEM NAZKANI', 'Human Resource (HR)', NULL, 'April 01, 2022', 0, 10000.00, 50000.00);
 
 INSERT INTO DEPARTMENT
 	VALUES (0, 'HEADQUARTERS', 'Noida'),
-		   (1,'SECURITY', 'Noida');
+		   (1, 'SECURITY', 'Noida');
 
 INSERT INTO DEPARTMENT (Dno, Dname)
-	VALUES (2,'EXECUTIVE'),
-		   (3,'ACCOUNTANCY');
+	VALUES (2, 'EXECUTIVE'),
+		   (3, 'ACCOUNTANCY');
 
 SELECT * FROM EMPLOYEE;
 
