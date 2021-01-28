@@ -24,14 +24,14 @@ FROM EMPLOYEE;
 --    a comma and name the said column as THE_OUTPUT.
 
 SELECT CONCAT (
-				Eno, ' , ',
-				Ename, ' , ',
-				Job_type, ' , ',
-				SupervisorEno, ' , ',
-				Hire_date, ' , ',
-				Dno, ' , ',
-				Commission, ' , ',
-				Salary
+                Eno, ' , ',
+                Ename, ' , ',
+                Job_type, ' , ',
+                SupervisorEno, ' , ',
+                Hire_date, ' , ',
+                Dno, ' , ',
+                Commission, ' , ',
+                Salary
 			  ) AS THE_OUTPUT
 FROM EMPLOYEE;
 
@@ -60,15 +60,60 @@ WHERE Salary < 1500 OR Salary > 2850;
 -- 8. Query to display Employee Name and Department No. of all the employees in Dept 10 and
 --    Dept 30 in the alphabetical order by name.
 
+SELECT Ename,
+       Dno
+FROM EMPLOYEE
+WHERE Dno = 10 OR Dno = 30
+ORDER BY Ename;
+
 -- 9. Query to display Name and Hire Date of every Employee who was hired in 1981.
+
+SELECT Ename,
+       Hire_date
+FROM EMPLOYEE
+WHERE Hire_date LIKE '1981____';
+
 -- 10. Query to display Name and Job of all employees who have not assigned a supervisor.
+
+SELECT Ename,
+       Job_type
+FROM EMPLOYEE
+WHERE SupervisorEno IS NULL;
+
 -- 11. Query to display the Name, Salary and Commission for all the employees who earn commission.
--- 12. Sort the data in descending order of Salary and Commission. 13. Query to display Name of all
---     the employees where the third letter of their name is ‘A’.
+
+SELECT Ename,
+       Job_type
+FROM EMPLOYEE
+WHERE Commission != 0.00;
+
+-- 12. Sort the data in descending order of Salary and Commission.
+
+SELECT *
+FROM EMPLOYEE
+ORDER BY Salary DESC, Commission DESC;
+
+-- 13. Query to display Name of all the employees where the third letter of their name is ‘A’.
+
+SELECT Ename
+FROM EMPLOYEE
+WHERE Ename LIKE '__A%';
+
 -- 14. Query to display Name of all employees either have two ‘R’s or have two ‘A’s in their name and
---     are either in Dept No = 30 or their Manger’s Employee No = 7788. 15. Query to display Name, Salary and
--- 	Commission for all employees whose Commission amount is greater than their Salary increased by 5%.
--- 16. Query to display the Current Date along with the day name. 
+--     are either in Dept No = 30 or their Manger’s Employee No = 7788.
+
+SELECT Ename
+FROM EMPLOYEE
+WHERE (Ename LIKE '%L%L%' or
+       Ename LIKE '%A%A%') AND
+	   (Dno = 30 or SupervisorEno = 7788);
+
+-- 15. Query to display Name, Salary and Commission for all employees whose
+--     Commission amount is greater than their Salary increased by 5%.
+
+-- In real life scenarios Commission can not be greater than Salary.
+
+-- 16. Query to display the Current Date along with the day name.
 -- 17. Query to display Name, Hire Date andSalary Review Date which is the 1st Monday after six months of employment.
 -- 18. Query to display Name and calculate the number of months between today and the date
 --     on which employee was hired of department ‘Purchase’.
