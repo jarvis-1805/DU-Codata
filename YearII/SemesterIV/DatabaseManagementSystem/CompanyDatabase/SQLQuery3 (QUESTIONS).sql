@@ -172,3 +172,67 @@ FROM EMPLOYEE
 WHERE Ename LIKE 'J%' OR
       Ename LIKE 'A%' OR
 	  Ename LIKE 'M%';
+
+-- 21. Query to display Name, Hire Date and Day of the week on which the employee started.
+
+SELECT Ename,
+       Hire_date,
+	   DATENAME(WEEKDAY, Hire_date)
+	       AS 'DayOfWeek'
+FROM EMPLOYEE;
+
+-- 22. Query to display Name, Department Name and Department No for all the employees.
+
+SELECT Ename,
+       Dname,
+	   DEPARTMENT.Dno
+FROM EMPLOYEE, DEPARTMENT
+WHERE EMPLOYEE.Dno = DEPARTMENT.Dno;
+
+-- 23. Query to display Unique Listing of all Jobs that are in Department number 30.
+
+SELECT DISTINCT Job_type
+FROM EMPLOYEE
+WHERE Dno = 30;
+
+-- 24. Query to display Name, Dept Name of all employees who have an ‘A’ in their name.
+
+SELECT Ename, 
+       Dname
+FROM EMPLOYEE AS E, DEPARTMENT AS D
+WHERE Ename LIKE '%A%' AND
+      E.Dno = D.Dno;
+
+-- 25. Query to display Name, Job, Department No. And Department Name for all the employees
+--	   working at the Dallas location.
+
+SELECT Ename,
+       Job_type,
+	   D.Dno,
+	   Dname
+FROM EMPLOYEE AS E, DEPARTMENT AS D
+WHERE Location LIKE 'Dallas' AND
+      E.Dno = D.Dno;
+
+-- 26. Query to display Name and Employee no. Along with their supervisor’s Name and the supervisor’s
+--	   employee no; along with the Employees’ Name who do not have a supervisor.
+-- 27. Query to display Name, Dept No. And Salary of any employee whose department No. and salary matches
+--	   both the department no. And the salary of any employee who earns a commission.
+-- 28. Query to display Name and Salaries represented by asterisks, where each asterisk (*) signifies $100.
+-- 29. Query to display the Highest, Lowest, Sum and Average Salaries of all the employees.
+-- 30. Query to display the number of employees performing the same Job type functions.
+-- 31. Query to display the total number of supervisors without listing their names.
+-- 32. Query to display the Department Name, Location Name, No. of Employees and the average salary for
+-- all employees in that department.
+-- 33. Query to display Name and Hire Date for all employees in the same dept. as Blake.
+-- 34. Query to display the Employee No. And Name for all employees who earn more than the average salary.
+-- 35. Query to display Employee Number and Name for all employees who work in a department with any employee
+--	   whose name contains a ‘T’.
+-- 36. Query to display the names and salaries of all employees who report to supervisor named ‘King’.
+-- 37. Query to display the department no, name and job for all employees in the Sales department
+-- 38. Display names of employees along with their department name who have more than 20 years experience
+-- 39. Display total number of departments at each location
+-- 40. Find the department name in which at least 20 employees work in.
+-- 41. Query to find the employee’ name who is not supervisor and name of supervisor supervising more
+--	   than 5 employees.
+-- 42. Query to display the job type with maximum and minimum employees.
