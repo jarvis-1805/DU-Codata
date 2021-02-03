@@ -32,13 +32,13 @@ SELECT CONCAT (
                 Dno, ' , ',
                 Commission, ' , ',
                 Salary
-			  ) AS THE_OUTPUT
+              ) AS THE_OUTPUT
 FROM EMPLOYEE;
 
 -- 5. Query to display the Employee Name and Salary of all the employees earning more than $2850.
 
 SELECT Ename,
-	   Salary
+       Salary
 FROM EMPLOYEE
 WHERE Salary > 2850.00;
 
@@ -71,7 +71,7 @@ ORDER BY Ename;
 SELECT Ename,
        Hire_date
 FROM EMPLOYEE
-WHERE Hire_date LIKE '1981____';
+WHERE Hire_date LIKE '1981______';
 
 -- 10. Query to display Name and Job of all employees who have not assigned a supervisor.
 
@@ -106,7 +106,7 @@ SELECT Ename
 FROM EMPLOYEE
 WHERE (Ename LIKE '%L%L%' or
        Ename LIKE '%A%A%') AND
-	   (Dno = 30 or SupervisorEno = 7788);
+	  (Dno = 30 or SupervisorEno = 7788);
 
 -- 15. Query to display Name, Salary and Commission for all employees whose
 --     Commission amount is greater than their Salary increased by 5%.
@@ -114,10 +114,61 @@ WHERE (Ename LIKE '%L%L%' or
 -- In real life scenarios Commission can not be greater than Salary.
 
 -- 16. Query to display the Current Date along with the day name.
--- 17. Query to display Name, Hire Date andSalary Review Date which is the 1st Monday after six months of employment.
+
+SELECT CONCAT(CAST(GETDATE() AS DATE), ', ',
+              DATENAME(dw, GETDATE())) AS Date_Day;
+-- CAST Syntax:  
+-- CAST ( expression AS data_type [ ( length ) ] )
+
+-- 17. Query to display Name, Hire Date and Salary Review Date which is the 1st Monday after six months of employment.
+
+SELECT Ename,
+       Hire_date,
+	   DATEADD(day, 9 - 
+	                 CASE
+	                     WHEN DATEPART(weekday, DATEADD(month, 6, Hire_date)) = 1	-- For Sunday
+	                         THEN 8
+	                     WHEN DATEPART(weekday, DATEADD(month, 6, Hire_date)) = 2	-- For Monday
+			    	         THEN 9
+			    	     ELSE DATEPART(weekday, DATEADD(month, 6, Hire_date))		-- For rest of the days
+		             END,
+		       DATEADD(month, 6, Hire_date))
+	   AS Salary_review_date
+FROM EMPLOYEE;
+
 -- 18. Query to display Name and calculate the number of months between today and the date
 --     on which employee was hired of department ‘Purchase’.
--- 19. Query to display the following for each employee <E-Name> earns < Salary> monthly but
+
+SELECT Ename,
+       DATEDIFF(month, Hire_date, GETDATE()) -
+       CASE
+	       WHEN DATEPART(day, Hire_date) > DATEPART(day, GETDATE())
+		       THEN 1
+		       ELSE 0
+		END
+		AS Months
+FROM EMPLOYEE, DEPARTMENT
+WHERE EMPLOYEE.Dno = DEPARTMENT.Dno AND
+      Dname = 'PURCHASE';
+
+-- 19. Query to display the following for each employee <E-Name> earns <Salary> monthly but
 --     wants < 3 * Current Salary >. Label the Column as Dream Salary.
+
+SELECT CONCAT(Ename, ' earns ',
+              Salary, ' monthly but wants ',
+			  3*Salary, '.')
+AS Dream_Salary
+FROM EMPLOYEE;
+
 -- 20. Query to display Name with the 1st letter capitalized and all other letter lower case and
 --     length of their name of all the employees whose name starts with ‘J’, ’A’ and ‘M’.
+
+SELECT UPPER(LEFT(Ename, 1)) +
+       LOWER(SUBSTRING(Ename, 2, LEN(Ename)))
+	       AS Names,
+	   LEN(Ename)
+	       AS Length
+FROM EMPLOYEE
+WHERE Ename LIKE 'J%' OR
+      Ename LIKE 'A%' OR
+	  Ename LIKE 'M%';
