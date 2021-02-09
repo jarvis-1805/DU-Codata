@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidLifecycle.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidLifecycle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidLifecycle.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidLifecycle.app.iml" />
-    </modules>
-  </component>
-</project>

@@ -1,7 +1,0 @@
-com/example/androidLifecycle/BuildConfig.java
- com.example.androidLifecycle.BuildConfig
-com/example/androidLifecycle/MainActivity.java
- com.example.androidLifecycle.MainActivity
- com.example.androidLifecycle.MainActivity$1
-com/example/androidLifecycle/SecondActivity.java
- com.example.androidLifecycle.SecondActivity
