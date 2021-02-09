@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">AndroidLifecycle</string>
-    <string name="first_activity">First Activity!</string>
-    <string name="second_activity">Second Activity!</string>
-</resources>
