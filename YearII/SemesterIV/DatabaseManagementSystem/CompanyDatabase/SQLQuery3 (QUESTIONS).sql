@@ -216,11 +216,50 @@ WHERE Location LIKE 'Dallas' AND
 
 -- 26. Query to display Name and Employee no. Along with their supervisor’s Name and the supervisor’s
 --	   employee no; along with the Employees’ Name who do not have a supervisor.
+
+SELECT Eno,
+       Ename,
+	   SupervisorEno,
+	   (SELECT Ename
+	        FROM EMPLOYEE AS E2
+			    WHERE E1.SupervisorEno = E2.Eno)
+				    AS Supervisor_Name
+FROM EMPLOYEE AS E1;
+
 -- 27. Query to display Name, Dept No. And Salary of any employee whose department No. and salary matches
 --	   both the department no. And the salary of any employee who earns a commission.
+
+SELECT E1.Ename,
+       E1.Dno,
+       E1.Salary
+FROM EMPLOYEE E1, EMPLOYEE E2
+WHERE E1.Dno = E2.Dno AND
+      E1.Salary = E2.Salary AND
+	  E1.Ename <> E2.Ename AND
+	  E2.Commission IS NOT NULL;
+
 -- 28. Query to display Name and Salaries represented by asterisks, where each asterisk (*) signifies $100.
+
+SELECT Ename,
+       REPLICATE('*', Salary / 100)
+	       AS Salary_Star
+FROM EMPLOYEE;
+
 -- 29. Query to display the Highest, Lowest, Sum and Average Salaries of all the employees.
+
+SELECT MAX(Salary) AS Highest,
+       MIN(Salary) AS Lowest,
+	   SUM(Salary) AS Sum,
+	   AVG(Salary) AS Average
+FROM EMPLOYEE;
+
 -- 30. Query to display the number of employees performing the same Job type functions.
+
+SELECT Job_type,
+       COUNT(Job_type) AS COUNT
+FROM EMPLOYEE
+GROUP BY Job_type;
+
 -- 31. Query to display the total number of supervisors without listing their names.
 -- 32. Query to display the Department Name, Location Name, No. of Employees and the average salary for
 -- all employees in that department.

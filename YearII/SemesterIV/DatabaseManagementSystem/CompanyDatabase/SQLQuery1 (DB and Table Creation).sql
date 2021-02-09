@@ -34,16 +34,14 @@ ALTER TABLE EMPLOYEE
 INSERT INTO DEPARTMENT
 	VALUES (10, 'HEADQUARTERS', 'Noida'),
 		   (20, 'SECURITY', 'Bengaluru'),
-		   (50, 'Purchase', 'Noida');
+		   (50, 'Purchase', 'Noida'),
+		   (80, 'IT', 'Dallas'),
+		   (60, 'MARKETING', 'Mumbai'),
+		   (70, 'SALES', 'Dallas');
 
 INSERT INTO DEPARTMENT (Dno, Dname)
 	VALUES (30, 'EXECUTIVE'),
 		   (40, 'ACCOUNTANCY');
-
-INSERT INTO DEPARTMENT
-	VALUES (50, 'IT', 'Dallas'),
-		   (60, 'MARKETING', 'Mumbai'),
-		   (70, 'SALES', 'Dallas');
 
 INSERT INTO EMPLOYEE
 	VALUES ('101', 'SHUBHANG GUPTA', 'Senior Security Engineer', '778', 'May 18, 1980', 20, 2000.00, 8000.00),
@@ -51,21 +49,23 @@ INSERT INTO EMPLOYEE
 		   ('103', 'KUSHAN THAKUR', 'Chief Operating Officer', '778', 'April 21, 1978', 30, 2000.00, 5000.00),
 		   ('104', 'KUNAL GIRI', 'Operating Officer', '103', 'September 30, 1985', 30, 1000.00, 4000.00),
 		   ('778', 'ANKUR KUMAR', 'Managing Director', NULL, 'November 01, 1972', 10, 2000.00, 6000.00),
-		   ('106', 'LIPSA PRAHARAJ', 'Accountant', '778', 'December 01, 1979', 40, 2000.00, 7000.00);
-
-INSERT INTO EMPLOYEE
-	VALUES ('107', 'DEVASHISH TYAGI', 'Accountant Intern', '106', 'June 28, 1981', 40, NULL, 2500.00),
-		   ('108', 'RAHUL SAHAY', 'Security Intern', '102', 'July 19, 1990', 20, NULL, 2800.00),
-		   ('109', 'TANIA CHAUHAN', 'Executive Intern', '104', 'May 22, 1989', 30, NULL, 2000.00),
+		   ('106', 'LIPSA PRAHARAJ', 'Accountant', '778', 'December 01, 1979', 40, 2000.00, 7000.00),
+           ('107', 'DEVASHISH TYAGI', 'Accountant Intern', '106', 'June 28, 1981', 40, NULL, 800.00),
+		   ('108', 'RAHUL SAHAY', 'Security Intern', '102', 'July 19, 1990', 20, NULL, 900.00),
+		   ('109', 'TANIA CHAUHAN', 'Executive Intern', '104', 'May 22, 1989', 30, NULL, 800.00),
 		   ('79', 'SANYEM NAZKANI', 'Human Resource (HR)', NULL, 'April 01, 1987', 10, 1000.00, 5000.00),
-           ('110', 'ALICIA JONES', 'Purchase Manager', '778', 'October 26, 1982', 50, NULL, 9800.35);
-
-INSERT INTO EMPLOYEE
-	VALUES ('111', 'ANAMIKA GHAI', 'Accountant Intern', '106', 'June 28, 1981', 40, NULL, 2500.00),
-		   ('112', 'AMARTYA SHARMA', 'Security Intern', '102', 'July 19, 1990', 20, NULL, 2800.00),
-		   ('113', 'SAMEER', 'Executive Intern', '104', 'May 22, 1989', 30, NULL, 2000.00),
-		   ('114', 'DUSHYANT KUMAR', 'Human Resource (HR)', NULL, 'April 01, 1987', 10, 1000.00, 5000.00),
-           ('115', 'LAKSHYA SHARMA', 'Purchase Manager', '778', 'October 26, 1982', 50, NULL, 9800.35);
+           ('110', 'ALICIA JONES', 'Purchase Manager', '778', 'October 26, 1982', 50, 1452.40, 7500.35),
+           ('111', 'ANAMIKA GHAI', 'Accountant Intern', '106', 'June 28, 1981', 40, NULL, 800.00),
+		   ('112', 'AMARTYA SHARMA', 'Security Intern', '102', 'July 19, 1990', 20, NULL, 900.00),
+		   ('113', 'SAMEER', 'Executive Intern', '104', 'May 22, 1989', 30, NULL, 800.00),
+		   ('114', 'DUSHYANT KUMAR', 'Sales Manager', '778', 'April 01, 1987', 70, 1000.00, 7500.35),
+           ('115', 'LAKSHYA SHARMA', 'SDE Manager', '778', 'October 26, 1982', 80, 1500.00, 8000.35),
+		   ('116', 'RODRICK HAIGHTON', 'Graphic Designer', '115', 'May 08, 2000', 80, 1000.00, 2027.74),
+           ('117', 'NINA FISBY', 'Systems Administrator', '115', 'July 26, 2017', 80, 524.39, 1920.84),
+           ('118', 'SKELL WOOLERTON', 'Software Test Engineer', '115', 'April 04, 2004', 80, 900.86, 2027.74),
+           ('119', 'CORNIE MUNBY', 'Software Consultant', '115', 'June 07, 1986', 80, NULL, 688.37),
+           ('120', 'LAYTON MURRIE', 'Graphic Designer', '115', 'June 24, 2006', 80, 1200, 2640.31),
+           ('121', 'RIVY BUZEK', 'Help Desk Technician', NULL, 'May 25, 1982', 80, NULL, 1095.31);
 
 SELECT * FROM EMPLOYEE;
 
@@ -73,8 +73,8 @@ SELECT * FROM DEPARTMENT;
 
 
 
--- UPDATE DEPARTMENT
--- SET Dname = 'PURCHASE' WHERE Dno = 50;
+-- UPDATE EMPLOYEE
+-- SET Salary = 7800 WHERE Ename = 'ALICIA JONES';
 
 -- ALTER TABLE EMPLOYEE
 --	DROP CONSTRAINT DepartmentNo_Constraint;
