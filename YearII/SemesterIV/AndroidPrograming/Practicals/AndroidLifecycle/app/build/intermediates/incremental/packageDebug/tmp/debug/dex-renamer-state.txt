@@ -1,0 +1,4 @@
+#Tue Feb 09 19:08:35 IST 2021
+base.0=D\:\\GitRepo\\DU-Codata\\YearII\\SemesterIV\\AndroidPrograming\\Practicals\\AndroidLifecycle\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
