@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <fstream>
+#define MAX 1001
 
 using namespace std;
 
@@ -9,11 +10,11 @@ class Heap_Sort
     public:
         int i;
         int size = 10;
-        int comparisions;
+        int array[MAX];
 
-        void best_case(int *);
-        void average_case(int *);
-        void worst_case(int *);
+        void best_case();
+        void average_case();
+        void worst_case();
 
         int max_heapify(int *, int);
         int build_max_heap(int *);
@@ -23,12 +24,14 @@ class Heap_Sort
         void display(int *);
 };
 
-void Heap_Sort::best_case(int *array)
+void Heap_Sort::best_case()
 {
     ofstream fout;
+    int comparisions;
 
-    for(i=0; i<size; i++)
+    for(i=1; i<=size; i++)
         array[i] = i;
+    comparisions = 0;
     cout << "\nBEST CASE:\n==========";
     display(array);
     comparisions = heap_sort(array);
@@ -41,13 +44,15 @@ void Heap_Sort::best_case(int *array)
     fout.close();
 }
 
-void Heap_Sort::average_case(int *array)
+void Heap_Sort::average_case()
 {
     ofstream fout;
+    int comparisions;
 
     // Generating randomm numbers in the array
-    for(i=0; i<size; i++)
+    for(i=1; i<=size; i++)
         array[i] = rand() % 1000;
+    comparisions = 0;
     cout << "\nAVERAGE CASE:\n=============";
     display(array);
     comparisions = heap_sort(array);
@@ -60,12 +65,14 @@ void Heap_Sort::average_case(int *array)
     fout.close();
 }
 
-void Heap_Sort::worst_case(int *array)
+void Heap_Sort::worst_case()
 {
     ofstream fout;
+    int comparisions;
 
-    for(i=0; i<size; i++)
+    for(i=1; i<=size; i++)
         array[i] = size - i;
+    comparisions = 0;
     cout << "\nWORST CASE:\n===========";
     display(array);
     comparisions = heap_sort(array);
@@ -82,42 +89,49 @@ int Heap_Sort::max_heapify(int *array, int i)
 {
     int left = 2*i;
     int right = 2*i + 1;
-    int maxim;
+    int maxim, comparisions = 0;
 
+    comparisions++;
     if(left <= size && array[left] > array[i])
         maxim = left;
     else
         maxim = i;
     
+    comparisions++;
     if(right <= size && array[right] > array[maxim])
         maxim = right;
     
     if(maxim != i)
     {
         array = swap(array, maxim, i);
-        max_heapify(array, maxim);
+        comparisions += max_heapify(array, maxim);
     }
+
+    return comparisions;
 }
 
 int Heap_Sort::build_max_heap(int *array)
 {
+    int comparisions = 0;
     for(int i=floor(size/2); i>=1; i--)
-        max_heapify(array, i);
+        comparisions += max_heapify(array, i);
+    
+    return comparisions;
 }
 
 int Heap_Sort::heap_sort(int *array)
 {
-    int s = size;
-    build_max_heap(array);
+    int s = size, comparisions = 0;
+    comparisions += build_max_heap(array);
     for(int i=size; i>=2; i--)
     {
         array = swap(array, 1, i);
         size--;
-        max_heapify(array, 1);
+        comparisions += max_heapify(array, 1);
     }
     size = s;
 
-    return 0;
+    return comparisions;
 }
 
 int *Heap_Sort::swap(int *array, int maxim, int i)
@@ -133,7 +147,7 @@ void Heap_Sort::display(int *array)
 {
     cout << "\nArray: ";
     if(size != 0)
-        for(int x=0; x<size; x++)
+        for(int x=1; x<=size; x++)
             cout << array[x] << " ";
     else
         cout << "Empty!";
@@ -145,99 +159,28 @@ int main()
     ofstream fout;
     Heap_Sort hs;
 
-    int i, comparisions;
     cout << "\n=========== HEAP SORT ===========";
     
     fout.open("comp.csv", ios::app);
     fout << "Best, " << "Average, " << "Worst\n";
     fout.close();
     
-    //for(hs.size=10; hs.size<=10; hs.size=hs.size+10)
-    //{
+    for(hs.size=10; hs.size<=1000; hs.size=hs.size+10)
+    {
         cout << "\nSize: " << hs.size;
-        int array[hs.size];
-        for(i=0; i<10; i++)
-            array[i] = 0;
+        //hs.array[hs.size];
+        for(int i=1; i<=hs.size; i++)
+            hs.array[i] = 0;
 
         //Best Case
-        hs.best_case(array);
+        hs.best_case();
         
         // Average Case
-        hs.average_case(array);
+        hs.average_case();
         
         // Worst Case
-        hs.worst_case(array);
-    //}
+        hs.worst_case();
+    }
     
     return 0;
 }
-
-/*
-int merge(int *array, int l, int m, int r)
-{
-    int n1 = m - l + 1;
-    int n2 = r - m;
-
-    int L[n1], R[n2];
-    for (int i = 0; i < n1; i++)
-        L[i] = array[l + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = array[m + 1 + j];
-
-    int i=0, j=0, k=l;
-    int comparisions = 0;
-
-    while(i < n1 && j < n2)
-    {
-        comparisions += 1;
-        if(L[i] <= R[j])
-        {
-            array[k] = L[i];
-            i++;
-        }
-        else
-        {
-            array[k] = R[j];
-            j++;
-        }
-        k++;
-    }
- 
-    // Copy the remaining elements of
-    // L[], if there are any
-    while (i < n1)
-    {
-        array[k] = L[i];
-        i++;
-        k++;
-    }
- 
-    // Copy the remaining elements of
-    // R[], if there are any
-    while (j < n2)
-    {
-        array[k] = R[j];
-        j++;
-        k++;
-    }
-
-    return comparisions;
-}
-
-int merge_sort(int *array, int si, int ei)
-{
-    // si => start index
-    // ei => end index
-    if(si >= ei)
-        return 0;
-    
-    int mid = (si+ei-1)/2;
-    int comparisions = 0;
-
-    comparisions += merge_sort(array, si, mid);
-    comparisions += merge_sort(array, mid+1, ei);
-
-    comparisions += merge(array, si, mid, ei);
-
-    return comparisions;
-}*/
