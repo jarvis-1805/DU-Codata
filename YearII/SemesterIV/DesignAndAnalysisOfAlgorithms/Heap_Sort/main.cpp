@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <fstream>
-#define MAX 1001
+#define MAX 1001        //Array indexing starts from 1, 2, 3...
 
 using namespace std;
 
@@ -33,7 +33,6 @@ void Heap_Sort::best_case()
         array[i] = i;
     comparisions = 0;
     cout << "\nBEST CASE:\n==========";
-    display(array);
     comparisions = heap_sort(array);
     display(array);
     cout << "\nTotal comparisions: "
@@ -54,7 +53,6 @@ void Heap_Sort::average_case()
         array[i] = rand() % 1000;
     comparisions = 0;
     cout << "\nAVERAGE CASE:\n=============";
-    display(array);
     comparisions = heap_sort(array);
     display(array);
     cout << "\nTotal comparisions: "
@@ -74,7 +72,6 @@ void Heap_Sort::worst_case()
         array[i] = size - i;
     comparisions = 0;
     cout << "\nWORST CASE:\n===========";
-    display(array);
     comparisions = heap_sort(array);
     display(array);
     cout << "\nTotal comparisions: "
@@ -91,18 +88,17 @@ int Heap_Sort::max_heapify(int *array, int i)
     int right = 2*i + 1;
     int maxim, comparisions = 0;
 
-    comparisions++;
     if(left <= size && array[left] > array[i])
         maxim = left;
     else
         maxim = i;
     
-    comparisions++;
     if(right <= size && array[right] > array[maxim])
         maxim = right;
     
     if(maxim != i)
     {
+        comparisions += 1;
         array = swap(array, maxim, i);
         comparisions += max_heapify(array, maxim);
     }
@@ -168,7 +164,6 @@ int main()
     for(hs.size=10; hs.size<=1000; hs.size=hs.size+10)
     {
         cout << "\nSize: " << hs.size;
-        //hs.array[hs.size];
         for(int i=1; i<=hs.size; i++)
             hs.array[i] = 0;
 
