@@ -261,17 +261,99 @@ FROM EMPLOYEE
 GROUP BY Job_type;
 
 -- 31. Query to display the total number of supervisors without listing their names.
+
+SELECT COUNT(DISTINCT SupervisorEno)
+           AS Total_Supervisors
+FROM EMPLOYEE;
+
 -- 32. Query to display the Department Name, Location Name, No. of Employees and the average salary for
 -- all employees in that department.
+
+SELECT Dname,
+       Location,
+	   COUNT(Eno) AS No_of_Employees,
+	   AVG(Salary) AS Average_Salary
+FROM EMPLOYEE E, DEPARTMENT D
+WHERE E.Dno = D.Dno
+GROUP BY Dname, Location;
+
 -- 33. Query to display Name and Hire Date for all employees in the same dept. as Blake.
+
+SELECT E1.Ename,
+       E1.Hire_date
+FROM EMPLOYEE E1
+WHERE E1.Dno = (SELECT E2.Dno 
+                    FROM EMPLOYEE E2 
+					    WHERE E2.Ename LIKE 'BLAKE%');
+
 -- 34. Query to display the Employee No. And Name for all employees who earn more than the average salary.
+
+SELECT Eno,
+       Ename
+FROM EMPLOYEE
+WHERE Salary > (SELECT AVG(Salary)
+                    FROM EMPLOYEE);
+
 -- 35. Query to display Employee Number and Name for all employees who work in a department with any employee
 --	   whose name contains a ‘T’.
+
+SELECT Eno,
+       Ename
+FROM EMPLOYEE
+WHERE Dno IS NOT NULL AND
+      Ename LIKE '%T%';
+
 -- 36. Query to display the names and salaries of all employees who report to supervisor named ‘King’.
--- 37. Query to display the department no, name and job for all employees in the Sales department
--- 38. Display names of employees along with their department name who have more than 20 years experience
--- 39. Display total number of departments at each location
+
+SELECT E1.Ename,
+       E1.Salary
+FROM EMPLOYEE E1
+WHERE E1.SupervisorEno = (SELECT E2.Eno
+                              FROM EMPLOYEE E2
+							      WHERE E2.Ename LIKE '%KING%');
+
+-- 37. Query to display the department no, name and job for all employees in the Sales department.
+
+SELECT E.Dno,
+       Ename,
+	   Job_Type
+FROM EMPLOYEE E, DEPARTMENT D
+WHERE E.Dno = D.Dno AND
+      Dname LIKE 'SALES';
+
+-- 38. Display names of employees along with their department name who have more than 20 years experience.
+
+SELECT Ename,
+       Dname
+FROM EMPLOYEE E, DEPARTMENT D
+WHERE E.Dno = D.Dno AND
+      DATEDIFF(YEAR, Hire_date, CAST(GETDATE() AS DATE)) > 20;
+
+-- 39. Display total number of departments at each location.
+
+SELECT Location,
+       COUNT(*) AS TOTAL_DEPTS
+FROM DEPARTMENT
+GROUP BY Location;
+
 -- 40. Find the department name in which at least 20 employees work in.
+
+SELECT Dname
+FROM EMPLOYEE, DEPARTMENT
+WHERE 5 <= (SELECT COUNT(Eno) FROM EMPLOYEE E, DEPARTMENT D WHERE E.Dno = D.Dno);
+/*
+SELECT emp_department.dpt_name
+  FROM emp_details 
+     INNER JOIN emp_department
+       ON emp_dept =dpt_code
+        GROUP BY emp_department.dpt_name
+          HAVING COUNT(*) > 2;
+		  */
 -- 41. Query to find the employee’ name who is not supervisor and name of supervisor supervising more
 --	   than 5 employees.
+
+
+
 -- 42. Query to display the job type with maximum and minimum employees.
+
+
