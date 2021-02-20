@@ -339,21 +339,58 @@ GROUP BY Location;
 -- 40. Find the department name in which at least 20 employees work in.
 
 SELECT Dname
-FROM EMPLOYEE, DEPARTMENT
-WHERE 5 <= (SELECT COUNT(Eno) FROM EMPLOYEE E, DEPARTMENT D WHERE E.Dno = D.Dno);
-/*
-SELECT emp_department.dpt_name
-  FROM emp_details 
-     INNER JOIN emp_department
-       ON emp_dept =dpt_code
-        GROUP BY emp_department.dpt_name
-          HAVING COUNT(*) > 2;
-		  */
--- 41. Query to find the employee’ name who is not supervisor and name of supervisor supervising more
+FROM EMPLOYEE E INNER JOIN DEPARTMENT D
+                  ON E.Dno = D.Dno
+GROUP BY D.Dname
+HAVING COUNT(*) >= 20;
+
+-- 41. Query to find the employee’s name who is not supervisor and name of supervisor supervising more
 --	   than 5 employees.
 
-
+(
+    SELECT Ename
+	FROM EMPLOYEE
+	WHERE Eno NOT IN(
+	    SELECT DISTINCT SupervisorEno
+		FROM EMPLOYEE
+		WHERE SupervisorEno IS NOT NULL
+	)
+)
+UNION
+(
+    SELECT Ename
+	FROM EMPLOYEE
+	WHERE Eno IN(
+	    SELECT SupervisorEno
+		FROM EMPLOYEE
+		WHERE SupervisorEno IS NOT NULL
+		GROUP BY SupervisorEno
+		HAVING COUNT(*) > 5
+	)
+);
 
 -- 42. Query to display the job type with maximum and minimum employees.
 
-
+SELECT Job_type,
+       COUNT(*) AS COUNT
+FROM EMPLOYEE
+GROUP BY Job_type
+HAVING COUNT(*) IN (
+    (
+        SELECT MAX(ECount)
+        FROM (
+                 SELECT COUNT(*) AS ECount
+                 FROM EMPLOYEE
+                 GROUP BY Job_type
+             ) AS E1
+    )
+    UNION
+    (
+        SELECT MIN(ECount)
+        FROM (
+                 SELECT COUNT(*) AS ECount
+                 FROM EMPLOYEE
+                 GROUP BY Job_type
+             ) AS E2
+    )
+);
