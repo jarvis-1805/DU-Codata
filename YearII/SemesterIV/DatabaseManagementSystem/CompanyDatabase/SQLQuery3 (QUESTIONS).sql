@@ -282,8 +282,8 @@ GROUP BY Dname, Location;
 SELECT E1.Ename,
        E1.Hire_date
 FROM EMPLOYEE E1
-WHERE E1.Dno = (SELECT E2.Dno 
-                    FROM EMPLOYEE E2 
+WHERE E1.Dno = (SELECT E2.Dno
+                    FROM EMPLOYEE E2
 					    WHERE E2.Ename LIKE 'BLAKE%');
 
 -- 34. Query to display the Employee No. And Name for all employees who earn more than the average salary.
@@ -310,7 +310,7 @@ SELECT E1.Ename,
 FROM EMPLOYEE E1
 WHERE E1.SupervisorEno = (SELECT E2.Eno
                               FROM EMPLOYEE E2
-							      WHERE E2.Ename LIKE '%KING%');
+							      WHERE E2.Ename LIKE 'KING%');
 
 -- 37. Query to display the department no, name and job for all employees in the Sales department.
 
@@ -372,7 +372,7 @@ UNION
 -- 42. Query to display the job type with maximum and minimum employees.
 
 SELECT Job_type,
-       COUNT(*) AS COUNT
+       COUNT(*) AS Count
 FROM EMPLOYEE
 GROUP BY Job_type
 HAVING COUNT(*) IN (
