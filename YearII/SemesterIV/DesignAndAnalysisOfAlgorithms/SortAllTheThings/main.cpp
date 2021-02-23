@@ -1,10 +1,10 @@
 #include <iostream>
 #include <fstream>
 
-#include "Plot_Graphs/matplotlibcpp.h"
-#include "Insertion_Sort/insertionSort.hpp"
-#include "Merge_Sort/mergeSort.hpp"
-#include "Heap_Sort/heapSort.hpp"
+//#include "Plot_Graphs/matplotlibcpp.h"
+//#include "Insertion_Sort/insertionSort.hpp"
+//#include "Merge_Sort/mergeSort.hpp"
+//#include "Heap_Sort/heapSort.hpp"
 #include "Quick_Sort/quickSort.hpp"
 
 #define MAX 1001        //Array indexing starts from 1, 2, 3...
