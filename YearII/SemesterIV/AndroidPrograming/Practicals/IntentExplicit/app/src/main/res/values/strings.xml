@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">IntentExplicit</string>
-    <string name="type_something">Type something!</string>
     <string name="send">SEND</string>
+    <string name="back">BACK</string>
+    <string name="type_something">Type your name!</string>
     <string name="first_activity">First Activity!</string>
     <string name="second_activity">Second Activity!</string>
     <string name="the_data_received_from_first_activity">The data received from first activity:</string>
-    <string name="Null">NULL</string>
 </resources>
