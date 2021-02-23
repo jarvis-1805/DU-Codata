@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">IntentImplicit</string>
+    <string name="send">SEND</string>
+    <string name="back">BACK</string>
+    <string name="enter_text">Enter Text!</string>
+    <string name="send_data">Send DATA!</string>
+    <string name="the_data_you_entered">The data you entered:</string>
+</resources>
