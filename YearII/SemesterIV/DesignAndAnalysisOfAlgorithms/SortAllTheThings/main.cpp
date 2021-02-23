@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 
+#include "Plot_Graphs/matplotlibcpp.h"
 #include "Insertion_Sort/insertionSort.hpp"
 #include "Merge_Sort/mergeSort.hpp"
 #include "Heap_Sort/heapSort.hpp"
