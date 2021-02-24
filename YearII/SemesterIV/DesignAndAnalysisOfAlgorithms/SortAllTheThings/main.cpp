@@ -2,12 +2,13 @@
 #include <fstream>
 
 //#include "Plot_Graphs/matplotlibcpp.h"
+#include "Other_Headers/BinarySearchTree.hpp"
 //#include "Insertion_Sort/insertionSort.hpp"
 //#include "Merge_Sort/mergeSort.hpp"
 //#include "Heap_Sort/heapSort.hpp"
 #include "Quick_Sort/quickSort.hpp"
 
-#define MAX 1001        //Array indexing starts from 1, 2, 3...
+#define MAX 1000        //Array indexing starts from 1, 2, 3...
 
 using namespace std;
 
@@ -30,7 +31,7 @@ class Sortings
         void insertion_sort();
         void merge_sort();
         void heap_sort();
-        void quick_sort();
+        void quick_sort(int *);
 
         void file_writer(string, string, int);
 };
@@ -66,7 +67,7 @@ void Sortings::choiceCalling(int ch)
         case 3:
             break;
         case 4:
-            quick_sort();
+            quick_sort(array);
             break;
         case 0:
             break;
@@ -108,14 +109,14 @@ void Sortings::file_writer(string fileName, string Case, int comparisons)
     fout.close();
 }
 
-void Sortings::quick_sort()
+void Sortings::quick_sort(int *array)
 {
     Quick_Sort quick;
     ofstream fout;
 
     cout << "\n=========== QUICK SORT ===========";
     
-    fout.open("Quick_Sort/comp.csv", ios::app);
+    fout.open("Quick_Sort/comp.csv", ios::trunc);
     fout << "Best, " << "Average, " << "Worst\n";
     fout.close();
     
@@ -126,18 +127,37 @@ void Sortings::quick_sort()
             array[i] = 0;
 
         //Best Case
+        /**
+         * @brief We use Binary Search Tree to construct post-order of sorted array in ascending
+         *        order. Since post-order partitions' the array in exactly two halves, i.e.,
+         *        from the median.
+         * 
+         *        Time Complexity: O(nlog(n))
+         * 
+         */
+        binarySearchTree binary;
         best_case(size);
+        array = binary.itr_post_order(array, size);
         
         comparisons = quick.quick_sort(array, 1, size);
         file_writer("Quick_Sort/comp.csv", "best", comparisons);
         
-        // Average Case
+        // Average Case:    Time Complexity: O(nlog(n))
         average_case(size);
         
         comparisons = quick.quick_sort(array, 1, size);
         file_writer("Quick_Sort/comp.csv", "average", comparisons);
         
         // Worst Case
+        /**
+         * @brief The worst case occurs when the partition process always picks greatest or
+         *        smallest element as pivot. If we consider above partition strategy where
+         *        last element is always picked as pivot, the worst case would occur when the
+         *        array is already sorted in increasing or decreasing order.
+         * 
+         *        Time Complexity: O(n^2)
+         * 
+         */
         worst_case(size);
         
         comparisons = quick.quick_sort(array, 1, size);

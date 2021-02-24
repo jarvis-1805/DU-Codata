@@ -32,9 +32,9 @@ std::tuple <int, int>Quick_Sort::partition(int *array, int startIndex, int endIn
 
     for(int j=startIndex; j<=endIndex-1; j++)
     {
+        comparisons++;
         if(array[j] < pivot)
         {
-            comparisons++;
             i++;
             array = swap(array, i, j);
         }
