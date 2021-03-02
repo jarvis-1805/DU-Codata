@@ -3,7 +3,7 @@
 
 //#include "Plot_Graphs/matplotlibcpp.h"
 #include "Other_Headers/BinarySearchTree.hpp"
-//#include "Insertion_Sort/insertionSort.hpp"
+#include "Insertion_Sort/insertionSort.hpp"
 //#include "Merge_Sort/mergeSort.hpp"
 //#include "Heap_Sort/heapSort.hpp"
 #include "Quick_Sort/quickSort.hpp"
@@ -29,7 +29,7 @@ class Sortings
         void average_case(int);
         void worst_case(int);
 
-        void insertion_sort();
+        void insertion_sort(int *);
         void merge_sort();
         void heap_sort();
         void quick_sort(int *);
@@ -62,7 +62,7 @@ void Sortings::choiceCalling(int ch)
     switch(ch)
     {
         case 1:
-            
+            insertion_sort(array);
             break;
         case 2:
             
@@ -115,17 +115,17 @@ void Sortings::file_writer(string fileName, string Case, int comparisons)
     fout.close();
 }
 
-void Sortings::randomised_quick_sort(int *array)
+void Sortings::insertion_sort(int *array)
 {
-    Randomised_Quick_Sort random_quick;
+    Insertion_Sort insert;
     ofstream fout;
 
-    cout << "\n=========== QUICK SORT ===========";
-    
-    fout.open("Randomised_Quick_Sort/comp.csv", ios::trunc);
+    cout << "\n=========== INSERTION SORT ===========";
+
+    fout.open("Insertion_Sort/comp.csv", ios::trunc);
     fout << "Best, " << "Average, " << "Worst\n";
     fout.close();
-    
+
     for(size=10; size<=1000; size=size+10)
     {
         int comparisons = 0;
@@ -133,27 +133,25 @@ void Sortings::randomised_quick_sort(int *array)
             array[i] = 0;
 
         //Best Case
-        binarySearchTree binary;
         best_case(size);
-        array = binary.itr_post_order(array, size);
-        
-        comparisons = random_quick.randomised_quick_sort(array, 1, size);
-        file_writer("Randomised_Quick_Sort/comp.csv", "best", comparisons);
-        
-        // Average Case
-        average_case(size);
-        
-        comparisons = random_quick.randomised_quick_sort(array, 1, size);
-        file_writer("Randomised_Quick_Sort/comp.csv", "average", comparisons);
-        
-        // Worst Case
-        worst_case(size);
-        
-        comparisons = random_quick.randomised_quick_sort(array, 1, size);
-        file_writer("Randomised_Quick_Sort/comp.csv", "worst", comparisons);
-    }
 
-    cout << "\nCompleted RANDOMISED QUICK SORT!\n";
+        comparisons = insert.insertion_sort(array, size);
+        file_writer("Insertion_Sort/comp.csv", "best", comparisons);
+        
+        //Average Case
+        average_case(size);
+
+        comparisons = insert.insertion_sort(array, size);
+        file_writer("Insertion_Sort/comp.csv", "average", comparisons);
+            
+        //Worst Case
+        worst_case(size);
+
+        comparisons = insert.insertion_sort(array, size);
+        file_writer("Insertion_Sort/comp.csv", "worst", comparisons);
+    }
+    
+    cout << "\nCompleted INSERTION SORT!\n";
 }
 
 void Sortings::quick_sort(int *array)
@@ -212,6 +210,47 @@ void Sortings::quick_sort(int *array)
     }
 
     cout << "\nCompleted QUICK SORT!\n";
+}
+
+void Sortings::randomised_quick_sort(int *array)
+{
+    Randomised_Quick_Sort random_quick;
+    ofstream fout;
+
+    cout << "\n=========== QUICK SORT ===========";
+    
+    fout.open("Randomised_Quick_Sort/comp.csv", ios::trunc);
+    fout << "Best, " << "Average, " << "Worst\n";
+    fout.close();
+    
+    for(size=10; size<=1000; size=size+10)
+    {
+        int comparisons = 0;
+        for(int i=0; i<=size; i++)
+            array[i] = 0;
+
+        //Best Case
+        binarySearchTree binary;
+        best_case(size);
+        array = binary.itr_post_order(array, size);
+        
+        comparisons = random_quick.randomised_quick_sort(array, 1, size);
+        file_writer("Randomised_Quick_Sort/comp.csv", "best", comparisons);
+        
+        // Average Case
+        average_case(size);
+        
+        comparisons = random_quick.randomised_quick_sort(array, 1, size);
+        file_writer("Randomised_Quick_Sort/comp.csv", "average", comparisons);
+        
+        // Worst Case
+        worst_case(size);
+        
+        comparisons = random_quick.randomised_quick_sort(array, 1, size);
+        file_writer("Randomised_Quick_Sort/comp.csv", "worst", comparisons);
+    }
+
+    cout << "\nCompleted RANDOMISED QUICK SORT!\n";
 }
 
 int main()
