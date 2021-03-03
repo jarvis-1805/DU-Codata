@@ -8,6 +8,8 @@
 //#include "Heap_Sort/heapSort.hpp"
 #include "Quick_Sort/quickSort.hpp"
 #include "Randomised_Quick_Sort/randomisedQuickSort.hpp"
+#include "Counting_Sort/countingSort.hpp"
+#include "Radix_Sort/radixSort.hpp"
 
 #define MAX 1000        //Array indexing starts from 1, 2, 3...
 
@@ -18,6 +20,7 @@ class Sortings
     private:
         int size;
         int array[MAX];
+        std::string arr[MAX];
         
     public:
         int ch;
@@ -34,7 +37,15 @@ class Sortings
         void heap_sort();
         void quick_sort(int *);
         void randomised_quick_sort(int *);
+        void counting_sort(int *);
+        void radix_sort(int *);
+        void radix_sort(std::string *);
+        void bucket_sort(int *);
 
+        void input(int *);
+        void input(std::string *);
+        void display(int *, int);
+        void display(std::string *, int);
         void file_writer(string, string, int);
 };
 
@@ -46,6 +57,10 @@ void Sortings::options()
         << "\n3. HEAP SORT"
         << "\n4. QUICK SORT"
         << "\n5. RANDOMISED QUICK SORT"
+        << "\n6. COUNTING SORT"
+        << "\n7. RADIX SORT (Integer)"
+        << "\n8. RADIX SORT (String)"
+        << "\n9. BUCKET SORT"
         << "\n0. EXIT";
 }
 
@@ -75,6 +90,15 @@ void Sortings::choiceCalling(int ch)
         case 5:
             randomised_quick_sort(array);
             break;
+        case 6:
+            counting_sort(array);
+            break;
+        case 7:
+            radix_sort(array);
+            break;
+        case 8:
+            radix_sort(arr);
+            break;
         case 0:
             break;
         default:
@@ -99,20 +123,6 @@ void Sortings::worst_case(int size)
 {
     for(int i=1; i<=size; i++)
         array[i] = size - i;
-}
-
-void Sortings::file_writer(string fileName, string Case, int comparisons)
-{
-    ofstream fout;
-    
-    fout.open(fileName, ios::app);
-
-    if(Case != "worst")
-        fout << comparisons << ", ";
-    else
-        fout << comparisons << endl;
-
-    fout.close();
 }
 
 void Sortings::insertion_sort(int *array)
@@ -251,6 +261,114 @@ void Sortings::randomised_quick_sort(int *array)
     }
 
     cout << "\nCompleted RANDOMISED QUICK SORT!\n";
+}
+
+void Sortings::counting_sort(int *array)
+{
+    cout << "\n=========== COUNTING SORT ===========";
+
+    input(array);
+    
+    Counting_Sort counting;
+    array = counting.counting_sort(array, size);
+    
+    display(array, size);
+
+    cout << "\nCompleted COUNTING SORT!\n";
+}
+
+void Sortings::radix_sort(int *array)
+{
+    cout << "\n=========== RADIX SORT (Integer) ===========";
+
+    input(array);
+    
+    Radix_Sort radix;
+    array = radix.radix_sort(array, size);
+    
+    display(array, size);
+
+    cout << "\nCompleted RADIX SORT!\n";
+}
+
+void Sortings::radix_sort(std::string *arr)
+{
+    cout << "\n=========== RADIX SORT (String) ===========";
+
+    input(arr);
+    
+    Radix_Sort radix;
+    arr = radix.radix_sort(arr, size);
+    
+    display(arr, size);
+
+    cout << "\nCompleted RADIX SORT!\n";
+}
+
+void Sortings::input(int *array)
+{
+    cout << "\nEnter the size of array: ";
+    cin >> size;
+
+    cout << "\nEnter the elements in the array:\n";
+    for(int i=0; i<size; i++)
+    {
+        cout << "Element " << i+1 << ": ";
+        cin >> array[i];
+    }
+}
+
+void Sortings::input(std::string *arr)
+{
+    cout << "\nEnter the size of array: ";
+    cin >> size;
+
+    cout << "\nEnter the elements in the array:\n";
+    for(int i=0; i<size; i++)
+    {
+        cout << "Element " << i+1 << ": ";
+        cin >> arr[i];
+    }
+}
+
+void Sortings::display(int *array, int size)
+{
+    cout << "Array: ";
+    for(int i=0; i<size; i++)
+    {
+        cout << array[i];
+        if(i != size-1)
+            cout << ", ";
+        else
+            cout << endl;
+    }
+}
+
+void Sortings::display(std::string *arr, int size)
+{
+    cout << "Array: ";
+    for(int i=0; i<size; i++)
+    {
+        cout << arr[i];
+        if(i != size-1)
+            cout << ", ";
+        else
+            cout << endl;
+    }
+}
+
+void Sortings::file_writer(string fileName, string Case, int comparisons)
+{
+    ofstream fout;
+    
+    fout.open(fileName, ios::app);
+
+    if(Case != "worst")
+        fout << comparisons << ", ";
+    else
+        fout << comparisons << endl;
+
+    fout.close();
 }
 
 int main()
