@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 //#include "Plot_Graphs/matplotlibcpp.h"
 #include "Other_Headers/BinarySearchTree.hpp"
@@ -10,6 +11,7 @@
 #include "Randomised_Quick_Sort/randomisedQuickSort.hpp"
 #include "Counting_Sort/countingSort.hpp"
 #include "Radix_Sort/radixSort.hpp"
+#include "Bucket_Sort/bucketSort.hpp"
 
 #define MAX 1000        //Array indexing starts from 1, 2, 3...
 
@@ -20,7 +22,8 @@ class Sortings
     private:
         int size;
         int array[MAX];
-        std::string arr[MAX];
+        float array2[MAX];
+        std::string array3[MAX];
         
     public:
         int ch;
@@ -40,12 +43,15 @@ class Sortings
         void counting_sort(int *);
         void radix_sort(int *);
         void radix_sort(std::string *);
+        void bucket_sort(float *);
         void bucket_sort(int *);
 
         void input(int *);
         void input(std::string *);
+        void input(float *);
         void display(int *, int);
         void display(std::string *, int);
+        void display(float *, int);
         void file_writer(string, string, int);
 };
 
@@ -60,7 +66,8 @@ void Sortings::options()
         << "\n6. COUNTING SORT"
         << "\n7. RADIX SORT (Integer)"
         << "\n8. RADIX SORT (String)"
-        << "\n9. BUCKET SORT"
+        << "\n9. BUCKET SORT (Float 0-1)"
+        << "\n10. BUCKET SORT (Integer)"
         << "\n0. EXIT";
 }
 
@@ -97,7 +104,13 @@ void Sortings::choiceCalling(int ch)
             radix_sort(array);
             break;
         case 8:
-            radix_sort(arr);
+            radix_sort(array3);
+            break;
+        case 9:
+            bucket_sort(array2);
+            break;
+        case 10:
+            bucket_sort(array);
             break;
         case 0:
             break;
@@ -291,18 +304,46 @@ void Sortings::radix_sort(int *array)
     cout << "\nCompleted RADIX SORT!\n";
 }
 
-void Sortings::radix_sort(std::string *arr)
+void Sortings::radix_sort(std::string *array3)
 {
     cout << "\n=========== RADIX SORT (String) ===========";
 
-    input(arr);
+    input(array3);
     
     Radix_Sort radix;
-    arr = radix.radix_sort(arr, size);
+    array3 = radix.radix_sort(array3, size);
     
-    display(arr, size);
+    display(array3, size);
 
     cout << "\nCompleted RADIX SORT!\n";
+}
+
+void Sortings::bucket_sort(float *array2)
+{
+    cout << "\n=========== BUCKET SORT ===========";
+
+    input(array2);
+    
+    Bucket_Sort bucket;
+    array2 = bucket.bucket_sort(array2, size);
+    
+    display(array2, size);
+
+    cout << "\nCompleted BUCKET SORT!\n";
+}
+
+void Sortings::bucket_sort(int *array)
+{
+    cout << "\n=========== BUCKET SORT ===========";
+
+    input(array);
+    
+    Bucket_Sort bucket;
+    array = bucket.bucket_sort(array, size);
+    
+    display(array, size);
+
+    cout << "\nCompleted BUCKET SORT!\n";
 }
 
 void Sortings::input(int *array)
@@ -318,7 +359,7 @@ void Sortings::input(int *array)
     }
 }
 
-void Sortings::input(std::string *arr)
+void Sortings::input(float *array2)
 {
     cout << "\nEnter the size of array: ";
     cin >> size;
@@ -327,7 +368,20 @@ void Sortings::input(std::string *arr)
     for(int i=0; i<size; i++)
     {
         cout << "Element " << i+1 << ": ";
-        cin >> arr[i];
+        cin >> array2[i];
+    }
+}
+
+void Sortings::input(std::string *array3)
+{
+    cout << "\nEnter the size of array: ";
+    cin >> size;
+
+    cout << "\nEnter the elements in the array:\n";
+    for(int i=0; i<size; i++)
+    {
+        cout << "Element " << i+1 << ": ";
+        cin >> array3[i];
     }
 }
 
@@ -344,12 +398,25 @@ void Sortings::display(int *array, int size)
     }
 }
 
-void Sortings::display(std::string *arr, int size)
+void Sortings::display(float *array2, int size)
 {
     cout << "Array: ";
     for(int i=0; i<size; i++)
     {
-        cout << arr[i];
+        cout << array2[i];
+        if(i != size-1)
+            cout << ", ";
+        else
+            cout << endl;
+    }
+}
+
+void Sortings::display(std::string *array3, int size)
+{
+    cout << "Array: ";
+    for(int i=0; i<size; i++)
+    {
+        cout << array3[i];
         if(i != size-1)
             cout << ", ";
         else
