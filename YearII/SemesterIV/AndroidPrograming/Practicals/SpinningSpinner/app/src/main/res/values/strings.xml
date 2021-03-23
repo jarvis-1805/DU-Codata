@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">SpinningSpinner</string>
     <string name="mark_i">MARK I</string>
+    <string name="mark_vi">MARK VI</string>
+    <string name="mark_xlii">MARK 41</string>
+    <string name="mark_xliv">HULKBUSTER</string>
+    <string name="war_machine_armor_mark_i">WAR MACHINE ARMOR</string>
+    <string name="image_of_tony_stark_s_suits">Image of Tony Stark\'s Suits</string>
 </resources>
