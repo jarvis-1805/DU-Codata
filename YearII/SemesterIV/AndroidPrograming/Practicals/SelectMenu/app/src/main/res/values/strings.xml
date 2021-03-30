@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SelectMenu</string>
+    <string name="home">home</string>
+    <string name="search">search</string>
+    <string name="help">help</string>
+    <string name="about">about</string>
+    <string name="contact">contact</string>
 </resources>
