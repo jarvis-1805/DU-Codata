@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 #include "Graph/Graph.hpp"
 
@@ -54,18 +55,18 @@ void GreedyAlgos::choiceCalling(int ch)
 void GreedyAlgos::kruskals_mst()
 {
     Kruskals_Algo kr;
+    
     int V;
     int E;
     int source, destination, weight;
+    vector<Edge> result;
     
     cout << "\nEnter the number of vertices: ";
     cin >> V;
     cout << "\nEnter the number of edges: ";
     cin >> E;
     
-    Edge* result;
-
-    Graph* graph = create_graph(V, E);
+    Graph* graph = new Graph(V, E);
 
     for(int i=0; i<E; i++)
     {
@@ -76,7 +77,7 @@ void GreedyAlgos::kruskals_mst()
         graph -> edge[i].weight = weight;
     }
 
-    std::tie(result, E) = kr.kruskal(graph);
+    tie(result, E) = kr.kruskal(graph);
     kr.print_kruskals_MST(result, E);
 }
 
