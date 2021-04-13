@@ -4,7 +4,7 @@
 #include "Graph/Graph.hpp"
 
 #include "Kruskals_Algo/kruskalsAlgo.hpp"
-//#include "Prims_Algo/primsAlgo.hpp"
+#include "Prims_Algo/primsAlgo.hpp"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ class GreedyAlgos
         void choiceCalling(int);
 
         void kruskals_mst();
-        //void prims_mst();
+        void prims_mst();
 };
 
 void GreedyAlgos::options()
@@ -43,7 +43,7 @@ void GreedyAlgos::choiceCalling(int ch)
             kruskals_mst();
             break;
         case 2:
-            //prims_mst();
+            prims_mst();
             break;
         case 0:
             break;
@@ -79,6 +79,35 @@ void GreedyAlgos::kruskals_mst()
 
     tie(result, E) = kr.kruskal(graph);
     kr.print_kruskals_MST(result, E);
+}
+
+void GreedyAlgos::prims_mst()
+{
+    int V;
+    int E;
+    int source, destination, weight;
+    
+    cout << "\nEnter the number of vertices: ";
+    cin >> V;
+    cout << "\nEnter the number of edges: ";
+    cin >> E;
+
+    Prims_Algo pr(V);
+
+    vector<vector<int>> graph1(V, vector<int>(V));
+    vector<int> parent;
+
+    for(int i=0; i<E; i++)
+    {
+        cout << "\nEnter source, destinstion and weight: ";
+        cin >> source >> destination >> weight;
+        graph1[source][destination] = weight;
+        graph1[destination][source] = weight;
+        graph1[source][source] = 0;
+    }
+    
+    tie(parent, graph1) = pr.prim(graph1);
+    pr.print_prims_MST(parent, graph1);
 }
 
 int main()
