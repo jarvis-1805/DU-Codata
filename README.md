@@ -23,4 +23,4 @@ Source code and notes are available under the open-source MIT license.
 ## AUTHOR
 
 [Shubhang Gupta](https://jarvis-1805.github.io/)\
-[@shubhsauh1805](mailto:shubhsahu1805@gmail.com)
+[@shubhsahu1805](mailto:shubhsahu1805@gmail.com)
