@@ -1,0 +1,10 @@
+; Copy the content of BX to SI, DI and BP
+.MODEL TINY
+.CODE
+.STARTUP
+MOV BX, 1234H
+MOV SI, BX
+MOV DI, BX
+MOV BP, BX
+.EXIT
+END
