@@ -2,7 +2,6 @@
  *  WAP to copy the contents of one text file to another 
  *  file, after removing all whitespaces.
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 14 - 10 - 2019
  */
 

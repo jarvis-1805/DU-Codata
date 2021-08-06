@@ -3,7 +3,6 @@
  *  following series:
  *        S = 1 - 2 + 3 - 4 + 5 - 6 + ...
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 16 - 08 - 2019
  */
 

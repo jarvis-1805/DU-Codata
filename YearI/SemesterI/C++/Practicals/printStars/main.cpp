@@ -7,7 +7,6 @@
  *   *****
  *  *******
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 16 - 08 - 2019
  */
 

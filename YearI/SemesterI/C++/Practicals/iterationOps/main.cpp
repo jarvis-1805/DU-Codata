@@ -4,7 +4,6 @@
  *      (b)	Calculate Factorial of a Number
  *      (c)	Calculate GCD of Two Numbers
  *
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 27 - 09 - 2019
  */
 

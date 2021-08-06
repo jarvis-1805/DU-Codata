@@ -13,7 +13,6 @@
  *  WAP which takes input from user for length, breadth
  *  and height to test the above class.
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 28 - 09 - 2019
  */
 

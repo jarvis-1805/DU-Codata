@@ -10,7 +10,6 @@
  *   (h) Calculate the number of vowels. 
  *   (i) Reverse the string. 
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 30 - 08 - 2019
  */
 

@@ -4,7 +4,6 @@
  *  for calculating area. Overload the assignment and the
  *  equality operator.
  *
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 27 - 09- 2019
  */
 

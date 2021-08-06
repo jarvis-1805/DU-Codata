@@ -1,7 +1,6 @@
 /**
  *  WAP to compute the factors of a given integer
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 16 - 08 - 2019
  */
 

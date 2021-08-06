@@ -1,7 +1,6 @@
 /**
  *  WAP to reverse of digits of an integer  
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 16 - 08 - 2019
  */
 

@@ -3,7 +3,6 @@
  *  following series:
  *        S = 1 + 1/2 + 1/3 + 1/4 + 1/5 + ...
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 16 - 08 - 2019
  */
 

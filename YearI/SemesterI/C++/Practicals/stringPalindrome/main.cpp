@@ -3,7 +3,6 @@
  *  is a Palindrome or not and use it to check whether 
  *  the string entered by user is a Palindrome.
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 06 - 09 - 2019
  */
 

@@ -4,7 +4,6 @@
  *  store 5 objects of Student class in a file. Retrieve 
  *  these records from file and display them
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 16 - 08 - 2019
  */
 

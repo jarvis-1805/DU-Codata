@@ -9,7 +9,6 @@
  *  WAP which takes input from user for feet and inch 
  *  to test the above class.
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 28 - 09 - 2019
  */
 

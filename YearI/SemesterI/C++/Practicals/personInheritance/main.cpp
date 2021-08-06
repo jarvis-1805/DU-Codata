@@ -6,7 +6,6 @@
  *  classes and create, display and delete objects of these
  *  two classes. (Use Run Time Polymorphism).
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 28 - 09 - 2019
  */
 

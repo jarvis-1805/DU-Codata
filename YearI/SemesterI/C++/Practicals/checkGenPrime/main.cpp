@@ -3,7 +3,6 @@
  *  Prime or not. Use the same to generate prime
  *  numbers less than 100.
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 06 - 09 - 2019
  */
 

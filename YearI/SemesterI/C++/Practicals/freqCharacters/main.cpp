@@ -3,7 +3,6 @@
  *  occurrences of each alphabet in the text entered 
  *  as command-line arguments.
  * 
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 14 - 10 - 2019
  */
 

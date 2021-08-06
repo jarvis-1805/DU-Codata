@@ -5,7 +5,6 @@
  *      (a) Sum     (b) Difference
  *      (c) Product (d) Transpose
  *
- *  Written by: Sudipto Ghosh for University of Delhi
  *  Date: 27 - 09- 2019
  */
 
