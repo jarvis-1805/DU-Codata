@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <h1>
+      <u>DOM Manipulation</u>
+    </h1>
+    <div class="container">
+      <ul>
+        <h2>getElementById & innerHTML</h2>
+      </ul>
+      <p>Click on any message below!</p>
+      <ul>
+        <li onclick="returnMsg(this)">Hello World!</li>
+        <li onclick="returnMsg(this)">Bye World!</li>
+        <li onclick="returnMsg(this)">World!</li>
+      </ul>
+      <p>So you said, "<span id="message"></span>"</p>
+    </div>
+
+    <div class="container" id="nodeMethods">
+      <ul>
+        <h2>Node Methods</h2>
+      </ul>
+      <p>Add some data first!</p>
+      <form onsubmit="addItem(event)">
+        <input type="text" placeholder="Add Item" id="toAdd">
+        <button type="submit">Add</button>
+      </form>
+      <ul id="list"></ul>
+      Actions
+      <ul>
+        <li><button onclick="getFirstChild()">Get First Child</button></li>
+        <li><button onclick="getLastChild()">Get Last Child</button></li>
+        <li><button onclick="getParentNode()">Get Parent Node</button></li>
+        <li><button onclick="getChildNode()">Get Child Node</button></li>
+        <li><button onclick="removeFirstChild()">Remove First Child</button></li>
+        <li>Click on element to get the next sibling.</li>
+        <li>Double click on element to get the previous sibling.</li>
+      </ul>
+
+      Result
+      <ul id="result"></ul>
+    </div>
+
+    <div class="container">
+      <h2>Attribute Demo</h2>
+      Get Attributes of the element below <br><br>
+      <span class="some-class" id="id-of-this-element" style="font-weight:1000; margin:25px">
+        A Span Element
+      </span>
+      <button onclick="displayAttr()">Display Attributes</button>
+      <br>
+      <br>
+      <span id="display-attributes">
+      </span>
+      <br>
+      Change Color of all 'li' tags
+      <ul>
+        <li><button onclick="changeColor('red')">Red</button></li>
+        <li><button onclick="changeColor('blue')">Blue</button></li>
+        <li><button onclick="changeColor('green')">Green</button></li>
+      </ul>
+    </div>
+  </body>
+</html>
