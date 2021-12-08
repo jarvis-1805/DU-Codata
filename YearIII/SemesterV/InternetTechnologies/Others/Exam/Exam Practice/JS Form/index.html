@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Form</title>
+  </head>
+  <body>
+    <form onsubmit="event.preventDefault(); validate();">
+      <label for="rollNumber">Roll Number:</label>
+      <input id="rollNumber" type="number" autofocus required>
+
+      <label for="name">Name:</label>
+      <input id="name" type="text" required>
+
+      <label for="email">Email:</label>
+      <input id="email" type="email" required>
+
+      <label for="country">Country:</label>
+      <select id="country">
+        <option value="">India</option>
+        <option value="">Australia</option>
+        <option value="">Canada</option>
+      </select>
+
+      <label for="password">Password:</label>
+      <input id="password" type="password" required>
+    </form>
+    <script>
+      function validate() {
+        // Get the value of the input field with id="numb"
+        let x = document.getElementById("rollNumber").value;
+        // If x is Not a Number or less than one or greater than 10
+        let text;
+        if (isNaN(x) || x < 1 || x > 10) {
+          text = "Input not valid";
+        } else {
+          text = "Input OK";
+        }
+        document.getElementById("demo").innerHTML = text;
+      }
+      </script>
+  </body>
+</html>

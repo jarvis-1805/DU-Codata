@@ -1,0 +1,14 @@
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 5px;
+  text-align: center;
+}
+
+.paper-details table {
+  display: none;
+  margin-top: 10px;
+}
+/*# sourceMappingURL=style.css.map */

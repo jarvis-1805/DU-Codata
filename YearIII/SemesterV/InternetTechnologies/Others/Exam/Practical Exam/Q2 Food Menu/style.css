@@ -1,0 +1,38 @@
+body {
+  background-color: #8ee7e7;
+}
+
+h1 {
+  font-size: 60px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  margin-left: 50px;
+  margin-top: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  background: #035b5e;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #00383a;
+}
+
+button:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+.menu-list {
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/*# sourceMappingURL=style.css.map */

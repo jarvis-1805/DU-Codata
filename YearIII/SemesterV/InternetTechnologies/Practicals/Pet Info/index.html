@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Information | Shubhang Gupta</title>
+    <link rel="stylesheet" href="assets/CSS/styles.css"/>
+    <script src="assets/JS/script.js"></script>
+    <link rel="icon" type="jpg" href="../favicon_octocat.png">
+  </head>
+  <body>
+    <div class="container">
+      <u>
+        <h1>PET INFORMATION</h1>
+      </u>
+      <div class="form">
+        <form onsubmit="event.preventDefault(); logData();" class="input-group">
+            <label>Pet's Name*</label>
+            <input id="pet_name" type="text" placeholder="Bruno" autofocus required size="50">
+
+            <label>Pet's Age*</label>
+            <input id="pet_age" type="number" placeholder="In years" required size="70">
+
+            <label>Pet's Weight*</label>
+            <input id="pet_weight" type="number" placeholder="In Kg" required size="70">
+
+            <label>Pet's Type*</label>
+            <input id="pet_type" type="text" placeholder="Eg. Dog" required size="50">
+
+            <label>Pet's Likes*</label>
+            <input id="pet_likes" type="text" placeholder="Walking" required size="50">
+
+            <button type="submit" class="button">Register</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

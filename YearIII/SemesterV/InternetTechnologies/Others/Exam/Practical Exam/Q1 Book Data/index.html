@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Book Data | Shubhang Gupta (19/78098)</title>
+        <link rel="stylesheet" href="styles.css"/>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <u>
+                <h1>BOOKS DATA</h1>
+            </u>
+            <div class="form">
+                <form onsubmit="event.preventDefault(); logData();" class="input-group">
+                    <label for="book_name">Book Name*</label>
+                    <input id="book_name" type="text" placeholder="Eg. The Fault In Our Stars" autofocus required>
+
+                    <label for="book_author">Author*</label>
+                    <input id="book_author" type="text" placeholder="Eg. John Green" required>
+
+                    <label for="book_price">Price*</label>
+                    <input id="book_price" type="number" placeholder="Eg. 50$" required>
+
+                    <label for="book_publisher">Publisher*</label>
+                    <input id="book_publisher" type="text" placeholder="Eg. Dutton Books" required>
+
+                    <label for="book_category">Category*</label>
+                    <input id="book_category" type="text" placeholder="Eg. Romance" required>
+
+                    <button type="submit" class="button">Register</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: rgba(158, 153, 153, 0.932);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
+}
+
+body {
+  margin: 0 20%;
+  border-left: 1px solid rgba(156, 156, 156, 0.568);
+  border-right: 1px solid rgba(156, 156, 156, 0.568);
+  background-color: black;
+}
+
+hr {
+  margin-top: 0;
+  height: 0;
+  width: 100%;
+  border-color: rgba(156, 156, 156, 0.568);
+}
+
+.start-content {
+  display: block;
+}
+
+.start-content .heading {
+  font-size: 15px;
+  padding: 1rem;
+}
+
+.start-content .heading h1 {
+  color: white;
+}
+
+.start-content .banner-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.start-content .banner-image img {
+  width: 100rem;
+  height: 15em;
+}
+
+.start-content .profile-image img {
+  width: 20%;
+  position: relative;
+  top: -90px;
+  left: 20px;
+  margin-bottom: -90px;
+  border-radius: 50%;
+  border: 5px solid black;
+}
+
+.introduction {
+  padding-left: 20px;
+}
+
+.introduction .names h3 {
+  color: white;
+}
+
+.introduction .bio {
+  margin: 10px 5px 10px auto;
+}
+
+.introduction .bio p {
+  color: white;
+}
+
+.introduction .link {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.introduction .link svg {
+  width: 2%;
+  fill: rgba(156, 156, 156, 0.568);
+}
+
+.tabs {
+  width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 10px auto auto auto;
+  padding: auto;
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tabs label {
+  width: 20%;
+  padding: 17px;
+  font-size: 17px;
+  text-align: center;
+}
+
+.tabs label:hover {
+  background-color: rgba(156, 156, 156, 0.151);
+}
+
+.tabs .tab {
+  width: 100%;
+  padding: 20px;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  display: none;
+}
+
+.tabs .tab h2 {
+  color: white;
+  font-size: 3em;
+}
+
+.tabs input[type='radio']:checked + label + .tab {
+  display: block;
+}
+
+.tabs input[type="radio"]:checked + label {
+  color: white;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 15px;
+  -webkit-text-decoration-color: #ff009d;
+          text-decoration-color: #ff009d;
+}
+
+.tabs .tab iframe {
+  width: 800px;
+  height: 450px;
+  border: 2mm ridge #ff009d;
+}
+
+.tabs .tab .tab-content {
+  padding: 1rem;
+}
+
+.tabs .tab .tab-content .tab-content-list {
+  font-size: 17px;
+  letter-spacing: 1px;
+  line-height: 1.7;
+  padding-left: 2rem;
+  padding-right: 5rem;
+}
+
+.tabs .tab .tab-content .tab-content-list li {
+  color: white;
+}
+
+.tabs .tab .tab-content p {
+  color: white;
+  font-size: 17px;
+  letter-spacing: 1px;
+  line-height: 1.7;
+}
+
+.tabs .tab .tab-content h3 {
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tabs .tab .tab-content .tab-content-list ol {
+  padding-left: 2rem;
+  padding-right: 5rem;
+}
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CAR DATA | Shubhang Gupta (19/78098)</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="car.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <u>
+                <h1>BOOKS DATA</h1>
+            </u>
+            <div class="form">
+                <form onsubmit="event.preventDefault(); logData();" class="input-group">
+                    <label for="manufacturer">Manufacturer Name*</label>
+                    <input id="manufacturer" type="text" placeholder="Eg. Adams Smith" autofocus required>
+                    
+                    <label for="model">Model Name*</label>
+                    <input id="model" type="text" placeholder="Eg. Benz" required>
+                    
+                    <label for="manuf_year">Manufacturer Name*</label>
+                    <input id="manuf_year" type="number" placeholder="Eg. 2011" required>
+
+                    <label for="fuel_type">Fuel Type*</label>
+                    <select id="fuel_type">
+                        <option value="Petrol">Petrol</option>
+                        <option value="Deisel">Deisel</option>
+                    </select>
+
+                    <label for="color">Color*</label>
+                    <input id="color" type="text" placeholder="Eg. Black" required>
+
+                    <label for="seating_cap">Seating Capacity*</label>
+                    <input id="seating_cap" type="number" placeholder="Eg. 4" required>
+
+                    <label for="cubic_cap">Cubic Capacity*</label>
+                    <input id="cubic_cap" type="number" placeholder="Eg. 90" required>
+
+                    <button type="submit" class="button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
