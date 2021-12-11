@@ -437,7 +437,7 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "vowelsnconsonants.l"
-/* Write a Lex program to count the number of vowels and consonants in the input string. */
+/* Write a Lex program to count the number of vowels and consonants in the input file. */
 #line 3 "vowelsnconsonants.l"
     int count_vowels = 0;
     int count_consonants = 0;
@@ -1741,8 +1741,9 @@ void yyfree (void * ptr )
 #line 9 "vowelsnconsonants.l"
 
 int main() {
-    printf("Enter the string:");
+    yyin = fopen("input.txt", "r");
     yylex();
+    fclose(yyin);
     printf("No. of vowels: %d\n", count_vowels);
     printf("No. of consonants: %d\n", count_consonants);
     return 1;

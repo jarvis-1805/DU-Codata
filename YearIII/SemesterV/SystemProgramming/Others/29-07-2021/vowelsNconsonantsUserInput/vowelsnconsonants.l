@@ -8,8 +8,9 @@
 [a-zA-Z] {count_consonants++;}
 %%
 int main() {
-    printf("Enter the string: ");
+    yyin = fopen("input.txt", "r");
     yylex();
+    fclose(yyin);
     printf("No. of vowels: %d\n", count_vowels);
     printf("No. of consonants: %d\n", count_consonants);
     return 1;
