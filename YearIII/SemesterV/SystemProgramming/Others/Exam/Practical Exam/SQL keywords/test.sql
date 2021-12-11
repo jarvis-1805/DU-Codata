@@ -1,0 +1,11 @@
+select
+where
+from
+abc
+abc2
+SELECT
+WHERE
+FROM
+SeLect
+WheRE
+FROm

@@ -1,0 +1,4 @@
+def DEF ghi GHI abc ABC
+ghi GHI jkl JKL def DEF
+xyz XYZ abc ABC uvw UVW
+abc ABC def DEF xyz XYZ
