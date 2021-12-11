@@ -1744,7 +1744,7 @@ void yyfree (void * ptr )
 #line 5 "checkVerb.l"
 
 int main() {
-    printf("Enter a word:");
+    printf("Enter a word: ");
     yylex();
     return 1;
 }
