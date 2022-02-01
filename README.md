@@ -2,6 +2,8 @@
 
 This repository contains the code for various projects, practical classes and a bit of implementation of theoretical lectures taken under the BSc (Hons) Computer Science degree programme of the University of Delhi.
 
+[![pages-build-deployment](https://github.com/jarvis-1805/DU-Codata/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master)](https://github.com/jarvis-1805/DU-Codata/actions/workflows/pages/pages-build-deployment)
+
 The code is organized mainly under the following heads:
 
 * Year
