@@ -1,0 +1,29 @@
+$ swipl -s .\2dot6.pl
+Welcome to SWI-Prolog (threaded, 64 bits, version 8.4.1)
+SWI-Prolog comes with ABSOLUTELY NO WARRANTY. This is free software.
+Please run ?- license. for legal details.
+
+For online help and background, visit https://www.swi-prolog.org
+For built-in help, use ?- help(Topic). or ?- apropos(Word).
+
+1 ?- f(s(1), A).
+A = two.
+
+2 ?- f(s(s(1)), two).
+false.
+
+3 ?- f(s(s(s(s(s(s(1)))))), C).
+C = one.
+
+4 ?- f(D, three).
+D = s(s(1)) ;
+D = s(s(s(s(s(1))))) ;
+D = s(s(s(s(s(s(s(s(1)))))))) ;
+D = s(s(s(s(s(s(s(s(s(s(...)))))))))) ;
+D = s(s(s(s(s(s(s(s(s(s(...)))))))))) ;
+D = s(s(s(s(s(s(s(s(s(s(...)))))))))) ;
+D = s(s(s(s(s(s(s(s(s(s(...)))))))))) ;
+D = s(s(s(s(s(s(s(s(s(s(...)))))))))) ;
+D = s(s(s(s(s(s(s(s(s(s(...)))))))))) .
+
+5 ?- 

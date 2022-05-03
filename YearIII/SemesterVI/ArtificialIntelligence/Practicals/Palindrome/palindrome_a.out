@@ -1,0 +1,45 @@
+$ swipl -s .\palindrome.pl
+Welcome to SWI-Prolog (threaded, 64 bits, version 8.4.1)
+SWI-Prolog comes with ABSOLUTELY NO WARRANTY. This is free software.
+Please run ?- license. for legal details.
+
+For online help and background, visit https://www.swi-prolog.org
+For built-in help, use ?- help(Topic). or ?- apropos(Word).
+
+1 ?- palindrome([1, 2, 3, 4]).    
+Non-Palindrome!
+true.
+
+2 ?- palindrome([1, 2, 1]).
+Palindrome!
+true .
+
+3 ?- trace.
+true.
+
+[trace] 3 ?- palindrome([n,a,m,a,n]).
+   Call: (10) palindrome([n, a, m, a, n]) ? creep
+   Call: (11) lists:append([_7654|_7656], [_7654], [n, a, m, a, n]) ? creep
+   Exit: (11) lists:append([n, a, m, a], [n], [n, a, m, a, n]) ? creep
+   Call: (11) palindrome([a, m, a]) ? creep
+   Call: (12) lists:append([_9974|_9976], [_9974], [a, m, a]) ? creep
+   Exit: (12) lists:append([a, m], [a], [a, m, a]) ? creep
+   Call: (12) palindrome([m]) ? creep
+   Call: (13) write('Palindrome!') ? creep
+Palindrome!
+   Exit: (13) write('Palindrome!') ? creep
+   Exit: (12) palindrome([m]) ? creep
+   Exit: (11) palindrome([a, m, a]) ? creep
+   Exit: (10) palindrome([n, a, m, a, n]) ? creep
+true .
+
+[trace] 3 ?- palindrome([a,m,a,n]).   
+   Call: (10) palindrome([a, m, a, n]) ? creep
+   Call: (11) lists:append([_1452|_1454], [_1452], [a, m, a, n]) ? creep
+   Fail: (11) lists:append([_1452|_1454], [_1452], [a, m, a, n]) ? creep
+   Redo: (10) palindrome([a, m, a, n]) ? creep
+   Call: (11) write('Non-Palindrome!') ? creep
+Non-Palindrome!
+   Exit: (11) write('Non-Palindrome!') ? creep
+   Exit: (10) palindrome([a, m, a, n]) ? creep
+true.
