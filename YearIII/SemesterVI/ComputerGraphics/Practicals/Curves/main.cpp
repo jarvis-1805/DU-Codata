@@ -76,7 +76,7 @@ void bezier_curve(vector<vector<int> > &_controlPoints) {
     _y1 = _controlPoints[i+1][1];
     line(_x, _y, _x1, _y1);
   }
-
+  // B(t) = (1-t)^3P0 + 3(1-t)^2tP1 + 3(1-t)^2t^2P2 + t^3P3
   for (float t = 0; t <= 1; t += 0.0001) {
     _x = pow(t, 3)*(_controlPoints[3][0] + 3*(_controlPoints[1][0] - _controlPoints[2][0]) - _controlPoints[0][0])
           + 3*pow(t, 2)*(_controlPoints[0][0] - 2*_controlPoints[1][0] + _controlPoints[2][0])
