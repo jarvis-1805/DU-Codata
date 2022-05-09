@@ -2,3 +2,4 @@ pythonenv3.8
 .vscode
 /home/codespace/workspace/DU-Codata/.vscode/launch.json
 .venv
+.ipynb_checkpoints
