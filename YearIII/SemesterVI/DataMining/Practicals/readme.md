@@ -1,3 +1,3 @@
 # PRACTICALS
 
-This file containes the practicals for Data Mining.
+This file contains the practicals for Data Mining.
